@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+import www from '../www';
+
+const config = require('cconfig')();
+
+www.start((err) => {
+  if (err) throw err;
+  console.log(`www started on port ${config.PORT}`)
+});

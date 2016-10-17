@@ -1,0 +1,84 @@
+#!/usr/bin/env node
+
+import program from 'commander';
+
+program
+  .command('add <email> <password>')
+    .action(function (email, password) {
+
+      const User = require('../lib/models/User').default;
+      const admin = new User();
+
+      User.findByEmail(email, (err, admin) => {
+        if (err) { return cb(err); }
+
+        // admin exists already
+        if (admin) {
+          
+          console.log(`admin ${email} already exists`)
+
+          password = User.generateHash(password);
+
+          return User.update({ email: email }, { $set: { isAdmin: true, password: password } }, (err) => {
+            if (err) throw err;
+            console.log(`updated user ${email} to admin`);
+            process.exit(); 
+          });
+        }
+
+        // create admin
+        var admin = new User();
+
+        admin.isAdmin = true;
+        admin.email = email;
+        admin.password = User.generateHash(password);
+      
+        admin.save(function(err) {
+
+          User.findByEmail(email, (err, admin) => {
+            if (err) throw err;
+            console.log(`created admin ${email}`);
+            process.exit();
+          });
+
+        });
+
+      });
+  });
+
+program
+  .command('list')
+    .action(function () {
+      const User = require('../lib/models/User').default;
+      User.findAdmins((err, admins) => {
+        if (err) throw err;
+        if ( ! admins.length) {
+          console.log('no admins current registered');
+        } else {
+          console.log('the following admins are registered:');
+          admins.forEach((admin) => {
+            console.log(admin.email);
+          })
+        }
+        process.exit();
+      });
+  });
+
+program
+  .command('rm <email>')
+    .action(function (email, password) {
+
+      const User = require('../lib/models/User').default;
+      const admin = new User();
+
+      User.remove({ email: email, isAdmin: true }, (err) => {
+        if (err) throw err;
+
+        console.log(`removed admin ${email}`);
+
+        process.exit();
+
+      });
+  });
+
+program.parse(process.argv);

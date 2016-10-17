@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="61px" height="61px" viewBox="0 0 61 61" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="61" height="61"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="61" height="61" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Designs-r2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="A" transform="translate(-102.000000, -1078.000000)">
+            <g id="Group-2" transform="translate(102.000000, 1078.000000)">
+                <use id="Rectangle-5" stroke="#979797" mask="url(#mask-2)" stroke-width="2" stroke-dasharray="7" xlink:href="#path-1"></use>
+                <g id="Fill-1773-+-Fill-1774" transform="translate(11.000000, 9.000000)" fill="#D1D1D1">
+                    <polygon id="Fill-1773" points="5.83333333 23 0 23 0 30.75 40 30.75 40 23 36.6666667 23"></polygon>
+                    <path d="M15.8333333,11.625 L10.8333333,11.625 C8.995,11.625 7.5,10.466375 7.5,9.04166667 C7.5,7.54075 9.19083333,6.33497917 11.1266667,6.4693125 C11.8125,4.93222917 13.6716667,3.875 15.8333333,3.875 C18.5908333,3.875 20.8333333,5.6129375 20.8333333,7.75 C20.8333333,9.8870625 18.5908333,11.625 15.8333333,11.625 L15.8333333,11.625 Z M0,0 L0,21.9583333 L5.28,21.9583333 C6.14833333,20.4102708 9.22416667,15.5 13.3333333,15.5 C16.6791667,15.5 19.4466667,17.6486875 20.7416667,18.8609167 L25.1375,13.02 C25.7858333,12.15975 26.9866667,11.625 28.2725,11.625 C29.655,11.625 30.8991667,12.2211042 31.5175,13.1795208 L37.1816667,21.9583333 L40,21.9583333 L40,0 L0,0 Z" id="Fill-1774"></path>
+                </g>
+                <text id="upload-logo" font-family="OpenSans, Open Sans" font-size="7" font-weight="normal" fill="#616161">
+                    <tspan x="12.1765137" y="51">upload logo</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>
