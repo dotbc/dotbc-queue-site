@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+const config = require('cconfig')();
+
+import server from '../index';
+
+server.start((err) => {
+  if (err) throw err;
+  console.log(`server started on port ${config.PORT}`)
+});

@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { Field, reduxForm } from 'redux-form';
 
 export default React.createClass({
 
