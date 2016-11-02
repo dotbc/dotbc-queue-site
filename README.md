@@ -1,10 +1,15 @@
-# Redux Real World Example
+# dotbc-queue-site
 
 This project template was built with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `./bin/admin add|list|rm`
+
+The admin utility exists to allow adding, listing, and removing admin users. Admin users may log into the site via the /admin-login route. 
+Once logged in they may access /admin-home to edit and review the participant queue. 
 
 ### `npm start`
 
