@@ -10,3 +10,6 @@ build
 .DS_Store
 npm-debug.log
 node_modules
+npm-debug.log
+public/*.hot-update.json
+public/*.hot-update.js

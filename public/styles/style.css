@@ -11,6 +11,32 @@ body {
   max-width: 49em;
   margin: 0 auto; }
 
+.modal {
+  position: fixed;
+  top: 5em;
+  left: 50%;
+  margin: 0 auto;
+  margin-left: -10em;
+  width: 20em;
+  background-color: #f2f2f2;
+  padding: 1em;
+  border-radius: 8px;
+  z-index: 10;
+}
+
+.modal .button {
+  font-size: .7em;
+  float: right;
+}
+
+.modal form .input-field {
+  margin-bottom: 1em;
+}
+
+.modal form {
+  margin: 0;
+}
+
 div, span, input, textarea {
   box-sizing: border-box; }
 
@@ -233,6 +259,9 @@ label {
     font-size: 2em;
     font-family: 'Open Sans', sans-serif;
     font-weight: 700; }
+  @media (max-width: 530px) {
+    .queueNumber {
+      padding: 2em 20px; } }
 
 .userSubmittedInfo {
   background: #fff;

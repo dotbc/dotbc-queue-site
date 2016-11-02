@@ -1,0 +1,75 @@
+#!/usr/bin/env node
+
+import program from 'commander';
+
+program
+  .command('add <email> <password>')
+    .action(function (email, password) {
+
+      const Admin = require('../lib/models/Admin').default;
+      const admin = new Admin();
+
+      Admin.findByEmail(email, (err, admin) => {
+        if (err) { return cb(err); }
+
+        // admin exists already
+        if (admin) { 
+          console.log(`admin ${email} already exists`)
+          process.exit(); 
+        }
+
+        // create admin
+        var admin = new Admin();
+
+        admin.email = email;
+        admin.password = Admin.generateHash(password);
+      
+        admin.save(function(err) {
+
+          Admin.findByEmail(email, (err, admin) => {
+            if (err) throw err;
+            console.log(`created admin ${email}`);
+            process.exit();
+          });
+
+        });
+
+      });
+  });
+
+program
+  .command('list')
+    .action(function () {
+      const Admin = require('../lib/models/Admin').default;
+      Admin.find({}, (err, admins) => {
+        if (err) throw err;
+        if ( ! admins.length) {
+          console.log('no admins current registered');
+        } else {
+          console.log('the following admins are registered:');
+          admins.forEach((admin) => {
+            console.log(admin.email);
+          })
+        }
+        process.exit();
+      });
+  });
+
+program
+  .command('rm <email>')
+    .action(function (email, password) {
+
+      const Admin = require('../lib/models/Admin').default;
+      const admin = new Admin();
+
+      Admin.remove({ email: email }, (err) => {
+        if (err) throw err;
+
+        console.log(`removed admin ${email}`);
+
+        process.exit();
+
+      });
+  });
+
+program.parse(process.argv);

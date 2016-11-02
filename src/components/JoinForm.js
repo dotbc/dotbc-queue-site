@@ -4,6 +4,7 @@ export default React.createClass({
 
   getInitialState () {
     return {
+      submitDisabled: this.props.submitDisabled,
       fullName: this.props.fullName,
       organization: this.props.organization,
       title: this.props.title,
@@ -14,9 +15,7 @@ export default React.createClass({
 
   handleSubmit (event) {
     event.preventDefault();
-    this.setState({ state: 'sending' }, () => {
-      this.props.onSubmit(this.state);
-    });
+    this.props.onSubmit(this.state);
   },
 
   handleChange (key, e) {
@@ -26,6 +25,7 @@ export default React.createClass({
   },
 
   render () {
+
     const { 
       onSubmit, 
     } = this.props;
@@ -62,14 +62,14 @@ export default React.createClass({
           <input name="organization" required type="text" value={this.state.organization} onChange={this.handleChange.bind(this, "organization")} />
         </div>
         <div className="input-field">
-          <label htmlFor="title">Your Roll/Title</label>
+          <label htmlFor="title">Your Role/Title</label>
           <input name="title" required type="text" value={this.state.title} onChange={this.handleChange.bind(this, "title")} />
         </div>
         <div className="input-field">
           <label htmlFor="interest">Why are you interested in participating in the dBC project?</label>
           <textarea name="interest" required rows="8" value={this.state.interest} onChange={this.handleChange.bind(this, "interest")} ></textarea>
         </div>
-        <input type="submit" className="button" value="Agree and Continue" />
+        <input type="submit" className="button" disabled={this.state.submitDisabled} value="Agree and Continue" />
       </form>
     );
 
