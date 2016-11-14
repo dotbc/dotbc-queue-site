@@ -1,5 +1,6 @@
 import bodyParser from 'body-parser';
 import express from 'express';
+import mongodbSession from 'connect-mongodb-session';
 import session from 'express-session';  
 import path from 'path';  
 import multer from 'multer';
@@ -32,11 +33,27 @@ module.exports.start = (cb) => {
 
   app.use('/', express.static(path.resolve(__dirname, './public')));
 
+  const MongoSessionStore = mongodbSession(session);
+
+  const store = new MongoSessionStore({
+    url: config.MONGO_URI,
+    collection: 'sessions',
+  });
+
+  // Catch errors 
+  store.on('error', function (error) {
+    return cb(error);
+  });
+
   app.use(session({ 
     name: 'dotbc-queue',
-    secret: 'keyboard cat', 
-    resave: false, 
-    saveUninitialized: false 
+    secret: 'da blockchain', 
+    resave: true, 
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week 
+    },
+    store: store,
   }));
   app.use(require('morgan')('short'));
   app.use(bodyParser.json()); // for parsing application/json

@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "4c400228924131676c4c"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "f3986f28b0cc7c37f2d5"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -40695,13 +40695,13 @@
 			};
 		},
 		componentDidMount: function componentDidMount() {
-			console.log(this.props.files);
+			// console.log(this.props.files)
 		},
 		onError: function onError(err) {
-			console.error(error);
+			// console.error(error)
 		},
 		onProgress: function onProgress() {
-			console.log(arguments);
+			// console.log(arguments)
 		},
 		onFinish: function onFinish(file) {
 			var _this = this;
@@ -64612,7 +64612,6 @@
 	              errorMessage: res.errorMessage || 'Unable to create user.'
 	            }, _this2.renderErrorMessage);
 	          } else {
-	            console.log('heading home');
 	            window.location = '/home';
 	          }
 	        }.bind(_this2)).fail(function (res) {

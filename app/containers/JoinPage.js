@@ -40,7 +40,6 @@ class JoinPage extends Component {
             errorMessage: res.errorMessage || 'Unable to create user.',
           }, this.renderErrorMessage);
         } else {
-          console.log('heading home')
           window.location = '/home';
         }
       }).bind(this))

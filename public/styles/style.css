@@ -416,8 +416,13 @@ ul.unstyled {
     display: block;
 }
 
-#adminQueue .open td:nth-child(4) > p {
+/*#adminQueue .open td:nth-child(4) > p {
     margin-top: 64px;
+}*/
+
+#adminQueue td:nth-child(4) {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
 }
 
 #adminQueue td {

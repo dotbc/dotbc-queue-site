@@ -13,15 +13,15 @@ export default React.createClass({
 	},
 
 	componentDidMount () {
-		console.log(this.props.files)
+		// console.log(this.props.files)
 	},
 
 	onError (err) {
-		console.error(error)
+		// console.error(error)
 	},
 
 	onProgress () {
-		console.log(arguments)
+		// console.log(arguments)
 	},
 
 	onFinish (file) {
