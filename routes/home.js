@@ -40,6 +40,21 @@ export default function (app) {
       })
   });
 
+  app.get('/api/index',
+    (req, res) => {
+      User.findAllSlim((err, participants) => {
+        if (err) return res.send({ error: err });
+        const partners = participants.filter((p) => { console.log(p); return p.accepted !== undefined; });
+        const waitlist = participants.filter((p) => { return p.accepted === undefined; })
+        partners.forEach((p) => { p.accepted = undefined; });
+        res.send({
+          partners,
+          waitlist,
+          user: req.user
+        });
+      });
+  });
+
   app.get('/api/home',
     isLoggedIn, 
     (req, res) => {

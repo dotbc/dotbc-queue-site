@@ -13,8 +13,10 @@ import $ from 'jquery';
 class App extends Component {
 
   state = {
+    partners: null,
     showLogin: false,
-    user: null
+    user: null,
+    waitlist: null,
   }
   
   componentDidMount() {
@@ -24,8 +26,8 @@ class App extends Component {
       });
     }
 
-    this.serverRequest = $.get('/api/home/', function (data, message, res) {
-      this.setState({ user: data });
+    this.serverRequest = $.get('/api/index/', function (data, message, res) {
+      this.setState({ user: data.user, waitlist: data.waitlist, partners: data.partners });
     }.bind(this));
 
   }
@@ -69,11 +71,11 @@ class App extends Component {
         <Modal showLogin={this.state.showLogin} 
           handleErrorDismissed={this.handleLoginErrorDismissedClicked} 
           handleSubmit={this.handleLoginClicked} 
-          errorMessage={this.state.errorMessage}/>
+          errorMessage={this.state.errorMessage} />
         <Header loggedIn={this.state.user} onJoinClicked={this.joinClicked}/>
         <SelectedPartners />
         <JoinButton />
-        <WaitListContainer value={inputValue} onChange={this.handleChange} />
+        <WaitListContainer partners={this.state.partners} waitlist={this.state.waitlist} onChange={this.handleChange} />
         <Footer />
         <hr />
         {children}
