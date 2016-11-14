@@ -5,9 +5,7 @@ import path from 'path';
 import multer from 'multer';
 import passport from './lib/passport';
 import routes from './routes';
-import webpack from 'webpack';  
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';  
+import webpack from 'webpack';    
 import webpackConfig from './webpack.config.js';
 import util from 'util';
 
@@ -22,11 +20,11 @@ module.exports.start = (cb) => {
 
   if (config.NODE_ENV === 'development') {
 
-    app.use(webpackDevMiddleware(compiler, {
+    app.use(require('webpack-dev-middleware')(compiler, {
       path: webpackConfig.output.path,
       publicPath: webpackConfig.output.publicPath
     }));
-    app.use(webpackHotMiddleware(compiler, {
+    app.use(require('webpack-hot-middleware')(compiler, {
       path: '/__webpack_hmr'
     }));
 
