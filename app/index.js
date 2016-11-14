@@ -7,8 +7,13 @@ import configureStore from './store/configureStore'
 
 const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
+const rootEl = document.getElementById('root');
 
-export default render(
-  <Root store={store} history={history} />,
-  document.getElementById('root')
-);
+const self = render(<Root store={store} history={history} />, rootEl);
+
+// re-render if in development mode
+if (module.hot) {
+  module.hot.accept();
+}
+
+export default self;

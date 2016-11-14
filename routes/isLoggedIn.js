@@ -2,7 +2,7 @@ export default function isLoggedIn (req, res, next) {
   if (req.user !== undefined) {
     next();
   } else {
-    console.log('redirecting')
-    return res.send(403, { error: 'not logged in' });
+    if (req.path.indexOf('/api') === 0) return res.send(401, null);
+    return res.redirect('/login');
   }
 };

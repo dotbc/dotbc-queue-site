@@ -13,3 +13,4 @@ node_modules
 npm-debug.log
 public/*.hot-update.json
 public/*.hot-update.js
+public/hot

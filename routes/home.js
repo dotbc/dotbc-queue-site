@@ -1,8 +1,9 @@
 import isEmail from 'is-email';
 import isLoggedIn from './isLoggedIn';
+import mongodb from 'mongodb';
 import path from 'path';
 import passport from '../lib/passport';
-// import User from '../lib/models/User'; 
+import User from '../lib/models/User'; 
 
 export default function (app) {
 
@@ -14,6 +15,11 @@ export default function (app) {
     } else return next();
   }
 
+  function ensureNonAdmin (req, res, next) {
+    if ( req.user && req.user.isAdmin) return res.redirect('/admin-home');
+    return next();
+  }
+
   // function ensureEmailMatchesCompany (req, res, next) {
   //   if ( ! isEmail(req.body.email)) {
   //     return res.send({
@@ -21,6 +27,17 @@ export default function (app) {
   //     });
   //   } esle return next();
   // }
+
+
+  app.post('/api/add-file',
+    isLoggedIn,
+    (req, res) => {
+      const file = req.body.file;
+      req.user.addFile(file, (err, user) => {
+        if (err) return res.send(err);
+        else res.send(user);
+      })
+  });
 
   app.get('/api/home',
     isLoggedIn, 
@@ -31,12 +48,30 @@ export default function (app) {
   app.post('/api/home',
     ensureEmail,
     // ensureEmailMatchesCompany,
+    ensureNonAdmin,
     passport.authenticate('local-signup'), 
     (req, res) => {
       res.send(res.user);
   });
 
-  app.get('/home', isLoggedIn, (req, res) => {  
+  app.post('/api/update-file-description',
+    isLoggedIn,
+    (req, res) => {
+
+      const file = req.user.files.find((file) => { return file._id === req.body.fileId; })
+
+      if ( ! file) return res.send(new Error('no file found with id provided'));
+
+      file.description = req.body.description;
+
+      req.user.save((err, user) => {
+        if (err) return res.send({ error: err });
+        else res.send({ description: req.body.description });
+      });
+
+  });
+   
+  app.get('/home', isLoggedIn, ensureNonAdmin, (req, res) => {  
     return res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
   });
 

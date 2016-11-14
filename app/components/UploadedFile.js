@@ -1,7 +1,44 @@
+import { RIETextArea } from 'riek'
 import React, { Component, PropTypes } from 'react'
 import UploadedFile from './UploadedFile';
+import $ from 'jquery';
 
 export default React.createClass({
+
+  getInitialState() {
+    return {};
+  },
+
+  descriptionChanged (value) {
+    $.ajax({
+      type: 'POST',
+      url: '/api/update-file-description',
+      data: { 
+        description: value.description,
+        userId: this.props.userId,
+        fileId: this.props.file._id, 
+      }
+    })
+    .done(((res) => {
+      if (res.error) {
+        this.setState({
+          submitDisabled: false,
+          errorMessage: res.error || 'Unable to upload file.',
+        });
+      } else {
+        this.setState({
+          submitDisabled: false,
+          description: res.description
+        });
+      }
+    }).bind(this))
+    .fail(function(res) {
+      this.setState({
+        submitDisabled: false,
+        errorMessage: res.error || 'Unable to upload file. Please try again.',
+      });
+    }.bind(this));
+  },
 
   render () {
 
@@ -33,8 +70,11 @@ export default React.createClass({
                 </g>
             </g>
         </svg>
-        <p className="docName">important_data_2016.xml</p>
-        <p className="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p className="docName">{this.props.file.filename}</p>
+        <RIETextArea className="description" 
+                     value={ this.state.description || this.props.file.description || 'Click to enter a description.'} 
+                     change={this.descriptionChanged}
+                     propName="description" />
       </li>
     );
 

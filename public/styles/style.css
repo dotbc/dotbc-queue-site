@@ -327,12 +327,12 @@ label {
       margin-top: .25em; }
     .filesDocs .uploaded ul li .description {
       font-size: .75em;
-      margin-left: 4.25em;
+      /*margin-left: 4.25em;*/
       width: 100%;
-      max-width: 35rem; }
+      max-width: 43rem; }
     .filesDocs .uploaded ul li textarea {
       width: 100%;
-      max-width: 35rem;
+      max-width: 43rem;
       border: 1px solid #bfbfbf;
       padding: 1em;
       border-radius: 4px;
@@ -360,3 +360,170 @@ footer .legal {
   margin-top: 2em;
   margin-bottom: 4em;
   opacity: .33; }
+
+#adminTabs {
+    margin: 4em 0 2em;
+}
+
+ul.unstyled {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#adminTabs li.active, #adminTabs li:hover {
+    opacity: 1;
+}
+
+#adminTabs li {
+    display: inline-block;
+    margin-right: 2em;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    opacity: .333;
+    cursor: pointer;
+}
+
+#adminQueue {
+    width: 100%;
+    border-collapse: collapse;
+    max-width: 90em;
+    margin: 0 auto 4em;
+}
+
+#adminQueue tr {
+    border-bottom: 1px solid #bfbfbf;
+}
+
+#adminQueue td:nth-child(1) {
+    font-size: 1.25em;
+    width: 8em;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+}
+
+#adminQueue td:nth-child(2), #adminQueue td:nth-child(3), #adminQueue td:nth-child(4) {
+    cursor: pointer;
+}
+
+#adminQueue td:nth-child(2) {
+    width: 15%;
+    text-align: center;
+}
+
+#adminQueue td:nth-child(3) span {
+    display: block;
+}
+
+#adminQueue .open td:nth-child(4) > p {
+    margin-top: 64px;
+}
+
+#adminQueue td {
+    padding: 1em;
+    margin: 0;
+    background-color: #fff;
+}
+
+#adminQueue img {
+    height: 2em;
+    display: inherit;
+}
+
+#adminQueue .button {
+    color: #bfbfbf;
+    border: 1px solid #bfbfbf;
+    padding: .25em 1em;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+#adminQueue .open .moreInfo {
+    font-size: .8em;
+    display: inherit;
+}
+
+#adminQueue .moreInfo {
+    display: none;
+}
+
+#adminQueue .file svg.docIcon {
+    width: 1.5em;
+}
+
+#adminQueue .file svg.downloadIcon {
+    margin-top: .25em;
+}
+
+#adminQueue .file .docName {
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+
+#adminQueue .file .description {
+    margin-left: 3.4em;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    max-width: 80%;
+}
+
+#adminQueue * {
+    transition: all .1s linear;
+}
+
+.file {
+    background: #fff;
+    padding: 1em;
+    margin-bottom: 1em;
+    border: 1px solid #bfbfbf;
+    border-radius: 4px;
+}
+
+.file svg.docIcon {
+    float: left;
+    margin-right: 1em;
+}
+
+.file svg.settingsIcon, .file svg.downloadIcon {
+    float: right;
+    cursor: pointer;
+}
+
+.file .docName {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    margin-top: .25em;
+}
+
+.file .description {
+    font-size: .75em;
+    /*margin-left: 4.25em;*/
+    width: 100%;
+    max-width: 35rem;
+}
+
+.queue li span.email a, .queue td span.email a {
+    color: #000;
+}
+.queue li span.email, .queue td span.email {
+    font-size: .75em;
+    margin-top: .25em;
+}
+
+.queue li span.org, .queue td span.org {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+}
+
+.queue li span.title, .queue td span.title {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+.queue li span, .queue td span {
+    margin-right: 2em;
+}
+div, span, input, textarea, tr, td {
+    box-sizing: border-box;
+}

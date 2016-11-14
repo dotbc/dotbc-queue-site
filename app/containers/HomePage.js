@@ -27,32 +27,6 @@ class HomePage extends Component {
     this.serverRequest.abort();
   }
 
-  handleSubmit = (data) => {
-
-    $.ajax({
-      type: 'POST',
-      url: '/api/join',
-      data: data
-    })
-    .done(((res) => {
-      if (res.errorMessage) {
-        this.setState({
-          errorMessage: 'Unable to create user.'
-        });
-        this.renderErrorMessage();
-      } else {
-        window.navigate('/home')
-      }
-    }).bind(this))
-    .fail(function(res) {
-      this.setState({
-        errorMessage: 'Unable to create user.'
-      });
-      this.renderErrorMessage();
-    }.bind(this));
-
-  }
-
   renderErrorMessage() {
     
     const { errorMessage } = this.props
@@ -80,9 +54,9 @@ class HomePage extends Component {
         <Header loggedIn={ !!this.state.user} />
         <main>
           <div className="container userAccountContainer">
-            <QueuePosition placeInQueue={this.state.user.placeInQueue} />
+            <QueuePosition accepted={this.state.user.accepted} placeInQueue={this.state.user.placeInQueue} />
             <UserSubmittedInfo user={this.state.user} />
-            <FilesAndDocuments />
+            <FilesAndDocuments files={this.state.user.files} userId={this.state.user._id} />
             {this.renderErrorMessage()}
             <LegalInfo />
           </div>

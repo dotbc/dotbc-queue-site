@@ -6,27 +6,36 @@ program
   .command('add <email> <password>')
     .action(function (email, password) {
 
-      const Admin = require('../lib/models/Admin').default;
-      const admin = new Admin();
+      const User = require('../lib/models/User').default;
+      const admin = new User();
 
-      Admin.findByEmail(email, (err, admin) => {
+      User.findByEmail(email, (err, admin) => {
         if (err) { return cb(err); }
 
         // admin exists already
-        if (admin) { 
+        if (admin) {
+          
           console.log(`admin ${email} already exists`)
-          process.exit(); 
+
+          password = User.generateHash(password);
+
+          return User.update({ email: email }, { $set: { isAdmin: true, password: password } }, (err) => {
+            if (err) throw err;
+            console.log(`updated user ${email} to admin`);
+            process.exit(); 
+          });
         }
 
         // create admin
-        var admin = new Admin();
+        var admin = new User();
 
+        admin.isAdmin = true;
         admin.email = email;
-        admin.password = Admin.generateHash(password);
+        admin.password = User.generateHash(password);
       
         admin.save(function(err) {
 
-          Admin.findByEmail(email, (err, admin) => {
+          User.findByEmail(email, (err, admin) => {
             if (err) throw err;
             console.log(`created admin ${email}`);
             process.exit();
@@ -40,8 +49,8 @@ program
 program
   .command('list')
     .action(function () {
-      const Admin = require('../lib/models/Admin').default;
-      Admin.find({}, (err, admins) => {
+      const User = require('../lib/models/User').default;
+      User.findAdmins((err, admins) => {
         if (err) throw err;
         if ( ! admins.length) {
           console.log('no admins current registered');
@@ -59,10 +68,10 @@ program
   .command('rm <email>')
     .action(function (email, password) {
 
-      const Admin = require('../lib/models/Admin').default;
-      const admin = new Admin();
+      const User = require('../lib/models/User').default;
+      const admin = new User();
 
-      Admin.remove({ email: email }, (err) => {
+      User.remove({ email: email, isAdmin: true }, (err) => {
         if (err) throw err;
 
         console.log(`removed admin ${email}`);

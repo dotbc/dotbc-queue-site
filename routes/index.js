@@ -1,3 +1,4 @@
+import admin from './admin';
 import home from './home';
 import join from './join';
 import login from './login';
@@ -6,6 +7,8 @@ import path from 'path';
 import User from '../lib/models/User'; 
 
 export default function (app) {
+
+  admin(app);
 
   home(app);
   

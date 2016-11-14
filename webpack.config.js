@@ -4,24 +4,27 @@ const path = require('path');
 module.exports = {
   entry: [
     'webpack-hot-middleware/client',
-    path.join(__dirname, 'src/index.js')
+    './app/index'
   ],
   output: {
-    path: path.join(__dirname, 'public'),
-    filename: 'bundle.js'       
+    filename: 'bundle.js',    
+    path: path.join(__dirname, 'public'),  
+    publicPath: '/', 
   },
   // This plugin activates hot loading
   plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
   ],
   module: {
     loaders: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|json)$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader',
-      }
-      , {
+        loaders: ['react-hot-loader/webpack', 'babel'],
+      }, 
+      {
         test: /\.css?$/,
         loader: 'style!css' // This are the loaders
       }

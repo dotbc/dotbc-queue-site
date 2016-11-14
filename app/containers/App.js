@@ -25,7 +25,6 @@ class App extends Component {
     }
 
     this.serverRequest = $.get('/api/home/', function (data, message, res) {
-      debugger;
       this.setState({ user: data });
     }.bind(this));
 

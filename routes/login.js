@@ -21,7 +21,9 @@ export default function (app) {
 
   app.get('/logout', (req, res) => {
     req.logout();
-    return res.redirect('/');
+    return req.session.destroy((err) => {
+      return res.redirect('/'); 
+    });
   });
 
 }

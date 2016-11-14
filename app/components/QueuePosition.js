@@ -8,6 +8,8 @@ export default React.createClass({
 
   render () {
 
+    if (this.props.accepted) return <div className="queueNumber"></div>;
+
     return (
       <div className="queueNumber">
 				<p>Your queue position is: <span>{this.props.placeInQueue}</span></p>
