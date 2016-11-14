@@ -1,5 +1,6 @@
 import isEmail from 'is-email';
 import isLoggedIn from './isLoggedIn';
+import merge from 'lodash.merge';
 import mongodb from 'mongodb';
 import path from 'path';
 import passport from '../lib/passport';
@@ -70,6 +71,25 @@ export default function (app) {
       });
 
   });
+
+  app.post('/api/update-form-data',
+    isLoggedIn,
+    (req, res) => {
+
+      const field = req.body;
+
+      if ( ! field) return res.send(new Error('no form field data provided'));
+
+      merge(req.user, field);
+
+      req.user.save((err, user) => {
+        if (err) return res.send({ error: err });
+        else res.send(user);
+      });
+
+  });
+
+
    
   app.get('/home', isLoggedIn, ensureNonAdmin, (req, res) => {  
     return res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
