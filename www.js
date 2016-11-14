@@ -36,7 +36,7 @@ module.exports.start = (cb) => {
   const MongoSessionStore = mongodbSession(session);
 
   const store = new MongoSessionStore({
-    url: config.MONGO_URI,
+    uri: config.MONGO_URI,
     collection: 'sessions',
   });
 
