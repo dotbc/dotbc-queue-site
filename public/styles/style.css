@@ -442,6 +442,7 @@ ul.unstyled {
 #adminQueue .open .moreInfo {
     font-size: .8em;
     display: inherit;
+    max-width: 32em;
 }
 
 #adminQueue .moreInfo {
