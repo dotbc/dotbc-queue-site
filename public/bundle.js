@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "49bc346b670a12395ebc"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "51cafcc419a8bff35ea4"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -41246,7 +41246,6 @@
 	      url: '/api/update-file-description',
 	      data: {
 	        description: value.description,
-	        userId: this.props.userId,
 	        fileId: this.props.file._id
 	      }
 	    }).done(function (res) {

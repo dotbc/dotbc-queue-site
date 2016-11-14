@@ -15,7 +15,6 @@ export default React.createClass({
       url: '/api/update-file-description',
       data: { 
         description: value.description,
-        userId: this.props.userId,
         fileId: this.props.file._id, 
       }
     })

@@ -4,7 +4,9 @@ import merge from 'lodash.merge';
 import mongodb from 'mongodb';
 import path from 'path';
 import passport from '../lib/passport';
-import User from '../lib/models/User'; 
+import User from '../lib/models/User';
+
+const config = require('cconfig')(); 
 
 export default function (app) {
 
@@ -33,11 +35,21 @@ export default function (app) {
   app.post('/api/add-file',
     isLoggedIn,
     (req, res) => {
+      
       const file = req.body.file;
+      const parts = file.publicUrl.split('/');
+      console.log(parts)
+      const s3 = parts[1];
+      const uploads = parts[2];
+      const filename = parts[3];
+
+      file.publicUrl = `${s3}/${uploads}/${config.NODE_ENV}/${req.user.organization}/${filename}`;
+      
       req.user.addFile(file, (err, user) => {
         if (err) return res.send(err);
         else res.send(user);
       })
+
   });
 
   app.get('/api/index',
