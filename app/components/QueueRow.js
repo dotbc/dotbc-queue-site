@@ -1,11 +1,43 @@
 import moment from 'moment';
 import React, { Component, PropTypes } from 'react'
+import { RIEInput } from 'riek'
+import $ from 'jquery';
 
 export default class QueueRow extends Component {
 
   state = {
     open: this.props.isOpen || false,
+    user: {},
   }
+
+	onPlaceInQueueChanged (change) {
+		debugger;
+
+    change.userId = this.props.user._id;
+    change.currentPlaceInQueue = this.props.user.placeInQueue;
+
+		$.ajax({
+      type: 'POST',
+      url: '/api/update-place-in-queue',
+      data: change
+    })
+    .done(((res) => {
+      if (res.error) {
+        this.setState({
+          submitDisabled: false,
+          errorMessage: res.error || 'Unable update place in queue.',
+        });
+      } else {
+        this.props.onRowUpdated(); 
+      }
+    }).bind(this))
+    .fail(function(res) {
+      this.setState({
+        submitDisabled: false,
+        errorMessage: res.error || 'Unable update place in queue. Please try again.',
+      });
+    }.bind(this));
+	}
   
   toggleOpen (e) {
     if (['IMG', 'A', 'INPUT', 'TEXTAREA', 'path', 'polygon', 'g', 'svg', 'span', 'p'].indexOf(e.target.tagName) > -1) return;
@@ -25,7 +57,10 @@ export default class QueueRow extends Component {
     const numberFiles = (this.props.user.files || []).length;
     const colOne = this.props.user.accepted ? 
       moment(new Date(this.props.user.accepted)).format("dddd, MMMM Do YYYY, h:mm:ss a") : 
-      this.props.user.placeInQueue;
+      (<RIEInput value={this.state.user.placeInQueue || this.props.user.placeInQueue}
+								change={this.onPlaceInQueueChanged.bind(this)}
+                className="input-field"
+								propName="placeInQueue" />);
 
     return (
       <tr onClick={this.toggleOpen.bind(this)}>
@@ -92,7 +127,10 @@ export default class QueueRow extends Component {
     const numberFiles = (this.props.user.files || []).length;
     const colOne = this.props.user.accepted ? 
       moment(new Date(this.props.user.accepted)).format("dddd, MMMM Do YYYY, h:mm:ss a") : 
-      this.props.user.placeInQueue;
+      (<RIEInput value={this.state.user.placeInQueue || this.props.user.placeInQueue}
+								change={this.onPlaceInQueueChanged.bind(this)}
+                className="input-field"
+								propName="placeInQueue" />);
 
     return (
       <tr className="open" onClick={this.toggleOpen.bind(this)}>

@@ -21,7 +21,6 @@ export default React.createClass({
   },
 
 	onChange (change) {
-		debugger;
 		$.ajax({
       type: 'POST',
       url: '/api/update-form-data',

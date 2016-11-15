@@ -26,11 +26,11 @@ export default class QueueTabs extends Component {
   
     if (this.props.activeTab === 'left') {
       (this.props.inQueue || []).forEach((row) => {
-        rows.push(<QueueRow key={row._id} user={row} onAcceptClicked={this._rowAccepted.bind(this)} />)
+        rows.push(<QueueRow key={row._id} user={row} onRowUpdated={this.props.rowsUpdated} onAcceptClicked={this._rowAccepted.bind(this)} />)
       });
     } else {
       (this.props.accepted || []).forEach((row) => {
-        rows.push(<QueueRow key={row._id} user={row} onUnAcceptClicked={this._rowUnaccepted.bind(this)} />)
+        rows.push(<QueueRow key={row._id} user={row} onRowUpdated={this.props.rowsUpdated} onUnAcceptClicked={this._rowUnaccepted.bind(this)} />)
       });
     }
   

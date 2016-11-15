@@ -18,9 +18,13 @@ export default function (app) {
           user: req.user,
           inQueue: users.filter((user) => {
             return ! user.accepted;
+          }).sort((a, b) => {
+            return a.placeInQueue - b.placeInQueue;
           }),
           accepted: users.filter((user) => {
             return !! user.accepted;
+          }).sort((a, b) => {
+            return a.placeInQueue - b.placeInQueue;
           })
         });
       })

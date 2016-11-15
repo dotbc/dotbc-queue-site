@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "51cafcc419a8bff35ea4"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "aebb3bfb2496e4d40f01"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -63047,6 +63047,12 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _riek = __webpack_require__(437);
+
+	var _jquery = __webpack_require__(34);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var QueueRow = function (_Component) {
@@ -63064,11 +63070,42 @@
 	    }
 
 	    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = QueueRow.__proto__ || (0, _getPrototypeOf2.default)(QueueRow)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-	      open: _this.props.isOpen || false
+	      open: _this.props.isOpen || false,
+	      user: {}
 	    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
 	  }
 
 	  (0, _createClass3.default)(QueueRow, [{
+	    key: 'onPlaceInQueueChanged',
+	    value: function onPlaceInQueueChanged(change) {
+	      var _this2 = this;
+
+	      debugger;
+
+	      change.userId = this.props.user._id;
+	      change.currentPlaceInQueue = this.props.user.placeInQueue;
+
+	      _jquery2.default.ajax({
+	        type: 'POST',
+	        url: '/api/update-place-in-queue',
+	        data: change
+	      }).done(function (res) {
+	        if (res.error) {
+	          _this2.setState({
+	            submitDisabled: false,
+	            errorMessage: res.error || 'Unable update place in queue.'
+	          });
+	        } else {
+	          _this2.props.onRowUpdated();
+	        }
+	      }.bind(this)).fail(function (res) {
+	        this.setState({
+	          submitDisabled: false,
+	          errorMessage: res.error || 'Unable update place in queue. Please try again.'
+	        });
+	      }.bind(this));
+	    }
+	  }, {
 	    key: 'toggleOpen',
 	    value: function toggleOpen(e) {
 	      if (['IMG', 'A', 'INPUT', 'TEXTAREA', 'path', 'polygon', 'g', 'svg', 'span', 'p'].indexOf(e.target.tagName) > -1) return;
@@ -63096,7 +63133,10 @@
 	    value: function _renderClosed() {
 
 	      var numberFiles = (this.props.user.files || []).length;
-	      var colOne = this.props.user.accepted ? (0, _moment2.default)(new Date(this.props.user.accepted)).format("dddd, MMMM Do YYYY, h:mm:ss a") : this.props.user.placeInQueue;
+	      var colOne = this.props.user.accepted ? (0, _moment2.default)(new Date(this.props.user.accepted)).format("dddd, MMMM Do YYYY, h:mm:ss a") : _react2.default.createElement(_riek.RIEInput, { value: this.state.user.placeInQueue || this.props.user.placeInQueue,
+	        change: this.onPlaceInQueueChanged.bind(this),
+	        className: 'input-field',
+	        propName: 'placeInQueue' });
 
 	      return _react2.default.createElement(
 	        'tr',
@@ -63240,7 +63280,10 @@
 	    value: function _renderOpen() {
 
 	      var numberFiles = (this.props.user.files || []).length;
-	      var colOne = this.props.user.accepted ? (0, _moment2.default)(new Date(this.props.user.accepted)).format("dddd, MMMM Do YYYY, h:mm:ss a") : this.props.user.placeInQueue;
+	      var colOne = this.props.user.accepted ? (0, _moment2.default)(new Date(this.props.user.accepted)).format("dddd, MMMM Do YYYY, h:mm:ss a") : _react2.default.createElement(_riek.RIEInput, { value: this.state.user.placeInQueue || this.props.user.placeInQueue,
+	        change: this.onPlaceInQueueChanged.bind(this),
+	        className: 'input-field',
+	        propName: 'placeInQueue' });
 
 	      return _react2.default.createElement(
 	        'tr',
@@ -63423,11 +63466,11 @@
 
 	      if (this.props.activeTab === 'left') {
 	        (this.props.inQueue || []).forEach(function (row) {
-	          rows.push(_react2.default.createElement(_QueueRow2.default, { key: row._id, user: row, onAcceptClicked: _this2._rowAccepted.bind(_this2) }));
+	          rows.push(_react2.default.createElement(_QueueRow2.default, { key: row._id, user: row, onRowUpdated: _this2.props.rowsUpdated, onAcceptClicked: _this2._rowAccepted.bind(_this2) }));
 	        });
 	      } else {
 	        (this.props.accepted || []).forEach(function (row) {
-	          rows.push(_react2.default.createElement(_QueueRow2.default, { key: row._id, user: row, onUnAcceptClicked: _this2._rowUnaccepted.bind(_this2) }));
+	          rows.push(_react2.default.createElement(_QueueRow2.default, { key: row._id, user: row, onRowUpdated: _this2.props.rowsUpdated, onUnAcceptClicked: _this2._rowUnaccepted.bind(_this2) }));
 	        });
 	      }
 
@@ -63799,7 +63842,6 @@
 		onChange: function onChange(change) {
 			var _this = this;
 
-			debugger;
 			_jquery2.default.ajax({
 				type: 'POST',
 				url: '/api/update-form-data',

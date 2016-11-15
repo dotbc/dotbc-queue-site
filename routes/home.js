@@ -56,8 +56,8 @@ export default function (app) {
     (req, res) => {
       User.findAllSlim((err, participants) => {
         if (err) return res.send({ error: err });
-        const partners = participants.filter((p) => { console.log(p); return p.accepted !== undefined; });
-        const waitlist = participants.filter((p) => { return p.accepted === undefined; })
+        const partners = participants.filter((p) => { console.log(p); return p.accepted !== undefined; }).reverse();
+        const waitlist = participants.filter((p) => { return p.accepted === undefined; }).reverse();
         partners.forEach((p) => { p.accepted = undefined; });
         res.send({
           partners,
@@ -116,8 +116,24 @@ export default function (app) {
 
   });
 
+  app.post('/api/update-place-in-queue',
+    isLoggedIn,
+    (req, res) => {
 
-   
+      const currentPlaceInQueue = req.body.currentPlaceInQueue;
+      const placeInQueue = req.body.placeInQueue;
+      const userId = req.body.userId;
+
+      if ( ! placeInQueue) return res.send(new Error('no form placeInQueue data provided'));
+      if ( ! userId) return res.send(new Error('no form userId data provided'));
+
+      User.moveToPlaceInQueue(userId, currentPlaceInQueue, placeInQueue, (err, user) => {
+        if (err) return res.send({ error: err });
+        else res.send(user);
+      });
+
+  });
+  
   app.get('/home', isLoggedIn, ensureNonAdmin, (req, res) => {  
     return res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
   });
