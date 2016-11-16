@@ -11,7 +11,6 @@ export default class QueueRow extends Component {
   }
 
 	onPlaceInQueueChanged (change) {
-		debugger;
 
     change.userId = this.props.user._id;
     change.currentPlaceInQueue = this.props.user.placeInQueue;
@@ -73,7 +72,7 @@ export default class QueueRow extends Component {
         </td>
         <td><p>FILES: {numberFiles}</p></td>
         <td>{this._renderButton()}</td>
-        <td><img src="images/move-top.svg" /></td>
+        <td><img src="images/move-top.svg" onClick={this.onPlaceInQueueChanged.bind(this, { placeInQueue: 1 })} /></td>
         <td><img src="images/move.svg" /></td>
       </tr>
     );
@@ -152,7 +151,7 @@ export default class QueueRow extends Component {
           </div>
         </td>
         <td>{this._renderButton()}</td>
-        <td><img src="images/move-top.svg" /></td>
+        <td><img src="images/move-top.svg" onClick={this.onPlaceInQueueChanged.bind(this, { placeInQueue: 1 })} /></td>
         <td><img src="images/move.svg" /></td>
       </tr>
     );

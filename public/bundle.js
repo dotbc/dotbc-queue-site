@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d9fd760854c1b4e33fa2"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "67298a26ffa8ed368485"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -63080,8 +63080,6 @@
 	    value: function onPlaceInQueueChanged(change) {
 	      var _this2 = this;
 
-	      debugger;
-
 	      change.userId = this.props.user._id;
 	      change.currentPlaceInQueue = this.props.user.placeInQueue;
 
@@ -63197,7 +63195,7 @@
 	        _react2.default.createElement(
 	          'td',
 	          null,
-	          _react2.default.createElement('img', { src: 'images/move-top.svg' })
+	          _react2.default.createElement('img', { src: 'images/move-top.svg', onClick: this.onPlaceInQueueChanged.bind(this, { placeInQueue: 1 }) })
 	        ),
 	        _react2.default.createElement(
 	          'td',
@@ -63359,7 +63357,7 @@
 	        _react2.default.createElement(
 	          'td',
 	          null,
-	          _react2.default.createElement('img', { src: 'images/move-top.svg' })
+	          _react2.default.createElement('img', { src: 'images/move-top.svg', onClick: this.onPlaceInQueueChanged.bind(this, { placeInQueue: 1 }) })
 	        ),
 	        _react2.default.createElement(
 	          'td',
