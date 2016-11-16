@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "6aa924344413eda27509"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d9fd760854c1b4e33fa2"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -63441,7 +63441,7 @@
 	  (0, _createClass3.default)(QueueTabs, [{
 	    key: '_rowAccepted',
 	    value: function _rowAccepted(row) {
-	      this.serverRequest = _jquery2.default.post('/api/admin/accept', { _id: row._id }, function (data, message, res) {
+	      this.serverRequest = _jquery2.default.post('/api/admin/accept', { _id: row._id, placeInQueue: row.placeInQueue }, function (data, message, res) {
 	        this.setState(data, this.props.rowsUpdated);
 	      }.bind(this));
 	    }

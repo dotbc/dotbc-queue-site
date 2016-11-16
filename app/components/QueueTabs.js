@@ -6,7 +6,7 @@ import $ from 'jquery';
 export default class QueueTabs extends Component {
 
   _rowAccepted (row) {
-    this.serverRequest = $.post('/api/admin/accept', { _id: row._id }, function (data, message, res) {
+    this.serverRequest = $.post('/api/admin/accept', { _id: row._id, placeInQueue: row.placeInQueue }, function (data, message, res) {
       this.setState(data, this.props.rowsUpdated);
     }.bind(this));
   }
