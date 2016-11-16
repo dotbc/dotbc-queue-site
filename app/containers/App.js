@@ -21,6 +21,7 @@ class App extends Component {
   
   componentDidMount() {
     if (this.props.inputValue === 'login') {
+      $('body').addClass('withModal');
       this.setState({
         showLogin: true,
       });
@@ -59,6 +60,7 @@ class App extends Component {
 
   joinClicked = (e) => {
     e.preventDefault();
+    $('body').addClass('withModal');
     this.setState({
       showLogin: true,
     });

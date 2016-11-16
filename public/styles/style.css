@@ -11,6 +11,15 @@ body {
   max-width: 49em;
   margin: 0 auto; }
 
+body.withModal {
+  overflow: hidden; 
+  background-color: #0C62AD;
+}
+
+body.withModal header, body.withModal main, body.withModal footer, body.withModal #selectedPartners, body.withModal #joinButton {
+    opacity: .3;
+}
+
 .modal {
   position: fixed;
   top: 5em;

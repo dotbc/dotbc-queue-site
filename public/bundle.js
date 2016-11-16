@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "aebb3bfb2496e4d40f01"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "6aa924344413eda27509"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -64339,6 +64339,7 @@
 	      });
 	    }, _this.joinClicked = function (e) {
 	      e.preventDefault();
+	      (0, _jquery2.default)('body').addClass('withModal');
 	      _this.setState({
 	        showLogin: true
 	      });
@@ -64349,6 +64350,7 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      if (this.props.inputValue === 'login') {
+	        (0, _jquery2.default)('body').addClass('withModal');
 	        this.setState({
 	          showLogin: true
 	        });
