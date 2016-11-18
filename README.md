@@ -42,10 +42,45 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
   - github repo transfer
     - move to dotbc and ensure team added
   - heroku app transfer
-    - ensure dotbc has an account to transfer to
+    - ensure dotbc has an account to transfer to. person with admin access will have to set up additional environments. 
+    - alternatively, ensure dotbc has an account, provide me access and I can set up all environments. each will need a new branch on above github repo. 
   - AWS IAM user setup
     - easiest to set up account and provide me access?
   - AWS S3 setup
     - easiest to set up account and provide me access?
 
 ## use cases in site
+
+### participant
+
+#### index: 
+
+- user can view information about dotbc queue, including current waitlist and accepted participants.
+  - clicking waitlist and accepted headers switches shown list. list will match current statuses. 
+- user can click to join 
+- user can click to login
+
+#### login:
+
+- user can login
+
+#### join:
+
+- user enters all necessary information and clicks to join, is then directed to /home page
+
+#### home: edit join information
+
+- user can view their current place in queue
+- user can inline-edit their provided information. entries are saved automatically on blur
+
+#### home: upload files
+
+- user can upload files to share with dotbc by dropping them on the dropzone, or clicking and selecting the files
+
+#### edit file descriptions
+
+- uploaded file descriptions can be edited inline
+
+### admin:
+
+#### login
