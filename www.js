@@ -60,7 +60,7 @@ module.exports.start = (cb) => {
   app.use(passport.session());
 
   app.use('/s3', require('react-dropzone-s3-uploader/s3router')({
-    bucket: "dotbc-queue",
+    bucket: config.AWS_BUCKET || "dotbc-queue",
     region: 'us-east-1', //optional
     server: 'http://localhost:3000',
     signatureVersion: 'v4', //optional (use for some amazon regions: frankfurt and others)
