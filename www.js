@@ -3,7 +3,6 @@ import express from 'express';
 import mongodbSession from 'connect-mongodb-session';
 import session from 'express-session';  
 import path from 'path';  
-import multer from 'multer';
 import passport from './lib/passport';
 import routes from './routes';
 import webpack from 'webpack';    
@@ -11,7 +10,6 @@ import webpackConfig from './webpack.config.js';
 import util from 'util';
 
 const config = require('cconfig')();
-const upload = multer(); // for parsing multipart/form-data
 
 module.exports.start = (cb) => {
 
@@ -69,7 +67,7 @@ module.exports.start = (cb) => {
     headers: {'Access-Control-Allow-Origin': '*'}, // optional
     ACL: 'public-read', 
     getFileKeyDir: function (req) {
-      return ! req.user.isAdmin ? `${config.NODE_ENV}/${req.user.organization}` : '';
+      return ! req.user.isAdmin ? `${config.NODE_ENV}/${req.user.organization}` : `${config.NODE_ENV}`;
     }
   }));
 

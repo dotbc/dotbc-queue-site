@@ -1,14 +1,33 @@
 import moment from 'moment';
+import Dropzone from 'react-dropzone';
 import React, { Component, PropTypes } from 'react'
+import request from 'superagent';
 import { RIEInput } from 'riek'
 import $ from 'jquery';
 
 export default class QueueRow extends Component {
 
-  state = {
+  state = { 
     open: this.props.isOpen || false,
-    user: {},
+    user: this.props.user || { logo: null },
   }
+
+	onLogoDrop (files) {
+
+		this.setState({ submitDisabled: true }, () => {
+
+      const userId = this.props.user._id;
+      const file = files[0];
+
+      request.post('/api/admin/update-logo/' + userId)
+        .attach('logo', file)
+        .end((err, res) => {
+          debugger;
+          this.setState({ user: { logo: file } });
+        })
+
+    });
+	}
 
 	onPlaceInQueueChanged (change) {
 
@@ -17,14 +36,14 @@ export default class QueueRow extends Component {
 
 		$.ajax({
       type: 'POST',
-      url: '/api/update-place-in-queue',
+      url: '/api/admin/update-place-in-queue',
       data: change
     })
     .done(((res) => {
       if (res.error) {
         this.setState({
           submitDisabled: false,
-          errorMessage: res.error || 'Unable update place in queue.',
+          errorMessage: res.error || 'Unable update participant logo.',
         });
       } else {
         this.props.onRowUpdated(); 
@@ -40,6 +59,7 @@ export default class QueueRow extends Component {
   
   toggleOpen (e) {
     if (['IMG', 'A', 'INPUT', 'TEXTAREA', 'path', 'polygon', 'g', 'svg', 'span', 'p'].indexOf(e.target.tagName) > -1) return;
+    if (e.target.classList.length && e.target.classList.contains && e.target.classList.contains('ignoreOpenClose') > -1) return;
     this.setState({
       open: ! this.state.open
     })
@@ -64,7 +84,9 @@ export default class QueueRow extends Component {
     return (
       <tr onClick={this.toggleOpen.bind(this)}>
         <td>{colOne}</td>
-        <td><img src="images/spotify-logo.png" /></td> 
+        <td>
+          {this._renderLogo()}          
+        </td> 
         <td>
           <span className="org">{this.props.user.organization}</span><span className="name">{this.props.user.fullName}</span>
           <span className="title">{this.props.user.title}</span>
@@ -73,16 +95,25 @@ export default class QueueRow extends Component {
         <td><p>FILES: {numberFiles}</p></td>
         <td>{this._renderButton()}</td>
         <td><img src="images/move-top.svg" onClick={this.onPlaceInQueueChanged.bind(this, { placeInQueue: 1 })} /></td>
-        <td><img src="images/move.svg" /></td>
       </tr>
     );
+  }
+
+  _renderLogo () {
+    return this.state.user.logo
+            ? (<Dropzone className="dropzone ignoreOpenClose file" onDrop={this.onLogoDrop.bind(this)} >
+                  <img className="ignoreOpenClose" src={this.state.user.logo.preview || this.state.user.logo} />
+                </Dropzone>)
+            :  (<Dropzone className="dropzone ignoreOpenClose file" onDrop={this.onLogoDrop.bind(this)} >
+                  <span className="ignoreOpenClose">Add logo</span>
+                </Dropzone>);
   }
 
   _renderOpenFiles () {
     const openFiles = [];
     this.props.user.files.forEach((file) => {
       openFiles.push((
-        <div className="file">
+        <div key={file._id} className="file">
           <svg className="docIcon" width="35px" height="29px" viewBox="0 0 35 47" version="1.1">
               <g id="Designs-r2" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                   <g id="B" transform="translate(-362.000000, -883.000000)" fill="#0C62AD">
@@ -122,7 +153,7 @@ export default class QueueRow extends Component {
   }
 
   _renderOpen () {
-    
+
     const numberFiles = (this.props.user.files || []).length;
     const colOne = this.props.user.accepted ? 
       moment(new Date(this.props.user.accepted)).format("dddd, MMMM Do YYYY, h:mm:ss a") : 
@@ -134,7 +165,9 @@ export default class QueueRow extends Component {
     return (
       <tr className="open" onClick={this.toggleOpen.bind(this)}>
         <td>{colOne}</td>
-        <td><img src="images/ascap-logo.png" /></td> 
+        <td>
+          {this._renderLogo()}
+        </td> 
         <td>
           <span className="org">{this.props.user.organization}</span>
           <span className="name">{this.props.user.fullName}</span>
@@ -152,13 +185,11 @@ export default class QueueRow extends Component {
         </td>
         <td>{this._renderButton()}</td>
         <td><img src="images/move-top.svg" onClick={this.onPlaceInQueueChanged.bind(this, { placeInQueue: 1 })} /></td>
-        <td><img src="images/move.svg" /></td>
       </tr>
     );
   }
 
   render () {
-
     if (this.state.open) return this._renderOpen();
     else return this._renderClosed();
 

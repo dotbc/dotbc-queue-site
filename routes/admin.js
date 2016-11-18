@@ -2,9 +2,15 @@ import User from '../lib/models/User';
 import isEmail from 'is-email';
 import isAdmin from './isAdmin';
 import isLoggedIn from './isLoggedIn';
+import multer from 'multer';
 import path from 'path';
 import passport from '../lib/passport';
-// import User from '../lib/models/User'; 
+// import User from '../lib/models/User';
+
+const config = require('cconfig')();
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 export default function (app) {
 
@@ -99,6 +105,64 @@ export default function (app) {
         });
 
       });
+  });
+
+  app.post('/api/admin/update-logo/:userId',
+    isLoggedIn,
+    upload.single('logo'),
+    (req, res) => {
+
+      const file = req.file;
+      const userId = req.params.userId;
+
+      User.findById(userId, (err, user) => {
+        if (err) return next(err);
+
+        user.logo = file.buffer;
+
+        user.save((err, user) => {
+          if (err) return res.send(err);
+          else res.send(user);
+        });
+
+      });
+
+  });
+
+  app.post('/api/admin/update-logo/:userId',
+    isLoggedIn,
+    upload.single('logo'),
+    (req, res) => {
+
+      const file = req.file.buffer;
+      const userId = req.param.userId;
+
+      if ( ! file) return res.send({ error: 'no file data provided' });
+      if ( ! userId) return res.send({ error: 'no userId data provided' });
+
+      User.update({ _id: userId }, { $set: { logo: file } }, (err, user) => {
+        if (err) return res.send({ error: err });
+        else res.send(user);
+      });
+
+  });
+
+  app.post('/api/admin/update-place-in-queue',
+    isLoggedIn,
+    (req, res) => {
+
+      const currentPlaceInQueue = req.body.currentPlaceInQueue;
+      const placeInQueue = req.body.placeInQueue;
+      const userId = req.body.userId;
+
+      if ( ! placeInQueue) return res.send({ error: 'no form placeInQueue data provided' });
+      if ( ! userId) return res.send({ error: 'no form userId data provided' });
+
+      User.moveToPlaceInQueue(userId, currentPlaceInQueue, placeInQueue, (err, user) => {
+        if (err) return res.send({ error: err });
+        else res.send(user);
+      });
+
   });
 
   app.get('/admin', isAdmin, (req, res) => {  

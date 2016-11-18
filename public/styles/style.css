@@ -440,9 +440,10 @@ ul.unstyled {
     background-color: #fff;
 }
 
-#adminQueue img {
+#adminQueue img, #adminQueue .dropzone {
     height: 2em;
     display: inherit;
+    max-width: 4em;
 }
 
 #adminQueue .button {

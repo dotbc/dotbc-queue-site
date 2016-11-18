@@ -38,7 +38,7 @@ export default function (app) {
       
       const file = req.body.file;
       const parts = file.publicUrl.split('/');
-      console.log(parts)
+
       const s3 = parts[1];
       const uploads = parts[2];
       const filename = parts[3];
@@ -56,7 +56,7 @@ export default function (app) {
     (req, res) => {
       User.findAllSlim((err, participants) => {
         if (err) return res.send({ error: err });
-        const partners = participants.filter((p) => { console.log(p); return p.accepted !== undefined; }).reverse();
+        const partners = participants.filter((p) => { return p.accepted !== undefined; }).reverse();
         const waitlist = participants.filter((p) => { return p.accepted === undefined; }).reverse();
         partners.forEach((p) => { p.accepted = undefined; });
         res.send({
@@ -110,24 +110,6 @@ export default function (app) {
       merge(req.user, field);
 
       req.user.save((err, user) => {
-        if (err) return res.send({ error: err });
-        else res.send(user);
-      });
-
-  });
-
-  app.post('/api/update-place-in-queue',
-    isLoggedIn,
-    (req, res) => {
-
-      const currentPlaceInQueue = req.body.currentPlaceInQueue;
-      const placeInQueue = req.body.placeInQueue;
-      const userId = req.body.userId;
-
-      if ( ! placeInQueue) return res.send(new Error('no form placeInQueue data provided'));
-      if ( ! userId) return res.send(new Error('no form userId data provided'));
-
-      User.moveToPlaceInQueue(userId, currentPlaceInQueue, placeInQueue, (err, user) => {
         if (err) return res.send({ error: err });
         else res.send(user);
       });
