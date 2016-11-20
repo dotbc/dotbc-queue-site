@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7948064cce829121d3b4"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "29548af9182cd4cd6784"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -86275,7 +86275,6 @@
 	        var file = files[0];
 
 	        _superagent2.default.post('/api/admin/update-logo/' + userId).attach('logo', file).end(function (err, res) {
-	          debugger;
 	          _this2.setState({ user: { logo: file } });
 	        });
 	      });
@@ -86337,7 +86336,7 @@
 	    value: function _renderClosed() {
 
 	      var numberFiles = (this.props.user.files || []).length;
-	      var colOne = this.props.user.accepted ? (0, _moment2.default)(new Date(this.props.user.accepted)).format("dddd, MMMM Do YYYY, h:mm:ss a") : _react2.default.createElement(_riek.RIEInput, { value: this.state.user.placeInQueue || this.props.user.placeInQueue,
+	      var colOne = this.props.user.accepted ? (0, _moment2.default)(new Date(this.props.user.accepted)).format("dddd, MMMM Do YYYY, h:mm:ss a") : _react2.default.createElement(_riek.RIEInput, { value: this.props.user.placeInQueue,
 	        change: this.onPlaceInQueueChanged.bind(this),
 	        className: 'input-field',
 	        propName: 'placeInQueue' });
@@ -86496,7 +86495,7 @@
 	    value: function _renderOpen() {
 
 	      var numberFiles = (this.props.user.files || []).length;
-	      var colOne = this.props.user.accepted ? (0, _moment2.default)(new Date(this.props.user.accepted)).format("dddd, MMMM Do YYYY, h:mm:ss a") : _react2.default.createElement(_riek.RIEInput, { value: this.state.user.placeInQueue || this.props.user.placeInQueue,
+	      var colOne = this.props.user.accepted ? (0, _moment2.default)(new Date(this.props.user.accepted)).format("dddd, MMMM Do YYYY, h:mm:ss a") : _react2.default.createElement(_riek.RIEInput, { value: this.props.user.placeInQueue,
 	        change: this.onPlaceInQueueChanged.bind(this),
 	        className: 'input-field',
 	        propName: 'placeInQueue' });

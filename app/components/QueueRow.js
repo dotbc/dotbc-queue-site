@@ -22,7 +22,6 @@ export default class QueueRow extends Component {
       request.post('/api/admin/update-logo/' + userId)
         .attach('logo', file)
         .end((err, res) => {
-          debugger;
           this.setState({ user: { logo: file } });
         })
 
@@ -76,7 +75,7 @@ export default class QueueRow extends Component {
     const numberFiles = (this.props.user.files || []).length;
     const colOne = this.props.user.accepted ? 
       moment(new Date(this.props.user.accepted)).format("dddd, MMMM Do YYYY, h:mm:ss a") : 
-      (<RIEInput value={this.state.user.placeInQueue || this.props.user.placeInQueue}
+      (<RIEInput value={this.props.user.placeInQueue}
 								change={this.onPlaceInQueueChanged.bind(this)}
                 className="input-field"
 								propName="placeInQueue" />);
@@ -157,7 +156,7 @@ export default class QueueRow extends Component {
     const numberFiles = (this.props.user.files || []).length;
     const colOne = this.props.user.accepted ? 
       moment(new Date(this.props.user.accepted)).format("dddd, MMMM Do YYYY, h:mm:ss a") : 
-      (<RIEInput value={this.state.user.placeInQueue || this.props.user.placeInQueue}
+      (<RIEInput value={this.props.user.placeInQueue}
 								change={this.onPlaceInQueueChanged.bind(this)}
                 className="input-field"
 								propName="placeInQueue" />);
