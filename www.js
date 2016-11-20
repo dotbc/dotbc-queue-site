@@ -67,7 +67,7 @@ module.exports.start = (cb) => {
     headers: {'Access-Control-Allow-Origin': '*'}, // optional
     ACL: 'public-read', 
     getFileKeyDir: function (req) {
-      return ! req.user.isAdmin ? `${config.NODE_ENV}/${req.user.organization}` : `${config.NODE_ENV}`;
+      return ! req.user.isAdmin ? `${config.NODE_ENV}/${req.user.organization}` : ``;
     }
   }));
 

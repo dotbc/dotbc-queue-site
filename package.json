@@ -76,5 +76,9 @@
     "web-server": "supervisor -w bin,lib,routes,www.js,webpack.config.js ./bin/www",
     "dev": "concurrently --kill-others \"npm run webpack-watch\" \"npm run web-server\"",
     "test": "echo \"Error: no test specified\" && exit 1"
-  }
+  },
+  "main": "index.js",
+  "repository": "git@github.com:dotbc/dotbc-queue-site.git",
+  "author": "Matt Walters <mattwalters5@gmail.com>",
+  "license": "MIT"
 }

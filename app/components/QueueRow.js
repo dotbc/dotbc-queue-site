@@ -58,8 +58,8 @@ export default class QueueRow extends Component {
 	}
   
   toggleOpen (e) {
-    if (['IMG', 'A', 'INPUT', 'TEXTAREA', 'path', 'polygon', 'g', 'svg', 'span', 'p'].indexOf(e.target.tagName) > -1) return;
-    if (e.target.classList.length && e.target.classList.contains && e.target.classList.contains('ignoreOpenClose') > -1) return;
+    if (['IMG', 'A', 'INPUT', 'TEXTAREA', 'path', 'polygon', 'g', 'svg' ].indexOf(e.target.tagName) > -1) return;
+    if (e.target.classList.length && e.target.classList.contains && e.target.classList.contains('ignoreOpenClose')) return;
     this.setState({
       open: ! this.state.open
     })
