@@ -52,6 +52,7 @@ Alternatively, you can specify environment variables directly and run with:
 - User can inline-edit their provided information. Entries are saved automatically on blur
 - User can upload files to share with dotbc by dropping them on the dropzone, or clicking and selecting the files
 - User can view their previously uploaded files and documents
+- User can delete files previously uploaded
 - User can click to inline-edit descriptions of uploaded files
 - User can sign out via top left link
 
