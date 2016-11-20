@@ -88,9 +88,10 @@ export default function (app) {
       User.update({ _id: req.user._id }, { $pull: { files: { _id: fileId} } }, (err) => {
         if (err) return res.send(err);
         const fileAtPath = file.publicUrl.substring(10, file.publicUrl.length);
-        client.del(fileAtPath).on('response', (res) => {
-          if (err) return res.send(err);
-          else res.send({ ok: 1 });
+        client.del(fileAtPath).on('response', () => {
+          res.send({ ok: 1 });
+        }).on('error', (err) => {
+          res.send({ error: err.message });
         }).end();
       })
 

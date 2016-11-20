@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "2c2fe41c4d0dd87b494b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "7948064cce829121d3b4"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -48638,6 +48638,28 @@
 		componentDidMount: function componentDidMount() {
 			// console.log(this.props.files)
 		},
+		fileDeleted: function fileDeleted() {
+			var _this = this;
+
+			_jquery2.default.get('/api/home').done(function (res) {
+				if (res.errorMessage) {
+					_this.setState({
+						submitDisabled: false,
+						errorMessage: res.errorMessage || 'Unable to upload file.'
+					});
+				} else {
+					_this.setState({
+						submitDisabled: false,
+						files: res.files
+					});
+				}
+			}.bind(this)).fail(function (res) {
+				this.setState({
+					submitDisabled: false,
+					errorMessage: res.errorMessage || 'Unable to upload file. Please try again.'
+				});
+			}.bind(this));
+		},
 		onError: function onError(err) {
 			// console.error(error)
 		},
@@ -48645,7 +48667,7 @@
 			// console.log(arguments)
 		},
 		onFinish: function onFinish(file) {
-			var _this = this;
+			var _this2 = this;
 
 			this.setState({ submitDisabled: true }, function () {
 
@@ -48658,31 +48680,31 @@
 					data: { file: file }
 				}).done(function (res) {
 					if (res.errorMessage) {
-						_this.setState({
+						_this2.setState({
 							submitDisabled: false,
 							errorMessage: res.errorMessage || 'Unable to upload file.'
 						});
 					} else {
-						_this.setState({
+						_this2.setState({
 							submitDisabled: false,
 							files: res.files
 						});
 					}
-				}.bind(_this)).fail(function (res) {
+				}.bind(_this2)).fail(function (res) {
 					this.setState({
 						submitDisabled: false,
 						errorMessage: res.errorMessage || 'Unable to upload file. Please try again.'
 					});
-				}.bind(_this));
+				}.bind(_this2));
 			});
 		},
 		_renderUploadedFiles: function _renderUploadedFiles() {
-			var _this2 = this;
+			var _this3 = this;
 
 			var uploadedFiles = [];
 			var stateOrPropFiles = this.state.files && this.state.files.length || this.props.files === undefined ? this.state.files : this.props.files;
 			stateOrPropFiles.forEach(function (file) {
-				uploadedFiles.push(_react2.default.createElement(_UploadedFile2.default, { key: file._id, file: file, userId: _this2.props.userId }));
+				uploadedFiles.push(_react2.default.createElement(_UploadedFile2.default, { key: file._id, file: file, onFileDeleted: _this3.fileDeleted.bind(_this3), userId: _this3.props.userId }));
 			});
 			return uploadedFiles;
 		},
@@ -49197,10 +49219,7 @@
 	          errorMessage: res.error || 'Unable to delete file.'
 	        });
 	      } else {
-	        _this.setState({
-	          submitDisabled: false,
-	          description: res.description
-	        });
+	        _this.props.onFileDeleted();
 	      }
 	    }.bind(this)).fail(function (res) {
 	      this.setState({

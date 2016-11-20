@@ -25,10 +25,7 @@ export default React.createClass({
           errorMessage: res.error || 'Unable to delete file.',
         });
       } else {
-        this.setState({
-          submitDisabled: false,
-          description: res.description
-        });
+        this.props.onFileDeleted();
       }
     }).bind(this))
     .fail(function(res) {

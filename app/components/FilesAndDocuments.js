@@ -16,6 +16,29 @@ export default React.createClass({
 		// console.log(this.props.files)
 	},
 
+	fileDeleted () {
+		$.get('/api/home')
+		.done(((res) => {
+			if (res.errorMessage) {
+				this.setState({
+					submitDisabled: false,
+					errorMessage: res.errorMessage || 'Unable to upload file.',
+				});
+			} else {
+				this.setState({
+					submitDisabled: false,
+					files: res.files
+				});
+			}
+		}).bind(this))
+		.fail(function(res) {
+			this.setState({
+				submitDisabled: false,
+				errorMessage: res.errorMessage || 'Unable to upload file. Please try again.',
+			});
+		}.bind(this));
+	},
+
 	onError (err) {
 		// console.error(error)
 	},
@@ -62,7 +85,7 @@ export default React.createClass({
 		const uploadedFiles = [];
 		const stateOrPropFiles = (this.state.files && this.state.files.length || this.props.files === undefined ? this.state.files : this.props.files);
 		stateOrPropFiles.forEach((file) => {
-			uploadedFiles.push(<UploadedFile key={file._id} file={file} userId={this.props.userId} />)
+			uploadedFiles.push(<UploadedFile key={file._id} file={file} onFileDeleted={this.fileDeleted.bind(this)} userId={this.props.userId} />)
 		});
 		return uploadedFiles;
 	},
