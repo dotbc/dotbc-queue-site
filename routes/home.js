@@ -6,7 +6,15 @@ import path from 'path';
 import passport from '../lib/passport';
 import User from '../lib/models/User';
 
-const config = require('cconfig')(); 
+const config = require('cconfig')();
+
+var knox = require('knox');
+
+var client = knox.createClient({
+  key: config.AWS_ACCESS_KEY_ID,
+  secret: config.AWS_SECRET_ACCESS_KEY,
+  bucket: config.AWS_BUCKET,
+});
 
 export default function (app) {
 
@@ -65,6 +73,27 @@ export default function (app) {
           user: req.user
         });
       });
+  });
+
+  app.post('/api/delete-file',
+    isLoggedIn,
+    (req, res) => {
+      
+      const fileId = req.body.fileId;
+
+      const file = req.user.files.find((f) => {
+        return f._id === fileId;
+      });
+
+      User.update({ _id: req.user._id }, { $pull: { files: { _id: fileId} } }, (err) => {
+        if (err) return res.send(err);
+        const fileAtPath = file.publicUrl.substring(10, file.publicUrl.length);
+        client.del(fileAtPath).on('response', (res) => {
+          if (err) return res.send(err);
+          else res.send({ ok: 1 });
+        }).end();
+      })
+
   });
 
   app.get('/api/home',

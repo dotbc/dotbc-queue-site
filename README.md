@@ -1,53 +1,24 @@
 # dotbc-queue-site
 
-This project template was built with [Create React App](https://github.com/facebookincubator/create-react-app).
+## Installing
 
-## Available Scripts
+`npm install`
 
-In the project directory, you can run:
+## Running
 
-### `./bin/admin add|list|rm`
+dotbq-queue-site requires AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, and AWS_BUCKET env variables which 
+point to access credentials for an AWS IAM user and the bucket name of an AWS S3 bucket. 
 
-The admin utility exists to allow adding, listing, and removing admin users. Admin users may log into the site via the /admin-login route. 
-Once logged in they may access /admin-home to edit and review the participant queue. 
+By default the site's Makefile will look for environment variables called DOTBC_AWS_ACCESS_KEY_ID, DOTBC_AWS_BUCKET, and DOTBC_AWS_ACCESS_KEY_ID 
+to provide these values. You can export them within your .bash_profile, .bashrc, or .zshrc files. 
 
-### `npm start`
+Run the site with the following script:
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+`make start`
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Alternatively, you can specify environment variables directly and run with: 
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## items for handoff
-
-  - github repo transfer
-    - move to dotbc and ensure team added
-  - heroku app transfer
-    - ensure dotbc has an account to transfer to. person with admin access will have to set up additional environments. 
-    - alternatively, ensure dotbc has an account, provide me access and I can set up all environments. each will need a new branch on above github repo. 
-  - AWS IAM user setup
-    - easiest to set up account and provide me access?
-  - AWS S3 setup
-    - easiest to set up account and provide me access?
+`make AWS_ACCESS_KEY_ID=[your key] AWS_SECRET_ACCESS_KEY=[your access key] AWS_BUCKET=[your bucket] start`
 
 ## use cases by route / page
 

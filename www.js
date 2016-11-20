@@ -65,9 +65,8 @@ module.exports.start = (cb) => {
     server: 'http://localhost:3000',
     signatureVersion: 'v4', //optional (use for some amazon regions: frankfurt and others)
     headers: {'Access-Control-Allow-Origin': '*'}, // optional
-    ACL: 'public-read', 
     getFileKeyDir: function (req) {
-      return ! req.user.isAdmin ? `${config.NODE_ENV}/${req.user.organization}` : ``;
+      return ! req.user.isAdmin ? `${config.NODE_ENV}/${req.user.organization}` : '';
     }
   }));
 
