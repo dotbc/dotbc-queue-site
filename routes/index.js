@@ -1,5 +1,6 @@
 import admin from './admin';
 import home from './home';
+import isLoggedIn from './isLoggedIn';
 import join from './join';
 import login from './login';
 import passport from '../lib/passport';
@@ -17,8 +18,10 @@ export default function (app) {
   login(app);
 
   // catch all other requests and serve main page
-  app.get('*', (req, res) => {  
-    return res.sendFile(path.resolve(__dirname, '..', 'public', 'index.html'));
+  app.get('*', (req, res, next) => {  
+    if (req.path === '/' && req.user) return res.redirect('/home');
+    if (req.path === '/' && req.user && req.user.isAdmin) return res.redirect('/admin-home');
+    return res.status(404).send('Woops! Nothing to be found here!');
   });
 
 }

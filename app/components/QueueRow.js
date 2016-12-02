@@ -12,6 +12,10 @@ export default class QueueRow extends Component {
     user: this.props.user || { logo: null },
   }
 
+  logoClicked () {
+    window.open(this.state.user.logo.preview || this.state.user.logo);
+  }
+
 	onLogoDrop (files) {
 
 		this.setState({ submitDisabled: true }, () => {
@@ -100,9 +104,12 @@ export default class QueueRow extends Component {
 
   _renderLogo () {
     return this.state.user.logo
-            ? (<Dropzone className="dropzone ignoreOpenClose file" onDrop={this.onLogoDrop.bind(this)} >
-                  <img className="ignoreOpenClose" src={this.state.user.logo.preview || this.state.user.logo} />
-                </Dropzone>)
+            ? (<div>
+                <img className="ignoreOpenClose file" src={this.state.user.logo.preview || this.state.user.logo} onClick={this.logoClicked.bind(this)} /> 
+                <Dropzone className="dropzone ignoreOpenClose" onDrop={this.onLogoDrop.bind(this)} >
+                  <button>change</button>
+                </Dropzone>
+               </div>)
             :  (<Dropzone className="dropzone ignoreOpenClose file" onDrop={this.onLogoDrop.bind(this)} >
                   <span className="ignoreOpenClose">Add logo</span>
                 </Dropzone>);

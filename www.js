@@ -29,8 +29,6 @@ module.exports.start = (cb) => {
 
   }
 
-  app.use('/', express.static(path.resolve(__dirname, './public')));
-
   const MongoSessionStore = mongodbSession(session);
 
   const store = new MongoSessionStore({
@@ -58,6 +56,14 @@ module.exports.start = (cb) => {
   app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
   app.use(passport.initialize());
   app.use(passport.session());
+
+  app.get('/', (req, res, next) => {
+    if (req.path === '/' && req.user) return res.redirect('/home');
+    if (req.path === '/' && req.user && req.user.isAdmin) return res.redirect('/admin-home');
+    return next();
+  });
+
+  app.use('/', express.static(path.resolve(__dirname, './public')));
 
   app.use('/s3', require('react-dropzone-s3-uploader/s3router')({
     bucket: config.AWS_BUCKET || "dotbc-queue",
