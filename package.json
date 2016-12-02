@@ -53,6 +53,7 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "rc-menu": "^5.0.5",
+    "rc-progress": "^2.0.3",
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.6",
     "react-dom": "^15.3.2",

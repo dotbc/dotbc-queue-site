@@ -1,8 +1,18 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react';
+import { Line } from 'rc-progress';
 
 export default React.createClass({
 
   render () {
+
+    if (this.props.progress > 0) {
+      return (
+        <div className="uploadNew">
+          <Line percent={this.props.progress} strokeWidth="4" strokeColor="#98eea3" />
+          <span>{this.props.progress}%</span>
+        </div>
+        );
+    }
 
     return (
 		  <div className="uploadNew">

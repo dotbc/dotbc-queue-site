@@ -8,7 +8,8 @@ export default React.createClass({
 
 	getInitialState () {
 		return {
-			files: []
+			files: [],
+			progress: 0
 		};
 	},
 
@@ -40,15 +41,16 @@ export default React.createClass({
 	},
 
 	onError (err) {
-		// console.error(error)
+		this.setState({ progress: 0 });
 	},
 
-	onProgress () {
-		// console.log(arguments)
+	onProgress (progress) {
+		debugger;
+		this.setState({ progress: progress });
 	},
 
 	onFinish (file) {
-		this.setState({ submitDisabled: true }, () => {
+		this.setState({ submitDisabled: true, progress: 0 }, () => {
 
 			file._id = file.filename.substring(0, file.filename.indexOf('_'));
 			file.filename = file.filename.substring(file.filename.indexOf('_') + 1, file.filename.length); 
@@ -111,7 +113,7 @@ export default React.createClass({
 				</ul>
 			</div>
 			<DropzoneS3Uploader onError={this.onError} onProgress={this.onProgress} onFinish={this.onFinish} {...uploaderProps} >
-				<UploadNew />
+				<UploadNew progress={this.state.progress} />
 			</DropzoneS3Uploader>
 		</div>
 

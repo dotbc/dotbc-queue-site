@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "29548af9182cd4cd6784"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b1e58507651f55a0fa58"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -48632,7 +48632,8 @@
 		displayName: 'FilesAndDocuments',
 		getInitialState: function getInitialState() {
 			return {
-				files: []
+				files: [],
+				progress: 0
 			};
 		},
 		componentDidMount: function componentDidMount() {
@@ -48661,15 +48662,16 @@
 			}.bind(this));
 		},
 		onError: function onError(err) {
-			// console.error(error)
+			this.setState({ progress: 0 });
 		},
-		onProgress: function onProgress() {
-			// console.log(arguments)
+		onProgress: function onProgress(progress) {
+			debugger;
+			this.setState({ progress: progress });
 		},
 		onFinish: function onFinish(file) {
 			var _this2 = this;
 
-			this.setState({ submitDisabled: true }, function () {
+			this.setState({ submitDisabled: true, progress: 0 }, function () {
 
 				file._id = file.filename.substring(0, file.filename.indexOf('_'));
 				file.filename = file.filename.substring(file.filename.indexOf('_') + 1, file.filename.length);
@@ -48740,7 +48742,7 @@
 				_react2.default.createElement(
 					_reactDropzoneS3Uploader2.default,
 					(0, _extends3.default)({ onError: this.onError, onProgress: this.onProgress, onFinish: this.onFinish }, uploaderProps),
-					_react2.default.createElement(_UploadNew2.default, null)
+					_react2.default.createElement(_UploadNew2.default, { progress: this.state.progress })
 				)
 			);
 		}
@@ -86951,7 +86953,7 @@
 /* 920 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -86961,44 +86963,60 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _rcProgress = __webpack_require__(1075);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-	  displayName: "UploadNew",
+	  displayName: 'UploadNew',
 	  render: function render() {
 
-	    return _react2.default.createElement(
-	      "div",
-	      { className: "uploadNew" },
-	      _react2.default.createElement(
-	        "svg",
-	        { className: "docIcon", width: "35px", height: "47px", viewBox: "0 0 35 47", version: "1.1" },
+	    if (this.props.progress > 0) {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'uploadNew' },
+	        _react2.default.createElement(_rcProgress.Line, { percent: this.props.progress, strokeWidth: '4', strokeColor: '#98eea3' }),
 	        _react2.default.createElement(
-	          "g",
-	          { id: "Designs-r2", stroke: "none", strokeWidth: "1", fill: "none", fillRule: "evenodd" },
+	          'span',
+	          null,
+	          this.props.progress,
+	          '%'
+	        )
+	      );
+	    }
+
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'uploadNew' },
+	      _react2.default.createElement(
+	        'svg',
+	        { className: 'docIcon', width: '35px', height: '47px', viewBox: '0 0 35 47', version: '1.1' },
+	        _react2.default.createElement(
+	          'g',
+	          { id: 'Designs-r2', stroke: 'none', strokeWidth: '1', fill: 'none', fillRule: 'evenodd' },
 	          _react2.default.createElement(
-	            "g",
-	            { id: "B", transform: "translate(-362.000000, -883.000000)", fill: "#0C62AD" },
+	            'g',
+	            { id: 'B', transform: 'translate(-362.000000, -883.000000)', fill: '#0C62AD' },
 	            _react2.default.createElement(
-	              "g",
-	              { id: "Group", transform: "translate(362.000000, 883.000000)" },
-	              _react2.default.createElement("polygon", { id: "Fill-1903", points: "13.6111111 35.25 7.77777778 35.25 7.77777778 39.1666667 13.6111111 39.1666667" }),
-	              _react2.default.createElement("polygon", { id: "Fill-1904", points: "27.2222222 35.25 15.5555556 35.25 15.5555556 39.1666667 27.2222222 39.1666667" }),
-	              _react2.default.createElement("polygon", { id: "Fill-1905", points: "27.2222222 23.5 15.5555556 23.5 15.5555556 27.4166667 27.2222222 27.4166667" }),
-	              _react2.default.createElement("polygon", { id: "Fill-1906", points: "27.2222222 29.375 15.5555556 29.375 15.5555556 33.2916667 27.2222222 33.2916667" }),
-	              _react2.default.createElement("polygon", { id: "Fill-1907", points: "13.6111111 23.5 7.77777778 23.5 7.77777778 27.4166667 13.6111111 27.4166667" }),
-	              _react2.default.createElement("polygon", { id: "Fill-1908", points: "13.6111111 29.375 7.77777778 29.375 7.77777778 33.2916667 13.6111111 33.2916667" }),
-	              _react2.default.createElement("polygon", { id: "Fill-1909", points: "27.2222222 17.625 15.5555556 17.625 15.5555556 21.5416667 27.2222222 21.5416667" }),
-	              _react2.default.createElement("polygon", { id: "Fill-1910", points: "13.6111111 17.625 7.77777778 17.625 7.77777778 21.5416667 13.6111111 21.5416667" }),
-	              _react2.default.createElement("path", { d: "M22.3611111,12.7291667 L22.3611111,0.979166667 L34.0277778,12.7291667 L22.3611111,12.7291667 Z M29.1666667,41.125 L5.83333333,41.125 L5.83333333,15.6666667 L29.1666667,15.6666667 L29.1666667,41.125 Z M34.7151389,12.0368958 L23.0484722,0.286895833 C22.8656944,0.1028125 22.61875,0 22.3611111,0 L0.972222222,0 C0.435555556,0 0,0.4376875 0,0.979166667 L0,46.0208333 C0,46.5623125 0.435555556,47 0.972222222,47 L34.0277778,47 C34.5644444,47 35,46.5623125 35,46.0208333 L35,12.7291667 C35,12.4687083 34.8969444,12.22 34.7151389,12.0368958 L34.7151389,12.0368958 Z", id: "Fill-1911" })
+	              'g',
+	              { id: 'Group', transform: 'translate(362.000000, 883.000000)' },
+	              _react2.default.createElement('polygon', { id: 'Fill-1903', points: '13.6111111 35.25 7.77777778 35.25 7.77777778 39.1666667 13.6111111 39.1666667' }),
+	              _react2.default.createElement('polygon', { id: 'Fill-1904', points: '27.2222222 35.25 15.5555556 35.25 15.5555556 39.1666667 27.2222222 39.1666667' }),
+	              _react2.default.createElement('polygon', { id: 'Fill-1905', points: '27.2222222 23.5 15.5555556 23.5 15.5555556 27.4166667 27.2222222 27.4166667' }),
+	              _react2.default.createElement('polygon', { id: 'Fill-1906', points: '27.2222222 29.375 15.5555556 29.375 15.5555556 33.2916667 27.2222222 33.2916667' }),
+	              _react2.default.createElement('polygon', { id: 'Fill-1907', points: '13.6111111 23.5 7.77777778 23.5 7.77777778 27.4166667 13.6111111 27.4166667' }),
+	              _react2.default.createElement('polygon', { id: 'Fill-1908', points: '13.6111111 29.375 7.77777778 29.375 7.77777778 33.2916667 13.6111111 33.2916667' }),
+	              _react2.default.createElement('polygon', { id: 'Fill-1909', points: '27.2222222 17.625 15.5555556 17.625 15.5555556 21.5416667 27.2222222 21.5416667' }),
+	              _react2.default.createElement('polygon', { id: 'Fill-1910', points: '13.6111111 17.625 7.77777778 17.625 7.77777778 21.5416667 13.6111111 21.5416667' }),
+	              _react2.default.createElement('path', { d: 'M22.3611111,12.7291667 L22.3611111,0.979166667 L34.0277778,12.7291667 L22.3611111,12.7291667 Z M29.1666667,41.125 L5.83333333,41.125 L5.83333333,15.6666667 L29.1666667,15.6666667 L29.1666667,41.125 Z M34.7151389,12.0368958 L23.0484722,0.286895833 C22.8656944,0.1028125 22.61875,0 22.3611111,0 L0.972222222,0 C0.435555556,0 0,0.4376875 0,0.979166667 L0,46.0208333 C0,46.5623125 0.435555556,47 0.972222222,47 L34.0277778,47 C34.5644444,47 35,46.5623125 35,46.0208333 L35,12.7291667 C35,12.4687083 34.8969444,12.22 34.7151389,12.0368958 L34.7151389,12.0368958 Z', id: 'Fill-1911' })
 	            )
 	          )
 	        )
 	      ),
 	      _react2.default.createElement(
-	        "p",
+	        'p',
 	        null,
-	        "+ Upload New File"
+	        '+ Upload New File'
 	      )
 	    );
 	  }
@@ -104809,6 +104827,243 @@
 	  }
 	};
 
+
+/***/ },
+/* 1072 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	exports["default"] = {
+	  propTypes: {
+	    prefixCls: _react.PropTypes.string,
+	    strokeWidth: _react.PropTypes.oneOfType([_react.PropTypes.number, _react.PropTypes.string]),
+	    strokeColor: _react.PropTypes.string,
+	    trailWidth: _react.PropTypes.oneOfType([_react.PropTypes.number, _react.PropTypes.string]),
+	    trailColor: _react.PropTypes.string,
+	    strokeLinecap: _react.PropTypes.oneOf(['round', 'square']),
+	    style: _react.PropTypes.object,
+	    className: _react.PropTypes.string
+	  },
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      prefixCls: 'rc-progress',
+	      strokeWidth: 1,
+	      strokeColor: '#2db7f5',
+	      trailWidth: 1,
+	      trailColor: '#D9D9D9',
+	      strokeLinecap: 'round',
+	      className: ''
+	    };
+	  },
+	  componentDidUpdate: function componentDidUpdate() {
+	    var now = Date.now();
+	    this.refs.path.style.transitionDuration = '0.3s, 0.3s';
+	    if (this.prevTimeStamp && now - this.prevTimeStamp < 100) {
+	      this.refs.path.style.transitionDuration = '0s, 0s';
+	    }
+	    this.prevTimeStamp = Date.now();
+	  }
+	};
+	module.exports = exports['default'];
+
+/***/ },
+/* 1073 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _mixin = __webpack_require__(1072);
+
+	var _mixin2 = _interopRequireDefault(_mixin);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; } /* eslint-disable react/prop-types */
+
+
+	exports["default"] = _react2["default"].createClass({
+	  displayName: 'Circle',
+
+	  mixins: [_mixin2["default"]],
+	  render: function render() {
+	    var _props = this.props;
+	    var prefixCls = _props.prefixCls;
+	    var strokeWidth = _props.strokeWidth;
+	    var trailWidth = _props.trailWidth;
+	    var strokeColor = _props.strokeColor;
+	    var trailColor = _props.trailColor;
+	    var strokeLinecap = _props.strokeLinecap;
+	    var percent = _props.percent;
+	    var style = _props.style;
+	    var className = _props.className;
+
+	    var restProps = _objectWithoutProperties(_props, ['prefixCls', 'strokeWidth', 'trailWidth', 'strokeColor', 'trailColor', 'strokeLinecap', 'percent', 'style', 'className']);
+
+	    var radius = 50 - strokeWidth / 2;
+	    var pathString = 'M 50,50 m 0,-' + radius + '\n     a ' + radius + ',' + radius + ' 0 1 1 0,' + 2 * radius + '\n     a ' + radius + ',' + radius + ' 0 1 1 0,-' + 2 * radius;
+	    var len = Math.PI * 2 * radius;
+	    var pathStyle = {
+	      strokeDasharray: len + 'px ' + len + 'px',
+	      strokeDashoffset: (100 - percent) / 100 * len + 'px',
+	      transition: 'stroke-dashoffset 0.3s ease 0s, stroke 0.3s ease'
+	    };
+
+	    return _react2["default"].createElement(
+	      'svg',
+	      _extends({
+	        className: prefixCls + '-circle ' + className,
+	        viewBox: '0 0 100 100',
+	        style: style
+	      }, restProps),
+	      _react2["default"].createElement('path', {
+	        className: prefixCls + '-circle-trail',
+	        d: pathString,
+	        stroke: trailColor,
+	        strokeWidth: trailWidth || strokeWidth,
+	        fillOpacity: '0'
+	      }),
+	      _react2["default"].createElement('path', {
+	        className: prefixCls + '-circle-path',
+	        d: pathString,
+	        strokeLinecap: strokeLinecap,
+	        stroke: strokeColor,
+	        strokeWidth: strokeWidth,
+	        fillOpacity: '0',
+	        ref: 'path',
+	        style: pathStyle
+	      })
+	    );
+	  }
+	});
+	module.exports = exports['default'];
+
+/***/ },
+/* 1074 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _mixin = __webpack_require__(1072);
+
+	var _mixin2 = _interopRequireDefault(_mixin);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; } /* eslint-disable react/prop-types */
+
+
+	exports["default"] = _react2["default"].createClass({
+	  displayName: 'Line',
+
+	  mixins: [_mixin2["default"]],
+	  render: function render() {
+	    var _props = this.props;
+	    var prefixCls = _props.prefixCls;
+	    var strokeWidth = _props.strokeWidth;
+	    var trailWidth = _props.trailWidth;
+	    var strokeColor = _props.strokeColor;
+	    var trailColor = _props.trailColor;
+	    var strokeLinecap = _props.strokeLinecap;
+	    var percent = _props.percent;
+	    var style = _props.style;
+	    var className = _props.className;
+
+	    var restProps = _objectWithoutProperties(_props, ['prefixCls', 'strokeWidth', 'trailWidth', 'strokeColor', 'trailColor', 'strokeLinecap', 'percent', 'style', 'className']);
+
+	    var pathStyle = {
+	      strokeDasharray: '100px, 100px',
+	      strokeDashoffset: 100 - percent + 'px',
+	      transition: 'stroke-dashoffset 0.3s ease 0s, stroke 0.3s linear'
+	    };
+
+	    var center = strokeWidth / 2;
+	    var right = 100 - strokeWidth / 2;
+	    var pathString = 'M ' + center + ',' + center + ' L ' + right + ',' + center;
+	    var viewBoxString = '0 0 100 ' + strokeWidth;
+
+	    return _react2["default"].createElement(
+	      'svg',
+	      _extends({
+	        className: prefixCls + '-line ' + className,
+	        viewBox: viewBoxString,
+	        preserveAspectRatio: 'none',
+	        style: style
+	      }, restProps),
+	      _react2["default"].createElement('path', {
+	        className: prefixCls + '-line-trail',
+	        d: pathString,
+	        strokeLinecap: strokeLinecap,
+	        stroke: trailColor,
+	        strokeWidth: trailWidth || strokeWidth,
+	        fillOpacity: '0'
+	      }),
+	      _react2["default"].createElement('path', {
+	        className: prefixCls + '-line-path',
+	        d: pathString,
+	        strokeLinecap: strokeLinecap,
+	        stroke: strokeColor,
+	        strokeWidth: strokeWidth,
+	        fillOpacity: '0',
+	        ref: 'path',
+	        style: pathStyle
+	      })
+	    );
+	  }
+	});
+	module.exports = exports['default'];
+
+/***/ },
+/* 1075 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _Line = __webpack_require__(1074);
+
+	var _Line2 = _interopRequireDefault(_Line);
+
+	var _Circle = __webpack_require__(1073);
+
+	var _Circle2 = _interopRequireDefault(_Circle);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+	exports["default"] = {
+	  Line: _Line2["default"],
+	  Circle: _Circle2["default"]
+	};
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);
