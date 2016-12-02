@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b1e58507651f55a0fa58"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "bded15b2baa2b5652ac7"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -87249,7 +87249,9 @@
 	    value: function _renderWaitlist() {
 	      var list = [];
 
-	      var input = this.state.selectedTab === 'left' ? this.props.waitlist : this.props.partners;
+	      var input = null;
+
+	      if (this.props.partners && this.props.partners.length === 0) input = this.props.waitlist;else if (this.props.waitlist && this.props.waitlist.length === 0) input = this.props.partners;else input = this.state.selectedTab === 'left' ? this.props.waitlist : this.props.partners;
 
 	      if (!input) return null;
 
@@ -87290,6 +87292,39 @@
 	      });
 	    }
 	  }, {
+	    key: '_renderAgencyButton',
+	    value: function _renderAgencyButton() {}
+	  }, {
+	    key: '_setNavStyle',
+	    value: function _setNavStyle() {
+	      return !this.props.waitlist.length || !this.props.partners.length ? { backgroundColor: '#fff', width: 100 + '%' } : null;
+	    }
+	  }, {
+	    key: '_renderQueueNav',
+	    value: function _renderQueueNav() {
+	      if (!this.props.waitlist && !this.props.partners) {
+	        return null;
+	      }
+
+	      var waitlist = this.props.waitlist.length === 0 ? null : _react2.default.createElement(
+	        'span',
+	        { className: this.setIfActive.bind(this, 'left')(), style: this._setNavStyle(), onClick: this.toggle.bind(this, 'left') },
+	        'Agencies and Organizations on the Waitlist'
+	      );
+	      var partners = this.props.partners.length === 0 ? null : _react2.default.createElement(
+	        'span',
+	        { className: this.setIfActive.bind(this, 'right')(), style: this._setNavStyle(), onClick: this.toggle.bind(this, 'right') },
+	        'Full List of Current accepted'
+	      );
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'queueNav' },
+	        waitlist,
+	        partners
+	      );
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 
@@ -87299,20 +87334,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'container' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'queueNav' },
-	            _react2.default.createElement(
-	              'span',
-	              { className: this.setIfActive.bind(this, 'left')(), onClick: this.toggle.bind(this, 'left') },
-	              'Agencies and Organizations on the Waitlist'
-	            ),
-	            _react2.default.createElement(
-	              'span',
-	              { className: this.setIfActive.bind(this, 'right')(), onClick: this.toggle.bind(this, 'right') },
-	              'Full List of Current accepted'
-	            )
-	          ),
+	          this._renderQueueNav(),
 	          _react2.default.createElement(
 	            'ul',
 	            { id: 'queue', className: 'unstyled' },

@@ -9,7 +9,12 @@ export default class WaitListContainer extends Component {
   _renderWaitlist () {
     const list = [];
 
-    const input = this.state.selectedTab === 'left' ? this.props.waitlist : this.props.partners;
+    let input = null;
+    
+    if (this.props.partners && this.props.partners.length === 0) input = this.props.waitlist;
+    else if (this.props.waitlist && this.props.waitlist.length === 0) input = this.props.partners;
+    else input = (this.state.selectedTab === 'left') ? this.props.waitlist : this.props.partners;
+
 
     if ( ! input) return null;
 
@@ -36,15 +41,36 @@ export default class WaitListContainer extends Component {
     })
   }
 
+  _renderAgencyButton() {
+
+  }
+
+  _setNavStyle() {
+    return ! this.props.waitlist.length || ! this.props.partners.length ? ( { backgroundColor: '#fff', width: 100 + '%' }) : null;
+  }
+
+  _renderQueueNav() {
+    if ( ! this.props.waitlist && ! this.props.partners) {
+      return null;
+    } 
+
+    const waitlist = this.props.waitlist.length === 0 ? null : (<span className={this.setIfActive.bind(this, 'left')()} style={this._setNavStyle()} onClick={this.toggle.bind(this, 'left')}>Agencies and Organizations on the Waitlist</span>);
+    const partners = this.props.partners.length === 0 ? null : (<span className={this.setIfActive.bind(this, 'right')()} style={this._setNavStyle()} onClick={this.toggle.bind(this, 'right')}>Full List of Current accepted</span>);
+ 
+    return (
+      <div className="queueNav">
+        {waitlist}
+        {partners}
+      </div>);
+  }
+
   render() {
 
     return (
       <main>
         <div className="container">
-          <div className="queueNav">
-            <span className={this.setIfActive.bind(this, 'left')()} onClick={this.toggle.bind(this, 'left')}>Agencies and Organizations on the Waitlist</span>
-            <span className={this.setIfActive.bind(this, 'right')()} onClick={this.toggle.bind(this, 'right')}>Full List of Current accepted</span>
-          </div>
+
+          {this._renderQueueNav()}
 
           <ul id="queue" className="unstyled">
             {this._renderWaitlist()}
