@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "531a78c634dd66e1c030"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3e80fd85578a76f08058"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -86709,7 +86709,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'a',
-	            { href: file.publicUrl, target: '_blank' },
+	            { href: file.publicUrl, target: '_blank', download: true },
 	            _react2.default.createElement(
 	              'svg',
 	              { className: 'downloadIcon', width: '20px', height: '20px', viewBox: '0 0 20 20', version: '1.1' },
