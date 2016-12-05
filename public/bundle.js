@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "3e80fd85578a76f08058"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0ef6d4f9ee383c76749c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -86657,7 +86657,7 @@
 	        _react2.default.createElement('img', { className: 'ignoreOpenClose file', src: this.state.user.logo.preview || this.state.user.logo, onClick: this.logoClicked.bind(this) }),
 	        _react2.default.createElement(
 	          _reactDropzone2.default,
-	          { className: 'dropzone ignoreOpenClose', onDrop: this.onLogoDrop.bind(this) },
+	          { className: 'dropzone ignoreOpenClose', accept: 'image/*', onDrop: this.onLogoDrop.bind(this) },
 	          _react2.default.createElement(
 	            'button',
 	            null,
@@ -86666,7 +86666,7 @@
 	        )
 	      ) : _react2.default.createElement(
 	        _reactDropzone2.default,
-	        { className: 'dropzone ignoreOpenClose file', onDrop: this.onLogoDrop.bind(this) },
+	        { className: 'dropzone ignoreOpenClose file', accept: 'image/*', onDrop: this.onLogoDrop.bind(this) },
 	        _react2.default.createElement(
 	          'span',
 	          { className: 'ignoreOpenClose' },
