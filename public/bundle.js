@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "0ef6d4f9ee383c76749c"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3df6b2430a39f3a8155d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -88177,6 +88177,17 @@
 
 	      this.setState({ submitDisabled: true }, function () {
 
+	        var validationFailed = '';
+
+	        // custom validate for pre-html5 browsers
+	        ['email', 'password', 'fullName', 'organization', 'title', 'interest'].forEach(function (field) {
+	          if (!data[field] || data[field].trim().length === 0) {
+	            validationFailed += validationFailed.length ? '\n' + field + ' is required' : field + ' is required';
+	          }
+	        });
+
+	        if (validationFailed.length) return _this2.setState({ submitDisabled: false, errorMessage: validationFailed });
+
 	        _jquery2.default.ajax({
 	          type: 'POST',
 	          url: '/api/join',
@@ -88214,7 +88225,13 @@
 	        _react2.default.createElement(
 	          'b',
 	          null,
-	          errorMessage
+	          errorMessage.split('\n').map(function (message) {
+	            return _react2.default.createElement(
+	              'div',
+	              null,
+	              message
+	            );
+	          })
 	        ),
 	        ' ',
 	        '(',

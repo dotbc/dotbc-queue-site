@@ -28,6 +28,22 @@ class JoinPage extends Component {
 
     this.setState({ submitDisabled: true }, () => {
 
+      let validationFailed = '';
+
+      // custom validate for pre-html5 browsers
+      ['email',
+       'password',
+       'fullName',
+       'organization',
+       'title',
+       'interest'].forEach((field) => {
+          if ( ! data[field] || data[field].trim().length === 0) {
+            validationFailed += (validationFailed.length) ? `\n${field} is required` : `${field} is required`;
+          }
+        });
+
+      if (validationFailed.length) return this.setState({ submitDisabled: false, errorMessage: validationFailed });
+      
       $.ajax({
         type: 'POST',
         url: '/api/join',
@@ -64,7 +80,7 @@ class JoinPage extends Component {
 
     return (
       <p style={{ backgroundColor: '#e99', padding: 10 }}>
-        <b>{errorMessage}</b>
+        <b>{errorMessage.split('\n').map((message) => { return <div>{ message }</div> })}</b>
         {' '}
         (<a href="#" onClick={this.handleDismissClick}>Dismiss</a>)
       </p>
