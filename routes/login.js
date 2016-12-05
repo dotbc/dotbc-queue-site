@@ -4,10 +4,12 @@ import path from 'path';
 export default function (app) {
 
   app.get('/admin-login', (req, res) => {  
+    if (req.user && req.user.isAdmin) return res.redirect('/admin-home');
     return res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
   });
 
   app.get('/login', (req, res) => {  
+    if (req.user) return res.redirect('/home');
     return res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
   });
 
