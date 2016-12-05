@@ -5,7 +5,7 @@ import session from 'express-session';
 import path from 'path';  
 import passport from './lib/passport';
 import routes from './routes';
-import webpack from 'webpack';    
+import webpack from 'webpack';
 import webpackConfig from './webpack.config.js';
 import util from 'util';
 
