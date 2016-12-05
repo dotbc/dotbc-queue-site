@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7d7871766ebfc76e1ec6"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b986779bdda5f8072e81"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -86508,7 +86508,9 @@
 
 	    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = QueueRow.__proto__ || (0, _getPrototypeOf2.default)(QueueRow)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
 	      open: _this.props.isOpen || false,
-	      user: _this.props.user || { logo: null }
+	      user: _this.props.user || { logo: null },
+	      acceptDisabled: false,
+	      unacceptDisabled: false
 	    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
 	  }
 
@@ -86570,17 +86572,46 @@
 	      });
 	    }
 	  }, {
+	    key: '_acceptClicked',
+	    value: function _acceptClicked(user) {
+	      var _this4 = this;
+
+	      debugger;
+	      if (this.state.acceptDisabled) return false;
+
+	      this.setState({
+	        acceptDisabled: true,
+	        unacceptDisabled: false
+	      }, function () {
+	        _this4.props.onAcceptClicked(user);
+	      });
+	    }
+	  }, {
+	    key: '_unacceptClicked',
+	    value: function _unacceptClicked(user) {
+	      var _this5 = this;
+
+	      if (this.state.unacceptDisabled) return false;
+
+	      this.setState({
+	        acceptDisabled: false,
+	        unacceptDisabled: true
+	      }, function () {
+	        _this5.props.onUnAcceptClicked(user);
+	      });
+	    }
+	  }, {
 	    key: '_renderButton',
 	    value: function _renderButton() {
 	      if (!this.props.user.accepted) {
 	        return _react2.default.createElement(
 	          'a',
-	          { className: 'button', onClick: this.props.onAcceptClicked.bind(this, this.props.user) },
+	          { className: 'button', disabled: this.state.acceptDisabled, onClick: this._acceptClicked.bind(this, this.props.user) },
 	          'Accept'
 	        );
 	      } else return _react2.default.createElement(
 	        'a',
-	        { className: 'button', onClick: this.props.onUnAcceptClicked.bind(this, this.props.user) },
+	        { className: 'button', disabled: this.state.unacceptDisabled, onClick: this._unacceptClicked.bind(this, this.props.user) },
 	        'Unaccept'
 	      );
 	    }

@@ -10,6 +10,8 @@ export default class QueueRow extends Component {
   state = { 
     open: this.props.isOpen || false,
     user: this.props.user || { logo: null },
+    acceptDisabled: false,
+    unacceptDisabled: false,
   }
 
   logoClicked () {
@@ -68,10 +70,35 @@ export default class QueueRow extends Component {
     })
   }
 
+  _acceptClicked (user) {
+
+    debugger;
+    if (this.state.acceptDisabled) return false;
+
+    this.setState({
+      acceptDisabled: true,
+      unacceptDisabled: false,
+    }, () => {
+      this.props.onAcceptClicked(user);
+    })
+  }
+
+  _unacceptClicked (user) {
+
+    if (this.state.unacceptDisabled) return false;
+
+    this.setState({
+      acceptDisabled: false,
+      unacceptDisabled: true,
+    }, () => {
+      this.props.onUnAcceptClicked(user);
+    })
+  }
+
   _renderButton () {
     if ( ! this.props.user.accepted) {
-      return (<a className="button" onClick={this.props.onAcceptClicked.bind(this, this.props.user)}>Accept</a>);
-    } else return (<a className="button" onClick={this.props.onUnAcceptClicked.bind(this, this.props.user)}>Unaccept</a>);
+      return (<a className="button" disabled={this.state.acceptDisabled} onClick={this._acceptClicked.bind(this, this.props.user)}>Accept</a>);
+    } else return (<a className="button" disabled={this.state.unacceptDisabled} onClick={this._unacceptClicked.bind(this, this.props.user)}>Unaccept</a>);
   }
 
   _renderClosed () {
