@@ -77,7 +77,7 @@
   },
   "scripts": {
     "webpack-watch": "webpack --watch --progress",
-    "web-server": "supervisor -w bin,lib,routes,www.js,webpack.config.js ./bin/www",
+    "web-server": "supervisor -w bin,lib,routes,www.js,webpack.development.config.js ./bin/www",
     "dev": "concurrently --kill-others \"npm run webpack-watch\" \"npm run web-server\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
