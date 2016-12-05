@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "0e1b0dd5bf269e375c74"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "7d7871766ebfc76e1ec6"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -87295,6 +87295,10 @@
 		value: true
 	});
 
+	var _keys = __webpack_require__(80);
+
+	var _keys2 = _interopRequireDefault(_keys);
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -87328,6 +87332,11 @@
 
 		onChange: function onChange(change) {
 			var _this = this;
+
+			var key = (0, _keys2.default)(change)[0];
+			var value = change[key];
+
+			if (value.trim().length === 0) return alert('Cannot update ' + key + ' to blank. Please provide a value.');
 
 			_jquery2.default.ajax({
 				type: 'POST',

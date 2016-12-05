@@ -21,6 +21,12 @@ export default React.createClass({
   },
 
 	onChange (change) {
+
+		const key = Object.keys(change)[0];
+		const value = change[key];
+
+		if (value.trim().length === 0) return alert(`Cannot update ${key} to blank. Please provide a value.`);
+
 		$.ajax({
       type: 'POST',
       url: '/api/update-form-data',
