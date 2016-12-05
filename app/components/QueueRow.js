@@ -106,11 +106,11 @@ export default class QueueRow extends Component {
     return this.state.user.logo
             ? (<div>
                 <img className="ignoreOpenClose file" src={this.state.user.logo.preview || this.state.user.logo} onClick={this.logoClicked.bind(this)} /> 
-                <Dropzone className="dropzone ignoreOpenClose" onDrop={this.onLogoDrop.bind(this)} >
+                <Dropzone className="dropzone ignoreOpenClose" accept="image/*" onDrop={this.onLogoDrop.bind(this)} >
                   <button>change</button>
                 </Dropzone>
                </div>)
-            :  (<Dropzone className="dropzone ignoreOpenClose file" onDrop={this.onLogoDrop.bind(this)} >
+            :  (<Dropzone className="dropzone ignoreOpenClose file" accept="image/*" onDrop={this.onLogoDrop.bind(this)} >
                   <span className="ignoreOpenClose">Add logo</span>
                 </Dropzone>);
   }
