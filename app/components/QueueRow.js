@@ -137,7 +137,7 @@ export default class QueueRow extends Component {
                   </g>
               </g>
           </svg>
-          <a href={file.publicUrl} target="_blank">
+          <a href={file.publicUrl} target="_blank" download>
             <svg className="downloadIcon" width="20px" height="20px" viewBox="0 0 20 20" version="1.1">
                 <g id="Designs-r2" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                     <g id="A" transform="translate(-950.000000, -690.000000)" fill="#808080">
