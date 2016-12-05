@@ -45,7 +45,6 @@ export default React.createClass({
 	},
 
 	onProgress (progress) {
-		debugger;
 		this.setState({ progress: progress });
 	},
 
@@ -112,7 +111,7 @@ export default React.createClass({
 					{this._renderUploadedFiles()}					
 				</ul>
 			</div>
-			<DropzoneS3Uploader onError={this.onError} onProgress={this.onProgress} onFinish={this.onFinish} {...uploaderProps} >
+			<DropzoneS3Uploader multiple={true} onError={this.onError} onProgress={this.onProgress} onFinish={this.onFinish} {...uploaderProps} >
 				<UploadNew progress={this.state.progress} />
 			</DropzoneS3Uploader>
 		</div>

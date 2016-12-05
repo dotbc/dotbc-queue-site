@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "70e868f70e14eef9d7d9"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "4bbfe1041f93269d2ceb"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -48714,7 +48714,6 @@
 			this.setState({ progress: 0 });
 		},
 		onProgress: function onProgress(progress) {
-			debugger;
 			this.setState({ progress: progress });
 		},
 		onFinish: function onFinish(file) {
@@ -48790,7 +48789,7 @@
 				),
 				_react2.default.createElement(
 					_reactDropzoneS3Uploader2.default,
-					(0, _extends3.default)({ onError: this.onError, onProgress: this.onProgress, onFinish: this.onFinish }, uploaderProps),
+					(0, _extends3.default)({ multiple: true, onError: this.onError, onProgress: this.onProgress, onFinish: this.onFinish }, uploaderProps),
 					_react2.default.createElement(_UploadNew2.default, { progress: this.state.progress })
 				)
 			);
