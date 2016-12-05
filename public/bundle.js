@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "4bbfe1041f93269d2ceb"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0e1b0dd5bf269e375c74"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -48754,7 +48754,7 @@
 			var uploadedFiles = [];
 			var stateOrPropFiles = this.state.files && this.state.files.length || this.props.files === undefined ? this.state.files : this.props.files;
 			stateOrPropFiles.forEach(function (file) {
-				uploadedFiles.push(_react2.default.createElement(_UploadedFile2.default, { key: file._id, file: file, onFileDeleted: _this3.fileDeleted.bind(_this3), userId: _this3.props.userId }));
+				uploadedFiles.push(_react2.default.createElement(_UploadedFile2.default, { key: file._id, file: file, onFileDeleted: _this3.fileDeleted, userId: _this3.props.userId }));
 			});
 			return uploadedFiles;
 		},
@@ -49251,32 +49251,38 @@
 	exports.default = _react2.default.createClass({
 	  displayName: 'UploadedFile',
 	  getInitialState: function getInitialState() {
-	    return {};
+	    return {
+	      deleteDisabled: false
+	    };
 	  },
 	  deleteClicked: function deleteClicked() {
 	    var _this = this;
 
-	    _jquery2.default.ajax({
-	      type: 'POST',
-	      url: '/api/delete-file',
-	      data: {
-	        fileId: this.props.file._id
-	      }
-	    }).done(function (res) {
-	      if (res.error) {
-	        _this.setState({
+	    this.setState({
+	      deleteDisabled: true
+	    }, function () {
+	      _jquery2.default.ajax({
+	        type: 'POST',
+	        url: '/api/delete-file',
+	        data: {
+	          fileId: _this.props.file._id
+	        }
+	      }).done(function (res) {
+	        if (res.error) {
+	          _this.setState({
+	            submitDisabled: false,
+	            errorMessage: res.error || 'Unable to delete file.'
+	          });
+	        } else {
+	          _this.props.onFileDeleted();
+	        }
+	      }.bind(_this)).fail(function (res) {
+	        this.setState({
 	          submitDisabled: false,
-	          errorMessage: res.error || 'Unable to delete file.'
+	          errorMessage: res.error || 'Unable to delete file. Please try again.'
 	        });
-	      } else {
-	        _this.props.onFileDeleted();
-	      }
-	    }.bind(this)).fail(function (res) {
-	      this.setState({
-	        submitDisabled: false,
-	        errorMessage: res.error || 'Unable to delete file. Please try again.'
-	      });
-	    }.bind(this));
+	      }.bind(_this));
+	    });
 	  },
 	  descriptionChanged: function descriptionChanged(value) {
 	    var _this2 = this;
@@ -49339,7 +49345,7 @@
 	      ),
 	      _react2.default.createElement(
 	        'button',
-	        { className: 'deleteIcon', onClick: this.deleteClicked.bind(this) },
+	        { className: 'deleteIcon', disabled: this.state.deleteDisabled, onClick: this.deleteClicked },
 	        'X'
 	      ),
 	      _react2.default.createElement(

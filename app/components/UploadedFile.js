@@ -7,33 +7,39 @@ import $ from 'jquery';
 export default React.createClass({
 
   getInitialState() {
-    return {};
+    return {
+      deleteDisabled: false
+    };
   },
 
   deleteClicked () {
-    $.ajax({
-      type: 'POST',
-      url: '/api/delete-file',
-      data: { 
-        fileId: this.props.file._id, 
-      }
-    })
-    .done(((res) => {
-      if (res.error) {
+    this.setState({
+      deleteDisabled: true
+    }, () => {
+      $.ajax({
+        type: 'POST',
+        url: '/api/delete-file',
+        data: { 
+          fileId: this.props.file._id, 
+        }
+      })
+      .done(((res) => {
+        if (res.error) {
+          this.setState({
+            submitDisabled: false,
+            errorMessage: res.error || 'Unable to delete file.',
+          });
+        } else {
+          this.props.onFileDeleted();
+        }
+      }).bind(this))
+      .fail(function(res) {
         this.setState({
           submitDisabled: false,
-          errorMessage: res.error || 'Unable to delete file.',
+          errorMessage: res.error || 'Unable to delete file. Please try again.',
         });
-      } else {
-        this.props.onFileDeleted();
-      }
-    }).bind(this))
-    .fail(function(res) {
-      this.setState({
-        submitDisabled: false,
-        errorMessage: res.error || 'Unable to delete file. Please try again.',
-      });
-    }.bind(this));
+      }.bind(this));
+    });
   },
 
   descriptionChanged (value) {
@@ -87,7 +93,7 @@ export default React.createClass({
                 </g>
             </g>
         </svg>  
-        <button className="deleteIcon" onClick={this.deleteClicked.bind(this)}>X</button>
+        <button className="deleteIcon" disabled={this.state.deleteDisabled} onClick={this.deleteClicked}>X</button>
         <p className="docName">{this.props.file.filename}</p>
         <RIETextArea className="description" 
                      value={ this.state.description || this.props.file.description || 'Click to enter a description.'} 
