@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a17dd188873c9549e9a4"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "70e868f70e14eef9d7d9"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -24330,11 +24330,15 @@
 	          _react2.default.createElement(
 	            "span",
 	            { id: "logo" },
-	            _react2.default.createElement("img", { src: 'images/dotBC-logo.svg' }),
 	            _react2.default.createElement(
-	              "span",
-	              { className: "name" },
-	              "dotBC Music"
+	              "a",
+	              { href: "/", className: "name" },
+	              _react2.default.createElement("img", { src: 'images/dotBC-logo.svg' }),
+	              _react2.default.createElement(
+	                "span",
+	                { className: "name" },
+	                "dotBC Music"
+	              )
 	            )
 	          ),
 	          loggedIn ? this._renderLoggedIn() : this._renderLoggedOut(),

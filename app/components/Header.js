@@ -28,8 +28,10 @@ export default class Header extends Component {
         <img src={'images/gradientBG.png'} className="BGimage" />
         <div className="container">
           <span id="logo">
-            <img src={'images/dotBC-logo.svg'} />
-            <span className="name">dotBC Music</span>
+            <a href="/" className="name">
+              <img src={'images/dotBC-logo.svg'} />
+              <span className="name">dotBC Music</span>
+            </a>
           </span>
           {(loggedIn) ? this._renderLoggedIn() : this._renderLoggedOut() }
           <p className="intro">

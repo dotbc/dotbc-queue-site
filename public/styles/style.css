@@ -120,6 +120,7 @@ header {
     font-size: 32px;
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
+    text-decoration: none;
     position: relative;
     top: -12px; }
   header #logo img {
