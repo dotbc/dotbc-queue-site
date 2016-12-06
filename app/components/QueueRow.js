@@ -10,8 +10,7 @@ export default class QueueRow extends Component {
   state = { 
     open: this.props.isOpen || false,
     user: this.props.user || { logo: null },
-    acceptDisabled: false,
-    unacceptDisabled: false,
+    submitDisabled: false,
   }
 
   logoClicked () {
@@ -36,30 +35,41 @@ export default class QueueRow extends Component {
 
 	onPlaceInQueueChanged (change) {
 
-    change.userId = this.props.user._id;
-    change.currentPlaceInQueue = this.props.user.placeInQueue;
+    if (this.state.submitDisabled) return;
 
-		$.ajax({
-      type: 'POST',
-      url: '/api/admin/update-place-in-queue',
-      data: change
-    })
-    .done(((res) => {
-      if (res.error) {
+    this.setState({
+      submitDisabled: true,
+    }, () => {
+      change.userId = this.props.user._id;
+      change.currentPlaceInQueue = this.props.user.placeInQueue;
+
+      $.ajax({
+        type: 'POST',
+        url: '/api/admin/update-place-in-queue',
+        data: change
+      })
+      .done(((res) => {
+        if (res.error) {
+          this.setState({
+            submitDisabled: false,
+            errorMessage: res.error || 'Unable update participant logo.',
+          });
+        } else {
+          this.setState({
+            submitDisabled: false,
+          }, () => {
+            this.props.onRowUpdated();
+          }); 
+        }
+      }).bind(this))
+      .fail(function(res) {
         this.setState({
           submitDisabled: false,
-          errorMessage: res.error || 'Unable update participant logo.',
+          errorMessage: res.error || 'Unable update place in queue. Please try again.',
         });
-      } else {
-        this.props.onRowUpdated(); 
-      }
-    }).bind(this))
-    .fail(function(res) {
-      this.setState({
-        submitDisabled: false,
-        errorMessage: res.error || 'Unable update place in queue. Please try again.',
-      });
-    }.bind(this));
+      }.bind(this));
+    });
+
 	}
   
   toggleOpen (e) {
@@ -73,11 +83,10 @@ export default class QueueRow extends Component {
   _acceptClicked (user) {
 
     debugger;
-    if (this.state.acceptDisabled) return false;
+    if (this.state.submitDisabled) return false;
 
     this.setState({
-      acceptDisabled: true,
-      unacceptDisabled: false,
+      submitDisabled: true,
     }, () => {
       this.props.onAcceptClicked(user);
     })
@@ -85,11 +94,10 @@ export default class QueueRow extends Component {
 
   _unacceptClicked (user) {
 
-    if (this.state.unacceptDisabled) return false;
+    if (this.state.submitDisabled) return false;
 
     this.setState({
-      acceptDisabled: false,
-      unacceptDisabled: true,
+      submitDisabled: false,
     }, () => {
       this.props.onUnAcceptClicked(user);
     })
@@ -97,8 +105,8 @@ export default class QueueRow extends Component {
 
   _renderButton () {
     if ( ! this.props.user.accepted) {
-      return (<a className="button" disabled={this.state.acceptDisabled} onClick={this._acceptClicked.bind(this, this.props.user)}>Accept</a>);
-    } else return (<a className="button" disabled={this.state.unacceptDisabled} onClick={this._unacceptClicked.bind(this, this.props.user)}>Unaccept</a>);
+      return (<a className="button" onClick={this._acceptClicked.bind(this, this.props.user)}>Accept</a>);
+    } else return (<a className="button" onClick={this._unacceptClicked.bind(this, this.props.user)}>Unaccept</a>);
   }
 
   _renderClosed () {

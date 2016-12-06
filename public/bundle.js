@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b986779bdda5f8072e81"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "482495fbf62dd8a63ef6"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -86509,8 +86509,7 @@
 	    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = QueueRow.__proto__ || (0, _getPrototypeOf2.default)(QueueRow)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
 	      open: _this.props.isOpen || false,
 	      user: _this.props.user || { logo: null },
-	      acceptDisabled: false,
-	      unacceptDisabled: false
+	      submitDisabled: false
 	    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
 	  }
 
@@ -86539,28 +86538,38 @@
 	    value: function onPlaceInQueueChanged(change) {
 	      var _this3 = this;
 
-	      change.userId = this.props.user._id;
-	      change.currentPlaceInQueue = this.props.user.placeInQueue;
+	      if (this.state.submitDisabled) return;
 
-	      _jquery2.default.ajax({
-	        type: 'POST',
-	        url: '/api/admin/update-place-in-queue',
-	        data: change
-	      }).done(function (res) {
-	        if (res.error) {
-	          _this3.setState({
+	      this.setState({
+	        submitDisabled: true
+	      }, function () {
+	        change.userId = _this3.props.user._id;
+	        change.currentPlaceInQueue = _this3.props.user.placeInQueue;
+
+	        _jquery2.default.ajax({
+	          type: 'POST',
+	          url: '/api/admin/update-place-in-queue',
+	          data: change
+	        }).done(function (res) {
+	          if (res.error) {
+	            _this3.setState({
+	              submitDisabled: false,
+	              errorMessage: res.error || 'Unable update participant logo.'
+	            });
+	          } else {
+	            _this3.setState({
+	              submitDisabled: false
+	            }, function () {
+	              _this3.props.onRowUpdated();
+	            });
+	          }
+	        }.bind(_this3)).fail(function (res) {
+	          this.setState({
 	            submitDisabled: false,
-	            errorMessage: res.error || 'Unable update participant logo.'
+	            errorMessage: res.error || 'Unable update place in queue. Please try again.'
 	          });
-	        } else {
-	          _this3.props.onRowUpdated();
-	        }
-	      }.bind(this)).fail(function (res) {
-	        this.setState({
-	          submitDisabled: false,
-	          errorMessage: res.error || 'Unable update place in queue. Please try again.'
-	        });
-	      }.bind(this));
+	        }.bind(_this3));
+	      });
 	    }
 	  }, {
 	    key: 'toggleOpen',
@@ -86577,11 +86586,10 @@
 	      var _this4 = this;
 
 	      debugger;
-	      if (this.state.acceptDisabled) return false;
+	      if (this.state.submitDisabled) return false;
 
 	      this.setState({
-	        acceptDisabled: true,
-	        unacceptDisabled: false
+	        submitDisabled: true
 	      }, function () {
 	        _this4.props.onAcceptClicked(user);
 	      });
@@ -86591,11 +86599,10 @@
 	    value: function _unacceptClicked(user) {
 	      var _this5 = this;
 
-	      if (this.state.unacceptDisabled) return false;
+	      if (this.state.submitDisabled) return false;
 
 	      this.setState({
-	        acceptDisabled: false,
-	        unacceptDisabled: true
+	        submitDisabled: false
 	      }, function () {
 	        _this5.props.onUnAcceptClicked(user);
 	      });
@@ -86606,12 +86613,12 @@
 	      if (!this.props.user.accepted) {
 	        return _react2.default.createElement(
 	          'a',
-	          { className: 'button', disabled: this.state.acceptDisabled, onClick: this._acceptClicked.bind(this, this.props.user) },
+	          { className: 'button', onClick: this._acceptClicked.bind(this, this.props.user) },
 	          'Accept'
 	        );
 	      } else return _react2.default.createElement(
 	        'a',
-	        { className: 'button', disabled: this.state.unacceptDisabled, onClick: this._unacceptClicked.bind(this, this.props.user) },
+	        { className: 'button', onClick: this._unacceptClicked.bind(this, this.props.user) },
 	        'Unaccept'
 	      );
 	    }
