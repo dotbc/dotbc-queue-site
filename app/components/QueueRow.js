@@ -10,7 +10,6 @@ export default class QueueRow extends Component {
   state = { 
     open: this.props.isOpen || false,
     user: this.props.user || { logo: null },
-    submitDisabled: false,
   }
 
   logoClicked () {
@@ -19,59 +18,17 @@ export default class QueueRow extends Component {
 
 	onLogoDrop (files) {
 
-		this.setState({ submitDisabled: true }, () => {
+    const userId = this.props.user._id;
+    const file = files[0];
 
-      const userId = this.props.user._id;
-      const file = files[0];
-
-      request.post('/api/admin/update-logo/' + userId)
-        .attach('logo', file)
-        .end((err, res) => {
-          this.setState({ user: { logo: file } });
-        })
-
-    });
-	}
-
-	onPlaceInQueueChanged (change) {
-
-    if (this.state.submitDisabled) return;
-
-    this.setState({
-      submitDisabled: true,
-    }, () => {
-      change.userId = this.props.user._id;
-      change.currentPlaceInQueue = this.props.user.placeInQueue;
-
-      $.ajax({
-        type: 'POST',
-        url: '/api/admin/update-place-in-queue',
-        data: change
-      })
-      .done(((res) => {
-        if (res.error) {
-          this.setState({
-            submitDisabled: false,
-            errorMessage: res.error || 'Unable update participant logo.',
-          });
-        } else {
-          this.setState({
-            submitDisabled: false,
-          }, () => {
-            this.props.onRowUpdated();
-          }); 
-        }
-      }).bind(this))
-      .fail(function(res) {
-        this.setState({
-          submitDisabled: false,
-          errorMessage: res.error || 'Unable update place in queue. Please try again.',
-        });
-      }.bind(this));
-    });
+    request.post('/api/admin/update-logo/' + userId)
+      .attach('logo', file)
+      .end((err, res) => {
+        this.setState({ user: { logo: file } });
+      });
 
 	}
-  
+
   toggleOpen (e) {
     if (['IMG', 'A', 'INPUT', 'TEXTAREA', 'path', 'polygon', 'g', 'svg' ].indexOf(e.target.tagName) > -1) return;
     if (e.target.classList.length && e.target.classList.contains && e.target.classList.contains('ignoreOpenClose')) return;
@@ -80,33 +37,16 @@ export default class QueueRow extends Component {
     })
   }
 
-  _acceptClicked (user) {
-
-    debugger;
-    if (this.state.submitDisabled) return false;
-
-    this.setState({
-      submitDisabled: true,
-    }, () => {
-      this.props.onAcceptClicked(user);
-    })
-  }
-
-  _unacceptClicked (user) {
-
-    if (this.state.submitDisabled) return false;
-
-    this.setState({
-      submitDisabled: false,
-    }, () => {
-      this.props.onUnAcceptClicked(user);
-    })
-  }
-
   _renderButton () {
     if ( ! this.props.user.accepted) {
-      return (<a className="button" onClick={this._acceptClicked.bind(this, this.props.user)}>Accept</a>);
-    } else return (<a className="button" onClick={this._unacceptClicked.bind(this, this.props.user)}>Unaccept</a>);
+      return (<a className="button" onClick={this.props.onAcceptClicked.bind(this, this.props.user)}>Accept</a>);
+    } else return (<a className="button" onClick={this.props.onUnAcceptClicked.bind(this, this.props.user)}>Unaccept</a>);
+  }
+
+  _renderMove () {
+    if (this.props.user.accepted) {
+      return (null);
+    } else return (<img src="images/move-top.svg" onClick={this.props.onPlaceInQueueChanged.bind(this, { placeInQueue: 1 })} />);
   }
 
   _renderClosed () {
@@ -115,7 +55,7 @@ export default class QueueRow extends Component {
     const colOne = this.props.user.accepted ? 
       moment(new Date(this.props.user.accepted)).format("dddd, MMMM Do YYYY, h:mm:ss a") : 
       (<RIEInput value={this.props.user.placeInQueue}
-								change={this.onPlaceInQueueChanged.bind(this)}
+								change={this.props.onPlaceInQueueChanged.bind(this)}
                 className="input-field"
 								propName="placeInQueue" />);
 
@@ -132,7 +72,7 @@ export default class QueueRow extends Component {
         </td>
         <td><p>FILES: {numberFiles}</p></td>
         <td>{this._renderButton()}</td>
-        <td><img src="images/move-top.svg" onClick={this.onPlaceInQueueChanged.bind(this, { placeInQueue: 1 })} /></td>
+        <td>{this._renderMove()}</td>
       </tr>
     );
   }
@@ -199,7 +139,7 @@ export default class QueueRow extends Component {
     const colOne = this.props.user.accepted ? 
       moment(new Date(this.props.user.accepted)).format("dddd, MMMM Do YYYY, h:mm:ss a") : 
       (<RIEInput value={this.props.user.placeInQueue}
-								change={this.onPlaceInQueueChanged.bind(this)}
+								change={this.props.onPlaceInQueueChanged.bind(this)}
                 className="input-field"
 								propName="placeInQueue" />);
 
@@ -225,7 +165,7 @@ export default class QueueRow extends Component {
           </div>
         </td>
         <td>{this._renderButton()}</td>
-        <td><img src="images/move-top.svg" onClick={this.onPlaceInQueueChanged.bind(this, { placeInQueue: 1 })} /></td>
+        <td>{this._renderMove()}</td>
       </tr>
     );
   }
