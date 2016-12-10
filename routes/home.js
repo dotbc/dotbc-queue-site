@@ -1,6 +1,5 @@
 import isEmail from 'is-email';
 import isLoggedIn from './isLoggedIn';
-import merge from 'lodash.merge';
 import mongodb from 'mongodb';
 import path from 'path';
 import passport from '../lib/passport';
@@ -30,15 +29,6 @@ export default function (app) {
     if ( req.user && req.user.isAdmin) return res.redirect('/admin-home');
     return next();
   }
-
-  // function ensureEmailMatchesCompany (req, res, next) {
-  //   if ( ! isEmail(req.body.email)) {
-  //     return res.send({
-  //       error: 'Please provide a valid email'
-  //     });
-  //   } esle return next();
-  // }
-
 
   app.post('/api/add-file',
     isLoggedIn,

@@ -1,11 +1,12 @@
-import User from '../lib/models/User';
 import isEmail from 'is-email';
 import isAdmin from './isAdmin';
 import isLoggedIn from './isLoggedIn';
+import assign from 'lodash.assign';
 import multer from 'multer';
 import path from 'path';
 import passport from '../lib/passport';
-// import User from '../lib/models/User';
+import Queue from '../lib/models/Queue';
+import User from '../lib/models/User';
 
 const config = require('cconfig')();
 
@@ -18,22 +19,13 @@ export default function (app) {
     isLoggedIn,
     isAdmin, 
     (req, res, next) => {
-      User.findAll((err, users) => {
-        if (err) return next(err);
+      Queue.get((err, queue) => {
         res.send({
           user: req.user,
-          inQueue: users.filter((user) => {
-            return ! user.accepted;
-          }).sort((a, b) => {
-            return a.placeInQueue - b.placeInQueue;
-          }),
-          accepted: users.filter((user) => {
-            return !! user.accepted;
-          }).sort((a, b) => {
-            return a.placeInQueue - b.placeInQueue;
-          })
+          inQueue: queue.inQueue,
+          accepted: queue.accepted,
         });
-      })
+      });
   });
 
   app.post('/api/admin/accept',
@@ -42,35 +34,27 @@ export default function (app) {
     (req, res, next) => {
 
       const _id = req.body._id;
-      const placeInQueue = req.body.placeInQueue;
 
       if ( ! _id) return next(new Error('_id not supplied!'));
-      if ( ! placeInQueue) return next(new Error('placeInQueue not supplied!'));
 
-      User.update({ _id: _id }, { $set: { accepted: new Date(), placeInQueue: -1 } }, (err) => {
+      User.update({ _id: _id }, { $set: { accepted: new Date() } }, (err) => {
         if (err) return next(err);
-      
-        User.update({ placeInQueue: { $gte: placeInQueue } }, { $inc: { placeInQueue: -1 } }, { multi: true }, (err) => {
+
+        Queue.acceptUser(_id, (err) => {
           if (err) return next(err);
-            
-          User.findAll((err, users) => {
-            if (err) return next(err);
-        
+
+          Queue.get((err, queue) => {
             res.send({
               user: req.user,
-              inQueue: users.filter((user) => {
-                return ! user.accepted;
-              }),
-              accepted: users.filter((user) => {
-                return !! user.accepted;
-              })
+              inQueue: queue.inQueue,
+              accepted: queue.accepted,
             });
-
           });
 
         });
 
       });
+
   });
 
   app.post('/api/admin/unaccept',
@@ -81,30 +65,24 @@ export default function (app) {
 
       if ( ! _id) return next(new Error('_id not supplied!'));
 
-      User.getNextQueueNumber((err, nextQueueNumber) => {
+      User.update({ _id: _id }, { $unset: { accepted: 1 } }, (err) => {
         if (err) return next(err);
 
-        User.update({ _id: _id }, { $set: { placeInQueue: nextQueueNumber }, $unset: { accepted: 1 } }, (err) => {
+        Queue.unacceptUser(_id, (err) => {
           if (err) return next(err);
-  
-          User.findAll((err, users) => {
-            if (err) return next(err);
 
+          Queue.get((err, queue) => {
             res.send({
               user: req.user,
-              inQueue: users.filter((user) => {
-                return ! user.accepted;
-              }),
-              accepted: users.filter((user) => {
-                return !! user.accepted;
-              })
+              inQueue: queue.inQueue,
+              accepted: queue.accepted,
             });
-
           });
 
         });
 
       });
+
   });
 
   app.post('/api/admin/update-logo/:userId',
@@ -151,16 +129,15 @@ export default function (app) {
     isLoggedIn,
     (req, res) => {
 
-      const currentPlaceInQueue = req.body.currentPlaceInQueue;
       const placeInQueue = req.body.placeInQueue;
       const userId = req.body.userId;
 
       if ( ! placeInQueue) return res.send({ error: 'no form placeInQueue data provided' });
       if ( ! userId) return res.send({ error: 'no form userId data provided' });
 
-      User.moveToPlaceInQueue(userId, currentPlaceInQueue, placeInQueue, (err, user) => {
+      Queue.moveUser(userId, placeInQueue, (err, user) => {
         if (err) return res.send({ error: err });
-        else res.send(user);
+        else res.send({ ok: true });
       });
 
   });

@@ -4,19 +4,19 @@ import { Field, reduxForm } from 'redux-form';
 import $ from 'jquery';
 
 export default class QueueTabs extends Component {
-  
+
   state = { 
     submitDisabled: false,
   }
 
   _rowAccepted (row) {    
-    
+
     if (this.state.submitDisabled) return;
 
     this.setState({
       submitDisabled: true,
     }, () => {
-      this.serverRequest = $.post('/api/admin/accept', { _id: row._id, placeInQueue: row.placeInQueue }, function (data, message, res) {
+      this.serverRequest = $.post('/api/admin/accept', { _id: row._id }, function (data, message, res) {
         data.submitDisabled = false;
         this.setState(data, this.props.rowsUpdated);
       }.bind(this));
@@ -24,7 +24,7 @@ export default class QueueTabs extends Component {
 
   }
 
-  _rowUnaccepted (row) {    
+  _rowUnaccepted (row) {
     
     if (this.state.submitDisabled) return;
 
@@ -39,15 +39,18 @@ export default class QueueTabs extends Component {
 
   }
 
-  _onPlaceInQueueChanged (change) {
+  _onPlaceInQueueChanged (userId, change) {
+
+    if (isNaN(change.placeInQueue)) return;
+
+    change.placeInQueue = Number(change.placeInQueue) > 0 ? 0 : Number(change.placeInQueue) - 1;
+    change.userId = userId;
 
     if (this.state.submitDisabled) return;
 
     this.setState({
       submitDisabled: true,
     }, () => {
-      change.userId = this.props.user._id;
-      change.currentPlaceInQueue = this.props.user.placeInQueue;
 
       $.ajax({
         type: 'POST',
@@ -84,10 +87,14 @@ export default class QueueTabs extends Component {
 
   _renderRows () {
     var rows = [];
+
+    var index = 0;
   
     if (this.props.activeTab === 'left') {
       (this.props.inQueue || []).forEach((row) => {
-        rows.push(<QueueRow key={row._id} user={row} 
+        rows.push(<QueueRow key={row._id} 
+          index={++index}
+          user={row} 
           submitDisabled={this.state.submitDisabled}
           onPlaceInQueueChanged={this._onPlaceInQueueChanged}
           onRowUpdated={this.props.rowsUpdated} 
@@ -95,7 +102,8 @@ export default class QueueTabs extends Component {
       });
     } else {
       (this.props.accepted || []).forEach((row) => {
-        rows.push(<QueueRow key={row._id} user={row}
+        rows.push(<QueueRow key={row._id} 
+          user={row}
           submitDisabled={this.state.submitDisabled} 
           onPlaceInQueueChanged={this._onPlaceInQueueChanged}
           onRowUpdated={this.props.rowsUpdated} 

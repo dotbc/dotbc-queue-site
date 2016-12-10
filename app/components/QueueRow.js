@@ -46,7 +46,7 @@ export default class QueueRow extends Component {
   _renderMove () {
     if (this.props.user.accepted) {
       return (null);
-    } else return (<img src="images/move-top.svg" onClick={this.props.onPlaceInQueueChanged.bind(this, { placeInQueue: 1 })} />);
+    } else return (<img src="images/move-top.svg" onClick={this.props.onPlaceInQueueChanged.bind(this, this.props.user._id, { placeInQueue: 1 })} />);
   }
 
   _renderClosed () {
@@ -54,8 +54,8 @@ export default class QueueRow extends Component {
     const numberFiles = (this.props.user.files || []).length;
     const colOne = this.props.user.accepted ? 
       moment(new Date(this.props.user.accepted)).format("dddd, MMMM Do YYYY, h:mm:ss a") : 
-      (<RIEInput value={this.props.user.placeInQueue}
-								change={this.props.onPlaceInQueueChanged.bind(this)}
+      (<RIEInput value={this.props.index}
+								change={this.props.onPlaceInQueueChanged.bind(this, this.props.user._id)}
                 className="input-field"
 								propName="placeInQueue" />);
 
@@ -138,8 +138,8 @@ export default class QueueRow extends Component {
     const numberFiles = (this.props.user.files || []).length;
     const colOne = this.props.user.accepted ? 
       moment(new Date(this.props.user.accepted)).format("dddd, MMMM Do YYYY, h:mm:ss a") : 
-      (<RIEInput value={this.props.user.placeInQueue}
-								change={this.props.onPlaceInQueueChanged.bind(this)}
+      (<RIEInput value={this.props.index}
+								change={this.props.onPlaceInQueueChanged.bind(this, this.props.user._id)}
                 className="input-field"
 								propName="placeInQueue" />);
 
