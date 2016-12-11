@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d0e3f5a3ce77883c941e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "a62b92c9dececf9a5c84"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -86935,7 +86935,7 @@
 
 	      if (isNaN(change.placeInQueue)) return;
 
-	      change.placeInQueue = Number(change.placeInQueue) > 0 ? 0 : Number(change.placeInQueue) - 1;
+	      change.placeInQueue = Number(change.placeInQueue) < 0 ? 0 : Number(change.placeInQueue) - 1;
 	      change.userId = userId;
 
 	      if (this.state.submitDisabled) return;

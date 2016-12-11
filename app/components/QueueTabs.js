@@ -43,7 +43,7 @@ export default class QueueTabs extends Component {
 
     if (isNaN(change.placeInQueue)) return;
 
-    change.placeInQueue = Number(change.placeInQueue) > 0 ? 0 : Number(change.placeInQueue) - 1;
+    change.placeInQueue = Number(change.placeInQueue) < 0 ? 0 : Number(change.placeInQueue) - 1;
     change.userId = userId;
 
     if (this.state.submitDisabled) return;
