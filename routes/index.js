@@ -6,6 +6,7 @@ import join from './join';
 import login from './login';
 import passport from '../lib/passport';
 import path from 'path';
+import reset from './reset';
 import User from '../lib/models/User'; 
 
 export default function (app) {
@@ -19,6 +20,8 @@ export default function (app) {
   join(app);
 
   login(app);
+  
+  reset(app);
 
   // catch all other requests and serve main page
   app.get('*', (req, res, next) => {  

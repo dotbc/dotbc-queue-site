@@ -1,5 +1,6 @@
 import bodyParser from 'body-parser';
 import express from 'express';
+import flash from 'express-flash';
 import mongodbSession from 'connect-mongodb-session';
 import session from 'express-session';  
 import path from 'path';  
@@ -56,6 +57,10 @@ module.exports.start = (cb) => {
   app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
   app.use(passport.initialize());
   app.use(passport.session());
+  app.use(flash());
+
+  app.set('views', path.join(__dirname, 'views'));
+  app.set('view engine', 'jade');
 
   app.get('/', (req, res, next) => {
     if (req.path === '/' && req.user) return res.redirect('/home');
