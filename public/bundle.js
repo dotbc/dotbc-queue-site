@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "2ce2fb82fa4cb8c09495"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e5c1f02811854aa9a396"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -87350,7 +87350,7 @@
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+			value: true
 	});
 
 	var _keys = __webpack_require__(65);
@@ -87370,147 +87370,182 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-		displayName: 'UserSubmittedInfo',
-		getInitialState: function getInitialState() {
-			return {
-				user: {}
-			};
-		},
+			displayName: 'UserSubmittedInfo',
+			getInitialState: function getInitialState() {
+					return {
+							user: {}
+					};
+			},
 
 
-		propTypes: {
-			user: _react.PropTypes.shape({
-				name: _react.PropTypes.string,
-				organization: _react.PropTypes.string,
-				title: _react.PropTypes.string,
-				email: _react.PropTypes.string,
-				interest: _react.PropTypes.string
-			})
-		},
+			propTypes: {
+					user: _react.PropTypes.shape({
+							name: _react.PropTypes.string,
+							organization: _react.PropTypes.string,
+							title: _react.PropTypes.string,
+							email: _react.PropTypes.string,
+							interest: _react.PropTypes.string
+					})
+			},
 
-		onChange: function onChange(change) {
-			var _this = this;
+			handleDismissClick: function handleDismissClick(e) {
+					e.preventDefault();
+					this.setState({ errorMessage: undefined });
+			},
+			onChange: function onChange(change) {
+					var _this = this;
 
-			var key = (0, _keys2.default)(change)[0];
-			var value = change[key];
+					this.setState({ errorMessage: null });
 
-			if (value.trim().length === 0) return alert('Cannot update ' + key + ' to blank. Please provide a value.');
+					var key = (0, _keys2.default)(change)[0];
+					var value = change[key];
 
-			_jquery2.default.ajax({
-				type: 'POST',
-				url: '/api/update-form-data',
-				data: change
-			}).done(function (res) {
-				if (res.error) {
-					_this.setState({
-						submitDisabled: false,
-						errorMessage: res.error || 'Unable update form data.'
-					});
-				} else {
-					_this.setState({
-						user: res
-					});
-				}
-			}.bind(this)).fail(function (res) {
-				this.setState({
-					submitDisabled: false,
-					errorMessage: res.error || 'Unable update form data. Please try again.'
-				});
-			}.bind(this));
-		},
-		render: function render() {
+					if (value.trim().length === 0) return this.setState({ errorMessage: 'Cannot update ' + key + ' to blank. Please provide a value.' });
 
-			return _react2.default.createElement(
-				'div',
-				{ className: 'userSubmittedInfo' },
-				_react2.default.createElement(
-					'div',
-					{ className: 'personal' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'pair' },
-						_react2.default.createElement(
-							'label',
-							null,
-							'Name'
-						),
-						_react2.default.createElement(
+					_jquery2.default.ajax({
+							type: 'POST',
+							url: '/api/update-form-data',
+							data: change
+					}).done(function (res) {
+							if (res.error) {
+									_this.setState({
+											submitDisabled: false,
+											errorMessage: res.error || 'Unable update form data.'
+									});
+							} else {
+									_this.setState({
+											user: res
+									});
+							}
+					}.bind(this)).fail(function (res) {
+							this.setState({
+									submitDisabled: false,
+									errorMessage: res.error || 'Unable update form data. Please try again.'
+							});
+					}.bind(this));
+			},
+			renderErrorMessage: function renderErrorMessage() {
+					var errorMessage = this.state.errorMessage;
+
+
+					if (!errorMessage) {
+							return null;
+					};
+
+					return _react2.default.createElement(
 							'p',
-							{ className: 'input-field' },
-							_react2.default.createElement(_riek.RIEInput, { value: this.state.user.fullName || this.props.user.fullName || '',
-								change: this.onChange,
-								propName: 'fullName' })
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'pair' },
-						_react2.default.createElement(
-							'label',
-							null,
-							'Your Company/Organization'
-						),
-						_react2.default.createElement(
-							'p',
-							{ className: 'input-field' },
-							_react2.default.createElement(_riek.RIEInput, { value: this.state.user.organization || this.props.user.organization || '',
-								change: this.onChange,
-								propName: 'organization' })
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'pair' },
-						_react2.default.createElement(
-							'label',
-							null,
-							'Your Roll/Title'
-						),
-						_react2.default.createElement(
-							'p',
-							{ className: 'input-field' },
-							_react2.default.createElement(_riek.RIEInput, { value: this.state.user.title || this.props.user.title || '',
-								change: this.onChange,
-								propName: 'title' })
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'pair' },
-						_react2.default.createElement(
-							'label',
-							null,
-							'Email Address'
-						),
-						_react2.default.createElement(
-							'p',
-							{ className: 'input-field' },
-							this.state.user.email || this.props.user.email || ''
-						)
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'purpose' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'pair' },
-						_react2.default.createElement(
-							'label',
-							null,
-							'Why are you interested in participating in the dBC project?'
-						),
-						_react2.default.createElement(
-							'p',
-							{ className: 'input-field' },
-							_react2.default.createElement(_riek.RIETextArea, { value: this.state.user.interest || this.props.user.interest || '',
-								change: this.onChange,
-								propName: 'interest' })
-						)
-					)
-				)
-			);
-		}
+							{ style: { backgroundColor: '#e99', padding: 10 } },
+							_react2.default.createElement(
+									'b',
+									null,
+									errorMessage
+							),
+							' ',
+							_react2.default.createElement(
+									'a',
+									{ href: '#', onClick: this.handleDismissClick },
+									'Dismiss'
+							)
+					);
+			},
+			render: function render() {
+
+					return _react2.default.createElement(
+							'div',
+							{ className: 'userSubmittedInfo' },
+							_react2.default.createElement(
+									'span',
+									null,
+									this.renderErrorMessage()
+							),
+							_react2.default.createElement(
+									'div',
+									{ className: 'personal' },
+									_react2.default.createElement(
+											'div',
+											{ className: 'pair' },
+											_react2.default.createElement(
+													'label',
+													null,
+													'Name'
+											),
+											_react2.default.createElement(
+													'p',
+													{ className: 'input-field' },
+													_react2.default.createElement(_riek.RIEInput, { value: this.state.user.fullName || this.props.user.fullName || '',
+															change: this.onChange,
+															propName: 'fullName' })
+											)
+									),
+									_react2.default.createElement(
+											'div',
+											{ className: 'pair' },
+											_react2.default.createElement(
+													'label',
+													null,
+													'Your Company/Organization'
+											),
+											_react2.default.createElement(
+													'p',
+													{ className: 'input-field' },
+													_react2.default.createElement(_riek.RIEInput, { value: this.state.user.organization || this.props.user.organization || '',
+															change: this.onChange,
+															propName: 'organization' })
+											)
+									),
+									_react2.default.createElement(
+											'div',
+											{ className: 'pair' },
+											_react2.default.createElement(
+													'label',
+													null,
+													'Your Roll/Title'
+											),
+											_react2.default.createElement(
+													'p',
+													{ className: 'input-field' },
+													_react2.default.createElement(_riek.RIEInput, { value: this.state.user.title || this.props.user.title || '',
+															change: this.onChange,
+															propName: 'title' })
+											)
+									),
+									_react2.default.createElement(
+											'div',
+											{ className: 'pair' },
+											_react2.default.createElement(
+													'label',
+													null,
+													'Email Address'
+											),
+											_react2.default.createElement(
+													'p',
+													{ className: 'input-field' },
+													this.state.user.email || this.props.user.email || ''
+											)
+									)
+							),
+							_react2.default.createElement(
+									'div',
+									{ className: 'purpose' },
+									_react2.default.createElement(
+											'div',
+											{ className: 'pair' },
+											_react2.default.createElement(
+													'label',
+													null,
+													'Why are you interested in participating in the dBC project?'
+											),
+											_react2.default.createElement(
+													'p',
+													{ className: 'input-field' },
+													_react2.default.createElement(_riek.RIETextArea, { value: this.state.user.interest || this.props.user.interest || '',
+															change: this.onChange,
+															propName: 'interest' })
+											)
+									)
+							)
+					);
+			}
 	});
 
 	 ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "/Users/mateodelnorte/development/dotbc/dotbc-queue-site/app/components/UserSubmittedInfo.js"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "/Users/mateodelnorte/development/dotbc/dotbc-queue-site/app/components/UserSubmittedInfo.js"); } } })();

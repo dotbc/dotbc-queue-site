@@ -19,13 +19,20 @@ export default React.createClass({
       interest: PropTypes.string,
     })
   },
+  
+  handleDismissClick(e) {
+    e.preventDefault();
+    this.setState({ errorMessage: undefined });
+  },
 
 	onChange (change) {
+
+		this.setState({ errorMessage: null });
 
 		const key = Object.keys(change)[0];
 		const value = change[key];
 
-		if (value.trim().length === 0) return alert(`Cannot update ${key} to blank. Please provide a value.`);
+		if (value.trim().length === 0) return this.setState({ errorMessage: `Cannot update ${key} to blank. Please provide a value.` });
 
 		$.ajax({
       type: 'POST',
@@ -52,10 +59,28 @@ export default React.createClass({
     }.bind(this));
 	},
 
+  renderErrorMessage() {
+    
+    const { errorMessage } = this.state;
+   
+    if ( ! errorMessage) {
+      return null
+    };
+
+    return (
+      <p style={{ backgroundColor: '#e99', padding: 10 }}>
+        <b>{errorMessage}</b>
+				{' '}
+				<a href="#" onClick={this.handleDismissClick}>Dismiss</a>
+      </p>
+    )
+  },
+
   render () {
 
     return (
       <div className="userSubmittedInfo">
+				<span>{this.renderErrorMessage()}</span>
 				<div className="personal">
 					<div className="pair">
 						<label>Name</label>

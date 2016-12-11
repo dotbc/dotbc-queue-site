@@ -1,5 +1,6 @@
 import isEmail from 'is-email';
 import isLoggedIn from './isLoggedIn';
+import merge from 'lodash.merge';
 import mongodb from 'mongodb';
 import path from 'path';
 import passport from '../lib/passport';
