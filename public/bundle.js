@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "58b486843bf1bd7ffb6b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e9f2f3b6fe4ecca5ba7f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -87947,7 +87947,7 @@
 	      _this.loginRequest = _jquery2.default.post(postRoute, data, function (data, message, res) {
 	        window.location = redirectLocation;
 	      }.bind(_this)).fail(function (one, two, errorMessage) {
-	        this.setState({ errorMessage: errorMessage });
+	        this.setState({ errorMessage: 'Please enter a valid email address and password' });
 	      }.bind(_this));;
 	    }, _this.handleLoginErrorDismissedClicked = function (data) {
 	      _this.setState({

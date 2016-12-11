@@ -48,7 +48,7 @@ class App extends Component {
     this.loginRequest = $.post(postRoute, data, function (data, message, res) {
       window.location = redirectLocation;
     }.bind(this)).fail(function(one, two, errorMessage) {
-      this.setState({ errorMessage: errorMessage });
+      this.setState({ errorMessage: 'Please enter a valid email address and password' });
     }.bind(this));;
   };
 
