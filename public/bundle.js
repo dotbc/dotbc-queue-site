@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a62b92c9dececf9a5c84"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "2ce2fb82fa4cb8c09495"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -86539,17 +86539,88 @@
 	      });
 	    }
 	  }, {
+	    key: 'rowAcceptClicked',
+	    value: function rowAcceptClicked() {
+	      var _this3 = this;
+
+	      if (this.state.submitDisabled) return;
+
+	      this.setState({
+	        submitDisabled: true
+	      }, function () {
+	        _this3.serverRequest = _jquery2.default.post('/api/admin/accept', { _id: _this3.props.user._id }, function (data, message, res) {
+	          this.setState(data, this.props.onRowUpdated);
+	        }.bind(_this3));
+	      });
+	    }
+	  }, {
+	    key: 'rowUnacceptClicked',
+	    value: function rowUnacceptClicked() {
+	      var _this4 = this;
+
+	      if (this.state.submitDisabled) return;
+
+	      this.setState({
+	        submitDisabled: true
+	      }, function () {
+	        _this4.serverRequest = _jquery2.default.post('/api/admin/unaccept', { _id: _this4.props.user._id }, function (data, message, res) {
+	          this.setState(data, this.props.onRowUpdated);
+	        }.bind(_this4));
+	      });
+	    }
+	  }, {
+	    key: 'placeInQueueChanged',
+	    value: function placeInQueueChanged(userId, change) {
+	      var _this5 = this;
+
+	      if (isNaN(change.placeInQueue)) return;
+
+	      change.placeInQueue = Number(change.placeInQueue) < 0 ? 0 : Number(change.placeInQueue) - 1;
+	      change.userId = userId;
+
+	      if (this.state.submitDisabled) return;
+
+	      this.setState({
+	        submitDisabled: true
+	      }, function () {
+
+	        _jquery2.default.ajax({
+	          type: 'POST',
+	          url: '/api/admin/update-place-in-queue',
+	          data: change
+	        }).done(function (res) {
+	          if (res.error) {
+	            _this5.setState({
+	              submitDisabled: false,
+	              errorMessage: res.error || 'Unable update participant logo.'
+	            });
+	          } else {
+	            _this5.setState({
+	              submitDisabled: false
+	            }, function () {
+	              _this5.props.onRowUpdated();
+	            });
+	          }
+	        }.bind(_this5)).fail(function (res) {
+	          _this5.setState({
+	            submitDisabled: false,
+	            errorMessage: res.error || 'Unable update place in queue. Please try again.'
+	          });
+	        });
+	      });
+	    }
+	  }, {
 	    key: '_renderButton',
 	    value: function _renderButton() {
 	      if (!this.props.user.accepted) {
 	        return _react2.default.createElement(
 	          'a',
-	          { className: 'button', onClick: this.props.onAcceptClicked.bind(this, this.props.user) },
+	          { className: 'button', onClick: this.rowAcceptClicked.bind(this) },
 	          'Accept'
 	        );
 	      } else return _react2.default.createElement(
 	        'a',
-	        { className: 'button', onClick: this.props.onUnAcceptClicked.bind(this, this.props.user) },
+	        { className: 'button', onClick: this.rowUnacceptClicked.bind(this) },
 	        'Unaccept'
 	      );
 	    }
@@ -86558,7 +86629,7 @@
 	    value: function _renderMove() {
 	      if (this.props.user.accepted) {
 	        return null;
-	      } else return _react2.default.createElement('img', { src: 'images/move-top.svg', onClick: this.props.onPlaceInQueueChanged.bind(this, this.props.user._id, { placeInQueue: 1 }) });
+	      } else return _react2.default.createElement('img', { src: 'images/move-top.svg', onClick: this.placeInQueueChanged.bind(this, this.props.user._id, { placeInQueue: 1 }) });
 	    }
 	  }, {
 	    key: '_renderClosed',
@@ -86566,7 +86637,7 @@
 
 	      var numberFiles = (this.props.user.files || []).length;
 	      var colOne = this.props.user.accepted ? (0, _moment2.default)(new Date(this.props.user.accepted)).format("dddd, MMMM Do YYYY, h:mm:ss a") : _react2.default.createElement(_riek.RIEInput, { value: this.props.index,
-	        change: this.props.onPlaceInQueueChanged.bind(this, this.props.user._id),
+	        change: this.placeInQueueChanged.bind(this, this.props.user._id),
 	        className: 'input-field',
 	        propName: 'placeInQueue' });
 
@@ -86734,7 +86805,7 @@
 
 	      var numberFiles = (this.props.user.files || []).length;
 	      var colOne = this.props.user.accepted ? (0, _moment2.default)(new Date(this.props.user.accepted)).format("dddd, MMMM Do YYYY, h:mm:ss a") : _react2.default.createElement(_riek.RIEInput, { value: this.props.index,
-	        change: this.props.onPlaceInQueueChanged.bind(this, this.props.user._id),
+	        change: this.placeInQueueChanged.bind(this, this.props.user._id),
 	        className: 'input-field',
 	        propName: 'placeInQueue' });
 
@@ -86897,79 +86968,6 @@
 	  }
 
 	  (0, _createClass3.default)(QueueTabs, [{
-	    key: '_rowAccepted',
-	    value: function _rowAccepted(row) {
-	      var _this2 = this;
-
-	      if (this.state.submitDisabled) return;
-
-	      this.setState({
-	        submitDisabled: true
-	      }, function () {
-	        _this2.serverRequest = _jquery2.default.post('/api/admin/accept', { _id: row._id }, function (data, message, res) {
-	          data.submitDisabled = false;
-	          this.setState(data, this.props.rowsUpdated);
-	        }.bind(_this2));
-	      });
-	    }
-	  }, {
-	    key: '_rowUnaccepted',
-	    value: function _rowUnaccepted(row) {
-	      var _this3 = this;
-
-	      if (this.state.submitDisabled) return;
-
-	      this.setState({
-	        submitDisabled: true
-	      }, function () {
-	        _this3.serverRequest = _jquery2.default.post('/api/admin/unaccept', { _id: row._id }, function (data, message, res) {
-	          data.submitDisabled = false;
-	          this.setState(data, this.props.rowsUpdated);
-	        }.bind(_this3));
-	      });
-	    }
-	  }, {
-	    key: '_onPlaceInQueueChanged',
-	    value: function _onPlaceInQueueChanged(userId, change) {
-	      var _this4 = this;
-
-	      if (isNaN(change.placeInQueue)) return;
-
-	      change.placeInQueue = Number(change.placeInQueue) < 0 ? 0 : Number(change.placeInQueue) - 1;
-	      change.userId = userId;
-
-	      if (this.state.submitDisabled) return;
-
-	      this.setState({
-	        submitDisabled: true
-	      }, function () {
-
-	        _jquery2.default.ajax({
-	          type: 'POST',
-	          url: '/api/admin/update-place-in-queue',
-	          data: change
-	        }).done(function (res) {
-	          if (res.error) {
-	            _this4.setState({
-	              submitDisabled: false,
-	              errorMessage: res.error || 'Unable update participant logo.'
-	            });
-	          } else {
-	            _this4.setState({
-	              submitDisabled: false
-	            }, function () {
-	              _this4.props.onRowUpdated();
-	            });
-	          }
-	        }.bind(_this4)).fail(function (res) {
-	          this.setState({
-	            submitDisabled: false,
-	            errorMessage: res.error || 'Unable update place in queue. Please try again.'
-	          });
-	        }.bind(_this4));
-	      });
-	    }
-	  }, {
 	    key: 'componentWillUnmount',
 	    value: function componentWillUnmount() {
 	      if (this.serverRequest) this.serverRequest.abort();
@@ -86977,7 +86975,7 @@
 	  }, {
 	    key: '_renderRows',
 	    value: function _renderRows() {
-	      var _this5 = this;
+	      var _this2 = this;
 
 	      var rows = [];
 
@@ -86988,19 +86986,19 @@
 	          rows.push(_react2.default.createElement(_QueueRow2.default, { key: row._id,
 	            index: ++index,
 	            user: row,
-	            submitDisabled: _this5.state.submitDisabled,
-	            onPlaceInQueueChanged: _this5._onPlaceInQueueChanged,
-	            onRowUpdated: _this5.props.rowsUpdated,
-	            onAcceptClicked: _this5._rowAccepted.bind(_this5) }));
+	            submitDisabled: _this2.state.submitDisabled,
+	            onAcceptClicked: _this2._rowAccepted,
+	            onPlaceInQueueChanged: _this2._onPlaceInQueueChanged,
+	            onRowUpdated: _this2.props.rowsUpdated }));
 	        });
 	      } else {
 	        (this.props.accepted || []).forEach(function (row) {
 	          rows.push(_react2.default.createElement(_QueueRow2.default, { key: row._id,
 	            user: row,
-	            submitDisabled: _this5.state.submitDisabled,
-	            onPlaceInQueueChanged: _this5._onPlaceInQueueChanged,
-	            onRowUpdated: _this5.props.rowsUpdated,
-	            onUnAcceptClicked: _this5._rowUnaccepted.bind(_this5) }));
+	            submitDisabled: _this2.state.submitDisabled,
+	            onUnAcceptClicked: _this2._rowUnaccepted,
+	            onPlaceInQueueChanged: _this2._onPlaceInQueueChanged,
+	            onRowUpdated: _this2.props.rowsUpdated }));
 	        });
 	      }
 
@@ -87197,6 +87195,7 @@
 	  }, {
 	    key: '_updateRows',
 	    value: function _updateRows() {
+	      debugger;
 	      this.serverRequest = _jquery2.default.get('/api/admin/queue/', function (data, message, res) {
 	        this.setState(data);
 	      }.bind(this));

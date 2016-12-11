@@ -26,6 +26,7 @@ export default class TabSelector extends Component {
   }
 
   _updateRows () {
+    debugger;
     this.serverRequest = $.get('/api/admin/queue/', function (data, message, res) {
       this.setState(data);
     }.bind(this));

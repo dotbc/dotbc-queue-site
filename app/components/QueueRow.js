@@ -37,16 +37,86 @@ export default class QueueRow extends Component {
     })
   }
 
+  rowAcceptClicked () {    
+
+    if (this.state.submitDisabled) return;
+
+    this.setState({
+      submitDisabled: true,
+    }, () => {
+      this.serverRequest = $.post('/api/admin/accept', { _id: this.props.user._id }, function (data, message, res) {
+        this.setState(data, this.props.onRowUpdated);
+      }.bind(this));
+    });
+
+  }
+
+  rowUnacceptClicked () {
+    
+    if (this.state.submitDisabled) return;
+
+    this.setState({
+      submitDisabled: true,
+    }, () => {
+      this.serverRequest = $.post('/api/admin/unaccept', { _id: this.props.user._id }, function (data, message, res) {
+        this.setState(data, this.props.onRowUpdated);
+      }.bind(this));
+    });
+
+  }
+
+  placeInQueueChanged (userId, change) {
+
+    if (isNaN(change.placeInQueue)) return;
+
+    change.placeInQueue = Number(change.placeInQueue) < 0 ? 0 : Number(change.placeInQueue) - 1;
+    change.userId = userId;
+
+    if (this.state.submitDisabled) return;
+
+    this.setState({
+      submitDisabled: true,
+    }, () => {
+
+      $.ajax({
+        type: 'POST',
+        url: '/api/admin/update-place-in-queue',
+        data: change
+      })
+      .done(((res) => {
+        if (res.error) {
+          this.setState({
+            submitDisabled: false,
+            errorMessage: res.error || 'Unable update participant logo.',
+          });
+        } else {
+          this.setState({
+            submitDisabled: false,
+          }, () => {
+            this.props.onRowUpdated();
+          }); 
+        }
+      }).bind(this))
+      .fail((res) => {
+        this.setState({
+          submitDisabled: false,
+          errorMessage: res.error || 'Unable update place in queue. Please try again.',
+        });
+      });
+    });
+
+	}
+
   _renderButton () {
     if ( ! this.props.user.accepted) {
-      return (<a className="button" onClick={this.props.onAcceptClicked.bind(this, this.props.user)}>Accept</a>);
-    } else return (<a className="button" onClick={this.props.onUnAcceptClicked.bind(this, this.props.user)}>Unaccept</a>);
+      return (<a className="button" onClick={this.rowAcceptClicked.bind(this)}>Accept</a>);
+    } else return (<a className="button" onClick={this.rowUnacceptClicked.bind(this)}>Unaccept</a>);
   }
 
   _renderMove () {
     if (this.props.user.accepted) {
       return (null);
-    } else return (<img src="images/move-top.svg" onClick={this.props.onPlaceInQueueChanged.bind(this, this.props.user._id, { placeInQueue: 1 })} />);
+    } else return (<img src="images/move-top.svg" onClick={this.placeInQueueChanged.bind(this, this.props.user._id, { placeInQueue: 1 })} />);
   }
 
   _renderClosed () {
@@ -55,7 +125,7 @@ export default class QueueRow extends Component {
     const colOne = this.props.user.accepted ? 
       moment(new Date(this.props.user.accepted)).format("dddd, MMMM Do YYYY, h:mm:ss a") : 
       (<RIEInput value={this.props.index}
-								change={this.props.onPlaceInQueueChanged.bind(this, this.props.user._id)}
+								change={this.placeInQueueChanged.bind(this, this.props.user._id)}
                 className="input-field"
 								propName="placeInQueue" />);
 
@@ -139,7 +209,7 @@ export default class QueueRow extends Component {
     const colOne = this.props.user.accepted ? 
       moment(new Date(this.props.user.accepted)).format("dddd, MMMM Do YYYY, h:mm:ss a") : 
       (<RIEInput value={this.props.index}
-								change={this.props.onPlaceInQueueChanged.bind(this, this.props.user._id)}
+								change={this.placeInQueueChanged.bind(this, this.props.user._id)}
                 className="input-field"
 								propName="placeInQueue" />);
 
