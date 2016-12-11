@@ -56,6 +56,7 @@ export default React.createClass({
             <input type="password" name="password" placeholder="password" onChange={this.handleChange.bind(this, "password")} />
           </div>
           <input className="button" type="submit" />
+          <a href="/forgot">forgot password</a>
         </form>
         {this.renderErrorMessage()}
       </div>

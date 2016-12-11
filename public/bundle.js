@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "10ea4ba3e762c1e6e0e7"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "58b486843bf1bd7ffb6b"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -86380,7 +86380,12 @@
 	          ),
 	          _react2.default.createElement('input', { type: 'password', name: 'password', placeholder: 'password', onChange: this.handleChange.bind(this, "password") })
 	        ),
-	        _react2.default.createElement('input', { className: 'button', type: 'submit' })
+	        _react2.default.createElement('input', { className: 'button', type: 'submit' }),
+	        _react2.default.createElement(
+	          'a',
+	          { href: '/forgot' },
+	          'forgot password'
+	        )
 	      ),
 	      this.renderErrorMessage()
 	    );

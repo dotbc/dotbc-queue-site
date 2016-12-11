@@ -42,9 +42,9 @@ export default function (app) {
     ensureEmailUnique,
     passport.authenticate('local-signup'), 
     (req, res, next) => {
-      Queue.addUser(res.user._id, (err) => {
+      Queue.addUser(req.user._id, (err) => {
         if (err) return next(err);
-        res.send(res.user);
+        res.send(req.user);
       });
   });
 

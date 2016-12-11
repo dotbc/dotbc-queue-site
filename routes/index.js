@@ -1,4 +1,5 @@
 import admin from './admin';
+import forgot from './forgot';
 import home from './home';
 import isLoggedIn from './isLoggedIn';
 import join from './join';
@@ -10,6 +11,8 @@ import User from '../lib/models/User';
 export default function (app) {
 
   admin(app);
+
+  forgot(app);
 
   home(app);
   
