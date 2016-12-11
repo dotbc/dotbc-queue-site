@@ -1,6 +1,7 @@
 import isEmail from 'is-email';
 import path from 'path';
 import passport from '../lib/passport';
+import Queue from '../lib/models/Queue';
 import User from '../lib/models/User'; 
 
 export default function (app) {
@@ -40,8 +41,11 @@ export default function (app) {
     ensureEmail,
     ensureEmailUnique,
     passport.authenticate('local-signup'), 
-    (req, res) => {
-      res.send(res.user);
+    (req, res, next) => {
+      Queue.addUser(res.user._id, (err) => {
+        if (err) return next(err);
+        res.send(res.user);
+      });
   });
 
   app.get('/join', (req, res) => {  
