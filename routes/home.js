@@ -4,6 +4,7 @@ import merge from 'lodash.merge';
 import mongodb from 'mongodb';
 import path from 'path';
 import passport from '../lib/passport';
+import Queue from '../lib/models/Queue';
 import User from '../lib/models/User';
 
 const config = require('cconfig')();
@@ -53,15 +54,12 @@ export default function (app) {
 
   app.get('/api/index',
     (req, res) => {
-      User.findAllSlim((err, participants) => {
+      Queue.get((err, queue) => {
         if (err) return res.send({ error: err });
-        const partners = participants.filter((p) => { return p.accepted !== undefined; }).reverse();
-        const waitlist = participants.filter((p) => { return p.accepted === undefined; }).reverse();
-        partners.forEach((p) => { p.accepted = undefined; });
         res.send({
-          partners,
-          waitlist,
-          user: req.user
+          user: req.user,
+          waitlist: queue.inQueue,
+          partners: queue.accepted,
         });
       });
   });

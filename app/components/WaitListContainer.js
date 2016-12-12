@@ -15,7 +15,6 @@ export default class WaitListContainer extends Component {
     else if (this.props.waitlist && this.props.waitlist.length === 0) input = this.props.partners;
     else input = (this.state.selectedTab === 'left') ? this.props.waitlist : this.props.partners;
 
-
     if ( ! input) return null;
 
     input.forEach((w) => {
