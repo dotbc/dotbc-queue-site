@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "6c5da8e2bb23124383e4"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "59bf92049115cd9323a0"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -86530,9 +86530,47 @@
 	      var userId = this.props.user._id;
 	      var file = files[0];
 
-	      _superagent2.default.post('/api/admin/update-logo/' + userId).attach('logo', file).end(function (err, res) {
-	        _this2.setState({ user: { logo: file } });
-	      });
+	      var xhr = new XMLHttpRequest();
+	      xhr.open('GET', '/sign-s3?name=' + file.name + '&type=' + file.type);
+	      xhr.onreadystatechange = function () {
+	        if (xhr.readyState === 4) {
+	          if (xhr.status === 200) {
+	            var response = JSON.parse(xhr.responseText);
+	            _this2.uploadFile(file, response.signedRequest, response.url);
+	          } else {
+	            alert('Could not get signed URL.');
+	          }
+	        }
+	      };
+	      xhr.send();
+	    }
+	  }, {
+	    key: 'uploadFile',
+	    value: function uploadFile(file, signedRequest, url) {
+	      var _this3 = this;
+
+	      var xhr = new XMLHttpRequest();
+	      xhr.open('PUT', signedRequest);
+	      xhr.onreadystatechange = function () {
+	        if (xhr.readyState === 4) {
+	          if (xhr.status === 200) {
+	            _this3.serverRequest = _jquery2.default.post({
+	              type: 'POST',
+	              url: '/api/admin/update-logo/' + _this3.props.user._id,
+	              data: { logo: url }
+	            }, function (data, message, res) {
+	              this.setState({
+	                user: {
+	                  logo: data.logo
+	                }
+	              });
+	            }.bind(_this3));
+	          } else {
+	            alert('Could not upload file.');
+	          }
+	        }
+	      };
+	      xhr.send(file);
 	    }
 	  }, {
 	    key: 'toggleOpen',
@@ -86546,21 +86584,6 @@
 	  }, {
 	    key: 'rowAcceptClicked',
 	    value: function rowAcceptClicked() {
-	      var _this3 = this;
-
-	      if (this.state.submitDisabled) return;
-
-	      this.setState({
-	        submitDisabled: true
-	      }, function () {
-	        _this3.serverRequest = _jquery2.default.post('/api/admin/accept', { _id: _this3.props.user._id }, function (data, message, res) {
-	          this.setState(data, this.props.onRowUpdated);
-	        }.bind(_this3));
-	      });
-	    }
-	  }, {
-	    key: 'rowUnacceptClicked',
-	    value: function rowUnacceptClicked() {
 	      var _this4 = this;
 
 	      if (this.state.submitDisabled) return;
@@ -86568,15 +86591,30 @@
 	      this.setState({
 	        submitDisabled: true
 	      }, function () {
-	        _this4.serverRequest = _jquery2.default.post('/api/admin/unaccept', { _id: _this4.props.user._id }, function (data, message, res) {
+	        _this4.serverRequest = _jquery2.default.post('/api/admin/accept', { _id: _this4.props.user._id }, function (data, message, res) {
 	          this.setState(data, this.props.onRowUpdated);
 	        }.bind(_this4));
 	      });
 	    }
 	  }, {
+	    key: 'rowUnacceptClicked',
+	    value: function rowUnacceptClicked() {
+	      var _this5 = this;
+
+	      if (this.state.submitDisabled) return;
+
+	      this.setState({
+	        submitDisabled: true
+	      }, function () {
+	        _this5.serverRequest = _jquery2.default.post('/api/admin/unaccept', { _id: _this5.props.user._id }, function (data, message, res) {
+	          this.setState(data, this.props.onRowUpdated);
+	        }.bind(_this5));
+	      });
+	    }
+	  }, {
 	    key: 'placeInQueueChanged',
 	    value: function placeInQueueChanged(userId, change) {
-	      var _this5 = this;
+	      var _this6 = this;
 
 	      if (isNaN(change.placeInQueue)) return;
 
@@ -86595,19 +86633,19 @@
 	          data: change
 	        }).done(function (res) {
 	          if (res.error) {
-	            _this5.setState({
+	            _this6.setState({
 	              submitDisabled: false,
 	              errorMessage: res.error || 'Unable update participant logo.'
 	            });
 	          } else {
-	            _this5.setState({
+	            _this6.setState({
 	              submitDisabled: false
 	            }, function () {
-	              _this5.props.onRowUpdated();
+	              _this6.props.onRowUpdated();
 	            });
 	          }
-	        }.bind(_this5)).fail(function (res) {
-	          _this5.setState({
+	        }.bind(_this6)).fail(function (res) {
+	          _this6.setState({
 	            submitDisabled: false,
 	            errorMessage: res.error || 'Unable update place in queue. Please try again.'
 	          });
@@ -87200,7 +87238,6 @@
 	  }, {
 	    key: '_updateRows',
 	    value: function _updateRows() {
-	      debugger;
 	      this.serverRequest = _jquery2.default.get('/api/admin/queue/', function (data, message, res) {
 	        this.setState(data);
 	      }.bind(this));

@@ -21,13 +21,49 @@ export default class QueueRow extends Component {
     const userId = this.props.user._id;
     const file = files[0];
 
-    request.post('/api/admin/update-logo/' + userId)
-      .attach('logo', file)
-      .end((err, res) => {
-        this.setState({ user: { logo: file } });
-      });
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `/sign-s3?name=${file.name}&type=${file.type}`);
+    xhr.onreadystatechange = () => {
+      if(xhr.readyState === 4){
+        if(xhr.status === 200){
+          const response = JSON.parse(xhr.responseText);
+          this.uploadFile(file, response.signedRequest, response.url);
+        }
+        else {
+          alert('Could not get signed URL.');
+        }
+      }
+    };
+    xhr.send();
 
 	}
+
+  uploadFile(file, signedRequest, url) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('PUT', signedRequest);
+    xhr.onreadystatechange = () => {
+      if(xhr.readyState === 4){
+        if(xhr.status === 200){
+          this.serverRequest = $.post({
+            type: 'POST',
+            url: `/api/admin/update-logo/${this.props.user._id}`,
+            data: { logo: url }
+          }, function (data, message, res) {
+            this.setState({ 
+              user: {
+                logo: data.logo
+              },
+            });
+          }.bind(this));
+          
+        }
+        else{
+          alert('Could not upload file.');
+        }
+      }
+    };
+    xhr.send(file);
+  }
 
   toggleOpen (e) {
     if (['IMG', 'A', 'INPUT', 'TEXTAREA', 'path', 'polygon', 'g', 'svg' ].indexOf(e.target.tagName) > -1) return;

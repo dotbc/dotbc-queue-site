@@ -87,40 +87,17 @@ export default function (app) {
 
   app.post('/api/admin/update-logo/:userId',
     isLoggedIn,
-    upload.single('logo'),
     (req, res) => {
 
-      const file = req.file;
+      const logo = req.body.logo;
       const userId = req.params.userId;
 
-      User.findById(userId, (err, user) => {
-        if (err) return next(err);
-
-        user.logo = file.buffer;
-
-        user.save((err, user) => {
-          if (err) return res.send(err);
-          else res.send(user);
-        });
-
-      });
-
-  });
-
-  app.post('/api/admin/update-logo/:userId',
-    isLoggedIn,
-    upload.single('logo'),
-    (req, res) => {
-
-      const file = req.file.buffer;
-      const userId = req.param.userId;
-
-      if ( ! file) return res.send({ error: 'no file data provided' });
+      if ( ! logo) return res.send({ error: 'no logo data provided' });
       if ( ! userId) return res.send({ error: 'no userId data provided' });
 
-      User.update({ _id: userId }, { $set: { logo: file } }, (err, user) => {
+      User.update({ _id: userId }, { $set: { logo: logo } }, (err, user) => {
         if (err) return res.send({ error: err });
-        else res.send(user);
+        else res.send({ logo });
       });
 
   });

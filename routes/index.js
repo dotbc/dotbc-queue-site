@@ -7,6 +7,7 @@ import login from './login';
 import passport from '../lib/passport';
 import path from 'path';
 import reset from './reset';
+import s3 from './s3';
 import User from '../lib/models/User'; 
 
 export default function (app) {
@@ -22,6 +23,8 @@ export default function (app) {
   login(app);
   
   reset(app);
+
+  s3(app);
 
   // catch all other requests and serve main page
   app.get('*', (req, res, next) => {  
