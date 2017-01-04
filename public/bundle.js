@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d6b1a35ba6f1669125c4"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "4b6f62c62d7895b2f8f8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -24367,11 +24367,11 @@
 	            _react2.default.createElement(
 	              "span",
 	              null,
-	              "If would would like to be included in the list for sponsored development please let us know ",
+	              "If would would like to pursue sponsored development please let us know at ",
 	              _react2.default.createElement(
 	                "a",
-	                { href: "http://eepurl.com/cwb3uH" },
-	                "here"
+	                { href: "/join" },
+	                "signup"
 	              ),
 	              "."
 	            )

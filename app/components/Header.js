@@ -44,7 +44,7 @@ export default class Header extends Component {
             All data will be kept private and confidential.
           </p>
           <p className="sponsoredDevelopment">
-            <span>If would would like to be included in the list for sponsored development please let us know <a href="http://eepurl.com/cwb3uH">here</a>.</span> 
+            <span>If would would like to pursue sponsored development please let us know at <a href={"/join"}>signup</a>.</span> 
           </p>
         </div>
       </header>
