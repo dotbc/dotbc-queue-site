@@ -39,9 +39,10 @@ export default class Header extends Component {
               We are now accepting data submissions from all participants in the music industry.
               Onboarding will be on a first come first served basis and we can accept any and all formats.
               All data will be kept private and confidential.
-              If would would like to be included in the list for sponsored development please let us here. (link
-              to email list) 
-            </span> 
+            </span>
+          </p>
+          <p className="intro">
+            <span>If would would like to be included in the list for sponsored development please let us <a href="#">here</a>.</span> 
           </p>
         </div>
       </header>

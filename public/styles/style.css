@@ -139,8 +139,8 @@ header {
       header #nav li a {
         text-decoration: none; }
   header .intro {
-    margin: 40px 0 40px 80px;
-    max-width: 35rem;
+    margin: 30px 0 30px 80px;
+    max-width: 44rem;
     font-family: 'Open Sans', sans-serif;
     font-weight: 300; 
     text-align: justify;}

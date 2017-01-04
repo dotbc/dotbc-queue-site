@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "5329e7e52fe16e8ceea6"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "63047eeddfcd03d10396"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -24348,7 +24348,22 @@
 	            _react2.default.createElement(
 	              "span",
 	              null,
-	              "We are now accepting data submissions from all participants in the music industry. Onboarding will be on a first come first served basis and we can accept any and all formats. All data will be kept private and confidential. If would would like to be included in the list for sponsored development please let us here. (link to email list)"
+	              "We are now accepting data submissions from all participants in the music industry. Onboarding will be on a first come first served basis and we can accept any and all formats. All data will be kept private and confidential."
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "p",
+	            { className: "intro" },
+	            _react2.default.createElement(
+	              "span",
+	              null,
+	              "If would would like to be included in the list for sponsored development please let us ",
+	              _react2.default.createElement(
+	                "a",
+	                { href: "#" },
+	                "here"
+	              ),
+	              "."
 	            )
 	          )
 	        )
