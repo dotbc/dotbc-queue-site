@@ -30,14 +30,18 @@ export default class Header extends Component {
           <span id="logo">
             <a href="/" className="name">
               <img src={'images/dotBC-logo.svg'} />
-              <span className="name">dotBC Music</span>
+              <span className="name">The dotBlockchain Music Project</span>
             </a>
           </span>
           {(loggedIn) ? this._renderLoggedIn() : this._renderLoggedOut() }
           <p className="intro">
-          <span>We are looking for volunteers to share their data with us to enhance the </span> 
-          <a href={"http://dotblockchainmusic.com"}>dotBC Music</a> 
-          <span> project.</span>
+            <span>
+              We are now accepting data submissions from all participants in the music industry.
+              Onboarding will be on a first come first served basis and we can accept any and all formats.
+              All data will be kept private and confidential.
+              If would would like to be included in the list for sponsored development please let us here. (link
+              to email list) 
+            </span> 
           </p>
         </div>
       </header>

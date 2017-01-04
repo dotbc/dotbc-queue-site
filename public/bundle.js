@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "59bf92049115cd9323a0"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "5329e7e52fe16e8ceea6"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -24337,7 +24337,7 @@
 	              _react2.default.createElement(
 	                "span",
 	                { className: "name" },
-	                "dotBC Music"
+	                "The dotBlockchain Music Project"
 	              )
 	            )
 	          ),
@@ -24348,17 +24348,7 @@
 	            _react2.default.createElement(
 	              "span",
 	              null,
-	              "We are looking for volunteers to share their data with us to enhance the "
-	            ),
-	            _react2.default.createElement(
-	              "a",
-	              { href: "http://dotblockchainmusic.com" },
-	              "dotBC Music"
-	            ),
-	            _react2.default.createElement(
-	              "span",
-	              null,
-	              " project."
+	              "We are now accepting data submissions from all participants in the music industry. Onboarding will be on a first come first served basis and we can accept any and all formats. All data will be kept private and confidential. If would would like to be included in the list for sponsored development please let us here. (link to email list)"
 	            )
 	          )
 	        )
@@ -87128,16 +87118,16 @@
 	          _react2.default.createElement(
 	            "p",
 	            { className: "sectionTitle" },
-	            "Selected Partners"
+	            "Sponsored Development Partners"
 	          ),
 	          _react2.default.createElement(
 	            "div",
 	            { className: "logos" },
-	            _react2.default.createElement("img", { src: "images/BMI-logo.png" }),
-	            _react2.default.createElement("img", { src: "images/spotify-logo.png" }),
-	            _react2.default.createElement("img", { src: "images/ascap-logo.png" }),
-	            _react2.default.createElement("img", { src: "images/monegraph-logo.png" }),
-	            _react2.default.createElement("img", { src: "images/hfa-logo.png" })
+	            _react2.default.createElement("img", { src: "images/SOCAN@2x.png" }),
+	            _react2.default.createElement("img", { src: "images/MediaNet.png" }),
+	            _react2.default.createElement("img", { src: "images/Songtrust.png" }),
+	            _react2.default.createElement("img", { src: "images/DowntownMP.png" }),
+	            _react2.default.createElement("img", { src: "images/CDBaby.png" })
 	          )
 	        )
 	      );

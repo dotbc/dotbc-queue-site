@@ -7,13 +7,13 @@ export default class SelectedPartners extends Component {
     return (
       <div id="selectedPartners">
         <div className="container">
-          <p className="sectionTitle">Selected Partners</p>
+          <p className="sectionTitle">Sponsored Development Partners</p>
           <div className="logos">
-            <img src="images/BMI-logo.png" />
-            <img src="images/spotify-logo.png" />
-            <img src="images/ascap-logo.png" />
-            <img src="images/monegraph-logo.png" />
-            <img src="images/hfa-logo.png" />
+            <img src="images/SOCAN@2x.png" />
+            <img src="images/MediaNet.png" />
+            <img src="images/Songtrust.png" />
+            <img src="images/DowntownMP.png" />
+            <img src="images/CDBaby.png" />
           </div>
         </div>
       </div>
