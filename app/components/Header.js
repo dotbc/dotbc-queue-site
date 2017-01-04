@@ -34,15 +34,17 @@ export default class Header extends Component {
             </a>
           </span>
           {(loggedIn) ? this._renderLoggedIn() : this._renderLoggedOut() }
-          <p className="intro">
-            <span>
-              We are now accepting data submissions from all participants in the music industry.
-              Onboarding will be on a first come first served basis and we can accept any and all formats.
-              All data will be kept private and confidential.
-            </span>
+          <p className="intro1">
+            <span>We are now accepting data submissions from all participants in the music industry.</span>
           </p>
           <p className="intro">
-            <span>If would would like to be included in the list for sponsored development please let us <a href="#">here</a>.</span> 
+            Onboarding will be on a first come first served basis and we can accept any and all formats.
+          </p>
+          <p className="intro">
+            All data will be kept private and confidential.
+          </p>
+          <p className="sponsoredDevelopment">
+            <span>If would would like to be included in the list for sponsored development please let us know <a href="http://eepurl.com/cwb3uH">here</a>.</span> 
           </p>
         </div>
       </header>

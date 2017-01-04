@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "63047eeddfcd03d10396"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d6b1a35ba6f1669125c4"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -24344,23 +24344,33 @@
 	          loggedIn ? this._renderLoggedIn() : this._renderLoggedOut(),
 	          _react2.default.createElement(
 	            "p",
-	            { className: "intro" },
+	            { className: "intro1" },
 	            _react2.default.createElement(
 	              "span",
 	              null,
-	              "We are now accepting data submissions from all participants in the music industry. Onboarding will be on a first come first served basis and we can accept any and all formats. All data will be kept private and confidential."
+	              "We are now accepting data submissions from all participants in the music industry."
 	            )
 	          ),
 	          _react2.default.createElement(
 	            "p",
 	            { className: "intro" },
+	            "Onboarding will be on a first come first served basis and we can accept any and all formats."
+	          ),
+	          _react2.default.createElement(
+	            "p",
+	            { className: "intro" },
+	            "All data will be kept private and confidential."
+	          ),
+	          _react2.default.createElement(
+	            "p",
+	            { className: "sponsoredDevelopment" },
 	            _react2.default.createElement(
 	              "span",
 	              null,
-	              "If would would like to be included in the list for sponsored development please let us ",
+	              "If would would like to be included in the list for sponsored development please let us know ",
 	              _react2.default.createElement(
 	                "a",
-	                { href: "#" },
+	                { href: "http://eepurl.com/cwb3uH" },
 	                "here"
 	              ),
 	              "."
