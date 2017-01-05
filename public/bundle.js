@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "4b6f62c62d7895b2f8f8"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "72019feeb76a048c93d4"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -48902,7 +48902,7 @@
 	          { htmlFor: "password" },
 	          "Password"
 	        ),
-	        _react2.default.createElement("input", { name: "password", required: true, type: "text", value: this.state.password, onChange: this.handleChange.bind(this, "password") })
+	        _react2.default.createElement("input", { name: "password", required: true, type: "password", value: this.state.password, onChange: this.handleChange.bind(this, "password") })
 	      ),
 	      _react2.default.createElement(
 	        "div",

@@ -51,7 +51,7 @@ export default React.createClass({
         </div>
         <div className="input-field">
           <label htmlFor="password">Password</label>
-          <input name="password" required type="text" value={this.state.password} onChange={this.handleChange.bind(this, "password")} />
+          <input name="password" required type="password" value={this.state.password} onChange={this.handleChange.bind(this, "password")} />
         </div>
         <div className="input-field">
           <label htmlFor="fullName">Full Name</label>
