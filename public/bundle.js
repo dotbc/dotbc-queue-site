@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "6b7f67d51ace0f2c058d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0ec857844a09af75bbc4"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -24344,37 +24344,29 @@
 	          loggedIn ? this._renderLoggedIn() : this._renderLoggedOut(),
 	          _react2.default.createElement(
 	            "p",
-	            { className: "intro1" },
-	            _react2.default.createElement(
-	              "span",
-	              null,
-	              "We are now accepting data submissions from all participants in the music industry."
-	            )
+	            { className: "intro1 intro" },
+	            "We are now accepting request sample data submissions from all participants in the music industry."
 	          ),
 	          _react2.default.createElement(
 	            "p",
 	            { className: "intro" },
-	            "Onboarding will be on a first come first served basis and we can accept any and all formats."
+	            "On-boarding will be on a first-come, first-served basis. We can accept any and all formats during this phase to aid our research and development efforts. However, future submission to the future blockchain-backed system will be governed by the Minimum Viable Data requirements."
 	          ),
 	          _react2.default.createElement(
 	            "p",
 	            { className: "intro" },
-	            "All data will be kept private and confidential."
+	            "All data will be kept strictly private and confidential during this pre-release period. You will be invited to use the dotBC Bundler application when it reaches its beta period to submit your information officially."
 	          ),
 	          _react2.default.createElement(
 	            "p",
 	            { className: "sponsoredDevelopment" },
+	            "If would would like to pursue sponsored development for a plug-in for automated ingestion and processing, please let us know at ",
 	            _react2.default.createElement(
-	              "span",
-	              null,
-	              "If would would like to pursue sponsored development please let us know at ",
-	              _react2.default.createElement(
-	                "a",
-	                { href: "/join" },
-	                "signup"
-	              ),
-	              "."
-	            )
+	              "a",
+	              { href: "/join" },
+	              "signup"
+	            ),
+	            "."
 	          )
 	        )
 	      );

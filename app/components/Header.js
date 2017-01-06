@@ -34,21 +34,29 @@ export default class Header extends Component {
             </a>
           </span>
           {(loggedIn) ? this._renderLoggedIn() : this._renderLoggedOut() }
-          <p className="intro1">
-            <span>We are now accepting data submissions from all participants in the music industry.</span>
+          <p className="intro1 intro">
+            We are now accepting request sample data submissions from all participants in the music industry.
           </p>
           <p className="intro">
-            Onboarding will be on a first come first served basis and we can accept any and all formats.
+            On-boarding will be on a first-come, first-served basis. We can accept any and all formats during this phase to aid our research and development efforts. However, future submission to the future blockchain-backed system will be governed by the Minimum Viable Data requirements.
           </p>
           <p className="intro">
-            All data will be kept private and confidential.
+            All data will be kept strictly private and confidential during this pre-release period. You will be invited to use the dotBC Bundler application when it reaches its beta period to submit your information officially.
           </p>
           <p className="sponsoredDevelopment">
-            <span>If would would like to pursue sponsored development please let us know at <a href={"/join"}>signup</a>.</span> 
+            If would would like to pursue sponsored development for a plug-in for automated ingestion and processing, please let us know at <a href={"/join"}>signup</a>.
           </p>
         </div>
       </header>
     );
+
+    
+
+
+
+
+
+
 
   }
 
