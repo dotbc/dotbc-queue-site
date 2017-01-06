@@ -15,7 +15,7 @@ export default class WaitListContainer extends Component {
     else if (this.props.waitlist && this.props.waitlist.length === 0) input = this.props.partners;
     else input = (this.state.selectedTab === 'left') ? this.props.waitlist : this.props.partners;
 
-    if ( ! input) return null;
+    if ( ! input || ! input.length) return null;
 
     input.forEach((w) => {
       list.push((
@@ -26,7 +26,8 @@ export default class WaitListContainer extends Component {
         </li>
       ));
     });
-    return list;
+
+    return <ul id="queue" className="unstyled">{list}</ul>;
   }
 
   setIfActive (tab) {
@@ -49,6 +50,7 @@ export default class WaitListContainer extends Component {
   }
 
   _renderQueueNav() {
+
     if ( ! this.props.waitlist && ! this.props.partners) {
       return null;
     } 
@@ -56,6 +58,8 @@ export default class WaitListContainer extends Component {
     const waitlist = this.props.waitlist.length === 0 ? null : (<span className={this.setIfActive.bind(this, 'left')()} style={this._setNavStyle()} onClick={this.toggle.bind(this, 'left')}>Agencies and Organizations on the Waitlist</span>);
     const partners = this.props.partners.length === 0 ? null : (<span className={this.setIfActive.bind(this, 'right')()} style={this._setNavStyle()} onClick={this.toggle.bind(this, 'right')}>Full List of Current accepted</span>);
  
+    if ( ! waitlist && ! partners) return null;
+
     return (
       <div className="queueNav">
         {waitlist}
@@ -71,9 +75,7 @@ export default class WaitListContainer extends Component {
 
           {this._renderQueueNav()}
 
-          <ul id="queue" className="unstyled">
-            {this._renderWaitlist()}
-          </ul>
+          {this._renderWaitlist()}
 
         </div>
       </main>

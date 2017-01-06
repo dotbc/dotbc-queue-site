@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "72019feeb76a048c93d4"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "6b7f67d51ace0f2c058d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -87672,7 +87672,7 @@
 
 	      if (this.props.partners && this.props.partners.length === 0) input = this.props.waitlist;else if (this.props.waitlist && this.props.waitlist.length === 0) input = this.props.partners;else input = this.state.selectedTab === 'left' ? this.props.waitlist : this.props.partners;
 
-	      if (!input) return null;
+	      if (!input || !input.length) return null;
 
 	      input.forEach(function (w) {
 	        list.push(_react2.default.createElement(
@@ -87695,7 +87695,12 @@
 	          )
 	        ));
 	      });
-	      return list;
+
+	      return _react2.default.createElement(
+	        'ul',
+	        { id: 'queue', className: 'unstyled' },
+	        list
+	      );
 	    }
 	  }, {
 	    key: 'setIfActive',
@@ -87721,6 +87726,7 @@
 	  }, {
 	    key: '_renderQueueNav',
 	    value: function _renderQueueNav() {
+
 	      if (!this.props.waitlist && !this.props.partners) {
 	        return null;
 	      }
@@ -87735,6 +87741,8 @@
 	        { className: this.setIfActive.bind(this, 'right')(), style: this._setNavStyle(), onClick: this.toggle.bind(this, 'right') },
 	        'Full List of Current accepted'
 	      );
+
+	      if (!waitlist && !partners) return null;
 
 	      return _react2.default.createElement(
 	        'div',
@@ -87754,11 +87762,7 @@
 	          'div',
 	          { className: 'container' },
 	          this._renderQueueNav(),
-	          _react2.default.createElement(
-	            'ul',
-	            { id: 'queue', className: 'unstyled' },
-	            this._renderWaitlist()
-	          )
+	          this._renderWaitlist()
 	        )
 	      );
 	    }
