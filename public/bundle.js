@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "0ec857844a09af75bbc4"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "780345d9fd98b535702c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -24345,22 +24345,22 @@
 	          _react2.default.createElement(
 	            "p",
 	            { className: "intro1 intro" },
-	            "We are now accepting request sample data submissions from all participants in the music industry."
+	            "We're building the world's first open framework for decentralized interoperability in the music industry, based on open source software and the biggest thing to ever come along in distributed computing: the Blockchain."
 	          ),
 	          _react2.default.createElement(
 	            "p",
 	            { className: "intro" },
-	            "On-boarding will be on a first-come, first-served basis. We can accept any and all formats during this phase to aid our research and development efforts. However, future submission to the future blockchain-backed system will be governed by the Minimum Viable Data requirements."
+	            "To make a platform that works for the needs of the whole industry, we want you involved."
 	          ),
 	          _react2.default.createElement(
 	            "p",
 	            { className: "intro" },
-	            "All data will be kept strictly private and confidential during this pre-release period. You will be invited to use the dotBC Bundler application when it reaches its beta period to submit your information officially."
+	            "We're onboarding partners and accepting sample data uploads to help guide development, and to make sure the types and formats of media files that run your business get the support they deserve. All uploads are kept strictly private and confidential."
 	          ),
 	          _react2.default.createElement(
 	            "p",
 	            { className: "sponsoredDevelopment" },
-	            "If would would like to pursue sponsored development for a plug-in for automated ingestion and processing, please let us know at ",
+	            "Join us today! On-boarding is first-come, first serve. If would would like to pursue sponsored development for a plug-in for automated ingestion and processing, please let us know at ",
 	            _react2.default.createElement(
 	              "a",
 	              { href: "/join" },

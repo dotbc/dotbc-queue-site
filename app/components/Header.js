@@ -35,22 +35,29 @@ export default class Header extends Component {
           </span>
           {(loggedIn) ? this._renderLoggedIn() : this._renderLoggedOut() }
           <p className="intro1 intro">
-            We are now accepting request sample data submissions from all participants in the music industry.
+            We're building the world's first open framework for decentralized interoperability in the music industry, based on open source software and the biggest thing to ever come 
+            along in distributed computing: the Blockchain.
           </p>
           <p className="intro">
-            On-boarding will be on a first-come, first-served basis. We can accept any and all formats during this phase to aid our research and development efforts. However, future submission to the future blockchain-backed system will be governed by the Minimum Viable Data requirements.
+            To make a platform that works for the needs of the whole industry, we want you involved.
           </p>
           <p className="intro">
-            All data will be kept strictly private and confidential during this pre-release period. You will be invited to use the dotBC Bundler application when it reaches its beta period to submit your information officially.
+            We're onboarding partners and accepting sample data uploads to help guide development, and to make sure the types and formats of media files that run your business 
+            get the support they deserve. All uploads are kept strictly private and confidential. 
           </p>
           <p className="sponsoredDevelopment">
-            If would would like to pursue sponsored development for a plug-in for automated ingestion and processing, please let us know at <a href={"/join"}>signup</a>.
+            Join us today! On-boarding is first-come, first serve. If would would like to pursue sponsored development for a plug-in for automated ingestion and processing, please let us know at <a href={"/join"}>signup</a>.
           </p>
         </div>
       </header>
     );
 
-    
+     
+
+
+
+
+
 
 
 
