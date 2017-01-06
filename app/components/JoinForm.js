@@ -69,9 +69,20 @@ export default React.createClass({
           <label htmlFor="interest">Why are you interested in participating in the dBC project?</label>
           <textarea name="interest" required rows="8" value={this.state.interest} onChange={this.handleChange.bind(this, "interest")} ></textarea>
         </div>
+        <div className="input-field">
+          <label htmlFor="interestedInSponsoredDevelopment">Interested in Sponsored Development</label>
+          <input name="interestedInSponsoredDevelopment" required type="checkbox" value={this.state.interestedInSponsoredDevelopment} onChange={this.handleChange.bind(this, "interestedInSponsoredDevelopment")} />
+        </div>
+
         <input type="submit" className="button" disabled={this.state.submitDisabled} value="Agree and Continue" />
       </form>
     );
+
+        // place the following above submit to enable hide from public
+        // <div className="input-field">
+        //   <label htmlFor="hideMeFromPublic">Hide my name from the public waitlist</label>
+        //   <input name="hideMeFromPublic" required type="checkbox" value={this.state.hideMeFromPublic} onChange={this.handleChange.bind(this, "hideMeFromPublic")} />
+        // </div>
 
   }
 

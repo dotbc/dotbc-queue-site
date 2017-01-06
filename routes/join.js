@@ -29,14 +29,6 @@ export default function (app) {
     });
   }
 
-  // function ensureEmailMatchesCompany (req, res, next) {
-  //   if ( ! isEmail(req.body.email)) {
-  //     return res.send({
-  //       error: 'Please provide a valid email'
-  //     });
-  //   } esle return next();
-  // }
-
   app.post('/api/join',
     ensureEmail,
     ensureEmailUnique,

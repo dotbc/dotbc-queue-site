@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "780345d9fd98b535702c"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "fa11d5107a71e72d1e30"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -24272,8 +24272,8 @@
 	  }
 
 	  (0, _createClass3.default)(Header, [{
-	    key: "_renderLoggedIn",
-	    value: function _renderLoggedIn() {
+	    key: "_renderLoggedInControls",
+	    value: function _renderLoggedInControls() {
 	      return _react2.default.createElement(
 	        "ul",
 	        { id: "nav", className: "unstyled" },
@@ -24289,8 +24289,8 @@
 	      );
 	    }
 	  }, {
-	    key: "_renderLoggedOut",
-	    value: function _renderLoggedOut() {
+	    key: "_renderLoggedOutControls",
+	    value: function _renderLoggedOutControls() {
 	      return _react2.default.createElement(
 	        "ul",
 	        { id: "nav", className: "unstyled" },
@@ -24311,6 +24311,51 @@
 	            { href: "/login", onClick: this.props.onJoinClicked },
 	            "Sign In"
 	          )
+	        )
+	      );
+	    }
+	  }, {
+	    key: "_renderTextContent",
+	    value: function _renderTextContent() {
+
+	      if (this.props.loggedIn) return _react2.default.createElement(
+	        "div",
+	        null,
+	        _react2.default.createElement(
+	          "p",
+	          { className: "intro1 intro" },
+	          "We're building the world's first open framework for decentralized interoperability in the music industry, based on open source software and the biggest thing to ever come along in distributed computing: the Blockchain."
+	        )
+	      );
+
+	      return _react2.default.createElement(
+	        "div",
+	        null,
+	        _react2.default.createElement(
+	          "p",
+	          { className: "intro1 intro" },
+	          "We're building the world's first open framework for decentralized interoperability in the music industry, based on open source software and the biggest thing to ever come along in distributed computing: the Blockchain."
+	        ),
+	        _react2.default.createElement(
+	          "p",
+	          { className: "intro" },
+	          "To make a platform that works for the needs of the whole industry, we want you involved."
+	        ),
+	        _react2.default.createElement(
+	          "p",
+	          { className: "intro" },
+	          "We're onboarding partners and accepting sample data uploads to help guide development, and to make sure the types and formats of media files that run your business get the support they deserve. All uploads are kept strictly private and confidential."
+	        ),
+	        _react2.default.createElement(
+	          "p",
+	          { className: "sponsoredDevelopment" },
+	          "Join us today! On-boarding is first-come, first serve. If would would like to pursue sponsored development for a plug-in for automated ingestion and processing, please let us know at ",
+	          _react2.default.createElement(
+	            "a",
+	            { href: "/join" },
+	            "signup"
+	          ),
+	          "."
 	        )
 	      );
 	    }
@@ -24341,33 +24386,8 @@
 	              )
 	            )
 	          ),
-	          loggedIn ? this._renderLoggedIn() : this._renderLoggedOut(),
-	          _react2.default.createElement(
-	            "p",
-	            { className: "intro1 intro" },
-	            "We're building the world's first open framework for decentralized interoperability in the music industry, based on open source software and the biggest thing to ever come along in distributed computing: the Blockchain."
-	          ),
-	          _react2.default.createElement(
-	            "p",
-	            { className: "intro" },
-	            "To make a platform that works for the needs of the whole industry, we want you involved."
-	          ),
-	          _react2.default.createElement(
-	            "p",
-	            { className: "intro" },
-	            "We're onboarding partners and accepting sample data uploads to help guide development, and to make sure the types and formats of media files that run your business get the support they deserve. All uploads are kept strictly private and confidential."
-	          ),
-	          _react2.default.createElement(
-	            "p",
-	            { className: "sponsoredDevelopment" },
-	            "Join us today! On-boarding is first-come, first serve. If would would like to pursue sponsored development for a plug-in for automated ingestion and processing, please let us know at ",
-	            _react2.default.createElement(
-	              "a",
-	              { href: "/join" },
-	              "signup"
-	            ),
-	            "."
-	          )
+	          loggedIn ? this._renderLoggedInControls() : this._renderLoggedOutControls(),
+	          this._renderTextContent()
 	        )
 	      );
 	    }
@@ -48786,6 +48806,11 @@
 					'Files & Documents'
 				),
 				_react2.default.createElement(
+					'p',
+					{ className: 'info' },
+					'All uploads are kept strictly private and confidential. You will be invited to use the dotBC Bundler application when it reaches its beta period to submit your information officially.'
+				),
+				_react2.default.createElement(
 					'div',
 					{ className: 'uploaded' },
 					_react2.default.createElement(
@@ -48936,8 +48961,24 @@
 	        ),
 	        _react2.default.createElement("textarea", { name: "interest", required: true, rows: "8", value: this.state.interest, onChange: this.handleChange.bind(this, "interest") })
 	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "input-field" },
+	        _react2.default.createElement(
+	          "label",
+	          { htmlFor: "interestedInSponsoredDevelopment" },
+	          "Interested in Sponsored Development"
+	        ),
+	        _react2.default.createElement("input", { name: "interestedInSponsoredDevelopment", required: true, type: "checkbox", value: this.state.interestedInSponsoredDevelopment, onChange: this.handleChange.bind(this, "interestedInSponsoredDevelopment") })
+	      ),
 	      _react2.default.createElement("input", { type: "submit", className: "button", disabled: this.state.submitDisabled, value: "Agree and Continue" })
 	    );
+
+	    // place the following above submit to enable hide from public
+	    // <div className="input-field">
+	    //   <label htmlFor="hideMeFromPublic">Hide my name from the public waitlist</label>
+	    //   <input name="hideMeFromPublic" required type="checkbox" value={this.state.hideMeFromPublic} onChange={this.handleChange.bind(this, "hideMeFromPublic")} />
+	    // </div>
 	  }
 	});
 
@@ -86660,6 +86701,29 @@
 	      });
 	    }
 	  }, {
+	    key: '_renderCheckboxes',
+	    value: function _renderCheckboxes() {
+	      if (!this.props.user.interestedInSponsoredDevelopment && !this.props.user.hideMeFromPublic) return _react2.default.createElement('td', null);
+	      return _react2.default.createElement(
+	        'td',
+	        null,
+	        _react2.default.createElement(
+	          'ul',
+	          null,
+	          this.props.user.interestedInSponsoredDevelopment ? _react2.default.createElement(
+	            'li',
+	            { className: 'checkboxes' },
+	            'Sponsored Dev Interest'
+	          ) : null,
+	          this.props.user.hideMeFromPublic ? _react2.default.createElement(
+	            'li',
+	            { className: 'checkboxes' },
+	            'Hide me from public'
+	          ) : null
+	        )
+	      );
+	    }
+	  }, {
 	    key: '_renderButton',
 	    value: function _renderButton() {
 	      if (!this.props.user.accepted) {
@@ -86732,6 +86796,7 @@
 	            )
 	          )
 	        ),
+	        this._renderCheckboxes(),
 	        _react2.default.createElement(
 	          'td',
 	          null,
@@ -86910,6 +86975,7 @@
 	            )
 	          )
 	        ),
+	        this._renderCheckboxes(),
 	        _react2.default.createElement(
 	          'td',
 	          null,
@@ -87399,7 +87465,7 @@
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-			value: true
+		value: true
 	});
 
 	var _keys = __webpack_require__(65);
@@ -87419,182 +87485,218 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-			displayName: 'UserSubmittedInfo',
-			getInitialState: function getInitialState() {
-					return {
-							user: {}
-					};
-			},
+		displayName: 'UserSubmittedInfo',
+		getInitialState: function getInitialState() {
+			return {
+				user: {}
+			};
+		},
 
 
-			propTypes: {
-					user: _react.PropTypes.shape({
-							name: _react.PropTypes.string,
-							organization: _react.PropTypes.string,
-							title: _react.PropTypes.string,
-							email: _react.PropTypes.string,
-							interest: _react.PropTypes.string
-					})
-			},
+		propTypes: {
+			user: _react.PropTypes.shape({
+				name: _react.PropTypes.string,
+				organization: _react.PropTypes.string,
+				title: _react.PropTypes.string,
+				email: _react.PropTypes.string,
+				interest: _react.PropTypes.string,
+				interestedInSponsoredDevelopment: _react.PropTypes.Boolean,
+				hideMeFromPublic: _react.PropTypes.Boolean
+			})
+		},
 
-			handleDismissClick: function handleDismissClick(e) {
-					e.preventDefault();
-					this.setState({ errorMessage: undefined });
-			},
-			onChange: function onChange(change) {
-					var _this = this;
+		handleDismissClick: function handleDismissClick(e) {
+			e.preventDefault();
+			this.setState({ errorMessage: undefined });
+		},
+		onChange: function onChange(change) {
+			var _this = this;
 
-					this.setState({ errorMessage: null });
+			this.setState({ errorMessage: null });
 
-					var key = (0, _keys2.default)(change)[0];
-					var value = change[key];
+			var key = (0, _keys2.default)(change)[0];
+			var value = change[key];
 
-					if (value.trim().length === 0) return this.setState({ errorMessage: 'Cannot update ' + key + ' to blank. Please provide a value.' });
+			if (value.trim().length === 0) return this.setState({ errorMessage: 'Cannot update ' + key + ' to blank. Please provide a value.' });
 
-					_jquery2.default.ajax({
-							type: 'POST',
-							url: '/api/update-form-data',
-							data: change
-					}).done(function (res) {
-							if (res.error) {
-									_this.setState({
-											submitDisabled: false,
-											errorMessage: res.error || 'Unable update form data.'
-									});
-							} else {
-									_this.setState({
-											user: res
-									});
-							}
-					}.bind(this)).fail(function (res) {
-							this.setState({
-									submitDisabled: false,
-									errorMessage: res.error || 'Unable update form data. Please try again.'
-							});
-					}.bind(this));
-			},
-			renderErrorMessage: function renderErrorMessage() {
-					var errorMessage = this.state.errorMessage;
+			_jquery2.default.ajax({
+				type: 'POST',
+				url: '/api/update-form-data',
+				data: change
+			}).done(function (res) {
+				if (res.error) {
+					_this.setState({
+						submitDisabled: false,
+						errorMessage: res.error || 'Unable update form data.'
+					});
+				} else {
+					_this.setState({
+						user: res
+					});
+				}
+			}.bind(this)).fail(function (res) {
+				this.setState({
+					submitDisabled: false,
+					errorMessage: res.error || 'Unable update form data. Please try again.'
+				});
+			}.bind(this));
+		},
+		renderErrorMessage: function renderErrorMessage() {
+			var errorMessage = this.state.errorMessage;
 
 
-					if (!errorMessage) {
-							return null;
-					};
+			if (!errorMessage) {
+				return null;
+			};
 
-					return _react2.default.createElement(
+			return _react2.default.createElement(
+				'p',
+				{ style: { backgroundColor: '#e99', padding: 10 } },
+				_react2.default.createElement(
+					'b',
+					null,
+					errorMessage
+				),
+				' ',
+				_react2.default.createElement(
+					'a',
+					{ href: '#', onClick: this.handleDismissClick },
+					'Dismiss'
+				)
+			);
+		},
+		render: function render() {
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'userSubmittedInfo' },
+				_react2.default.createElement(
+					'span',
+					null,
+					this.renderErrorMessage()
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'personal' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'pair' },
+						_react2.default.createElement(
+							'label',
+							null,
+							'Name'
+						),
+						_react2.default.createElement(
 							'p',
-							{ style: { backgroundColor: '#e99', padding: 10 } },
-							_react2.default.createElement(
-									'b',
-									null,
-									errorMessage
-							),
-							' ',
-							_react2.default.createElement(
-									'a',
-									{ href: '#', onClick: this.handleDismissClick },
-									'Dismiss'
-							)
-					);
-			},
-			render: function render() {
-
-					return _react2.default.createElement(
-							'div',
-							{ className: 'userSubmittedInfo' },
-							_react2.default.createElement(
-									'span',
-									null,
-									this.renderErrorMessage()
-							),
-							_react2.default.createElement(
-									'div',
-									{ className: 'personal' },
-									_react2.default.createElement(
-											'div',
-											{ className: 'pair' },
-											_react2.default.createElement(
-													'label',
-													null,
-													'Name'
-											),
-											_react2.default.createElement(
-													'p',
-													{ className: 'input-field' },
-													_react2.default.createElement(_riek.RIEInput, { value: this.state.user.fullName || this.props.user.fullName || '',
-															change: this.onChange,
-															propName: 'fullName' })
-											)
-									),
-									_react2.default.createElement(
-											'div',
-											{ className: 'pair' },
-											_react2.default.createElement(
-													'label',
-													null,
-													'Your Company/Organization'
-											),
-											_react2.default.createElement(
-													'p',
-													{ className: 'input-field' },
-													_react2.default.createElement(_riek.RIEInput, { value: this.state.user.organization || this.props.user.organization || '',
-															change: this.onChange,
-															propName: 'organization' })
-											)
-									),
-									_react2.default.createElement(
-											'div',
-											{ className: 'pair' },
-											_react2.default.createElement(
-													'label',
-													null,
-													'Your Roll/Title'
-											),
-											_react2.default.createElement(
-													'p',
-													{ className: 'input-field' },
-													_react2.default.createElement(_riek.RIEInput, { value: this.state.user.title || this.props.user.title || '',
-															change: this.onChange,
-															propName: 'title' })
-											)
-									),
-									_react2.default.createElement(
-											'div',
-											{ className: 'pair' },
-											_react2.default.createElement(
-													'label',
-													null,
-													'Email Address'
-											),
-											_react2.default.createElement(
-													'p',
-													{ className: 'input-field' },
-													this.state.user.email || this.props.user.email || ''
-											)
-									)
-							),
-							_react2.default.createElement(
-									'div',
-									{ className: 'purpose' },
-									_react2.default.createElement(
-											'div',
-											{ className: 'pair' },
-											_react2.default.createElement(
-													'label',
-													null,
-													'Why are you interested in participating in the dBC project?'
-											),
-											_react2.default.createElement(
-													'p',
-													{ className: 'input-field' },
-													_react2.default.createElement(_riek.RIETextArea, { value: this.state.user.interest || this.props.user.interest || '',
-															change: this.onChange,
-															propName: 'interest' })
-											)
-									)
-							)
-					);
-			}
+							{ className: 'input-field' },
+							_react2.default.createElement(_riek.RIEInput, { value: this.state.user.fullName || this.props.user.fullName || '',
+								change: this.onChange,
+								propName: 'fullName' })
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'pair' },
+						_react2.default.createElement(
+							'label',
+							null,
+							'Your Company/Organization'
+						),
+						_react2.default.createElement(
+							'p',
+							{ className: 'input-field' },
+							_react2.default.createElement(_riek.RIEInput, { value: this.state.user.organization || this.props.user.organization || '',
+								change: this.onChange,
+								propName: 'organization' })
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'pair' },
+						_react2.default.createElement(
+							'label',
+							null,
+							'Your Roll/Title'
+						),
+						_react2.default.createElement(
+							'p',
+							{ className: 'input-field' },
+							_react2.default.createElement(_riek.RIEInput, { value: this.state.user.title || this.props.user.title || '',
+								change: this.onChange,
+								propName: 'title' })
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'pair' },
+						_react2.default.createElement(
+							'label',
+							null,
+							'Email Address'
+						),
+						_react2.default.createElement(
+							'p',
+							{ className: 'input-field' },
+							this.state.user.email || this.props.user.email || ''
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'purpose' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'pair' },
+						_react2.default.createElement(
+							'label',
+							null,
+							'Why are you interested in participating in the dBC project?'
+						),
+						_react2.default.createElement(
+							'p',
+							{ className: 'input-field interest' },
+							_react2.default.createElement(_riek.RIETextArea, { value: this.state.user.interest || this.props.user.interest || '',
+								change: this.onChange,
+								propName: 'interest' })
+						)
+					)
+				),
+				_react2.default.createElement('br', null),
+				_react2.default.createElement(
+					'div',
+					{ className: 'purpose' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'pair' },
+						_react2.default.createElement(
+							'label',
+							null,
+							'Interested in Sponsored Development'
+						),
+						_react2.default.createElement(
+							'p',
+							{ className: 'input-field' },
+							_react2.default.createElement('input', { checked: this.state.user.interestedInSponsoredDevelopment || this.props.user.interestedInSponsoredDevelopment || false,
+								type: 'checkbox',
+								disabled: 'disabled' })
+						),
+						_react2.default.createElement(
+							'label',
+							null,
+							'Hide me from the public waitlist'
+						),
+						_react2.default.createElement(
+							'p',
+							{ className: 'input-field' },
+							_react2.default.createElement('input', { checked: this.state.user.hideMeFromPublic || this.props.user.hideMeFromPublic || false,
+								type: 'checkbox',
+								disabled: 'disabled' })
+						)
+					)
+				),
+				_react2.default.createElement('br', null)
+			);
+		}
 	});
 
 	 ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "/Users/mateodelnorte/development/dotbc/dotbc-queue-site/app/components/UserSubmittedInfo.js"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "/Users/mateodelnorte/development/dotbc/dotbc-queue-site/app/components/UserSubmittedInfo.js"); } } })();

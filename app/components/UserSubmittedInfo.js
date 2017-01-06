@@ -17,6 +17,8 @@ export default React.createClass({
       title: PropTypes.string,
       email: PropTypes.string,
       interest: PropTypes.string,
+			interestedInSponsoredDevelopment: PropTypes.Boolean,
+			hideMeFromPublic: PropTypes.Boolean
     })
   },
   
@@ -116,13 +118,31 @@ export default React.createClass({
 				<div className="purpose">
 					<div className="pair">
 						<label>Why are you interested in participating in the dBC project?</label>
-						<p className="input-field">
+						<p className="input-field interest">
 							<RIETextArea value={this.state.user.interest || this.props.user.interest || ''}
 								change={this.onChange}
 								propName="interest" />
 						</p>
 					</div>
 				</div>
+				<br />
+				<div className="purpose">
+					<div className="pair">
+						<label>Interested in Sponsored Development</label>
+						<p className="input-field">
+							<input checked={this.state.user.interestedInSponsoredDevelopment || this.props.user.interestedInSponsoredDevelopment || false }
+								type="checkbox"
+								disabled="disabled" />
+						</p>
+						<label>Hide me from the public waitlist</label>
+						<p className="input-field">
+							<input checked={this.state.user.hideMeFromPublic || this.props.user.hideMeFromPublic || false}
+								type="checkbox"
+								disabled="disabled" />
+						</p>
+					</div>
+				</div>
+				<br />
 			</div>
     );
 

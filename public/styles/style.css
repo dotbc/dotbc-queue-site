@@ -287,7 +287,8 @@ label {
   padding: 2em 3em 2em 2em;
   overflow: hidden; }
   .userSubmittedInfo > div {
-    float: left; }
+    float: left; 
+    width: 50%; }
     .userSubmittedInfo > div:first-child {
       width: 40%; }
     .userSubmittedInfo > div:last-child {
@@ -298,6 +299,8 @@ label {
     margin-top: .25em;
     font-size: 1.1em;
     margin-bottom: 1.25em; }
+  .userSubmittedInfo .pair .interest {
+    max-width: 374px; } 
 
 .filesDocs {
   margin: 4em 0;
@@ -357,6 +360,8 @@ label {
       border-radius: 4px;
       font-family: 'Open Sans', sans-serif;
       font-weight: 400; }
+    .filesDocs .info {
+      font-weight: 300; }
 .deleteIcon {
   float: right;
 }
@@ -552,6 +557,9 @@ ul.unstyled {
 .queue li span, .queue td span {
     margin-right: 2em;
 }
+.queue li.checkboxes {
+  font-weight: 300;
+  list-style: none; }
 div, span, input, textarea, tr, td {
     box-sizing: border-box;
 }

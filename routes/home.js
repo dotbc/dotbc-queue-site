@@ -58,8 +58,8 @@ export default function (app) {
         if (err) return res.send({ error: err });
         res.send({
           user: req.user,
-          waitlist: queue.inQueue,
-          partners: queue.accepted,
+          waitlist: queue.inQueue.filter((u) => { return u.get('hideMeFromPublic') !== true; }),
+          partners: queue.accepted.filter((u) => { return u.get('hideMeFromPublic') !== true; }),
         });
       });
   });

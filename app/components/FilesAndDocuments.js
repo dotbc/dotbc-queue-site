@@ -106,6 +106,10 @@ export default React.createClass({
     return (
 		<div className="filesDocs">
 			<label>Files & Documents</label>
+
+			<p className="info">
+				All uploads are kept strictly private and confidential. You will be invited to use the dotBC Bundler application when it reaches its beta period to submit your information officially. 
+			</p>
 			<div className="uploaded">
 				<ul className="unstyled">
 					{this._renderUploadedFiles()}					

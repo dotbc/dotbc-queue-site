@@ -143,6 +143,17 @@ export default class QueueRow extends Component {
 
 	}
 
+  _renderCheckboxes() {
+    if ( ! this.props.user.interestedInSponsoredDevelopment && ! this.props.user.hideMeFromPublic) return <td></td>;
+    return (
+      <td>
+        <ul>
+          { (this.props.user.interestedInSponsoredDevelopment) ? <li className="checkboxes">Sponsored Dev Interest</li> : null }
+          { (this.props.user.hideMeFromPublic) ? <li className="checkboxes">Hide me from public</li> : null }
+        </ul>
+      </td>);
+  }
+
   _renderButton () {
     if ( ! this.props.user.accepted) {
       return (<a className="button" onClick={this.rowAcceptClicked.bind(this)}>Accept</a>);
@@ -176,6 +187,7 @@ export default class QueueRow extends Component {
           <span className="title">{this.props.user.title}</span>
           <span className="email"><a href="mailto:{this.props.user.email}">{this.props.user.email}</a></span>
         </td>
+        {this._renderCheckboxes()}
         <td><p>FILES: {numberFiles}</p></td>
         <td>{this._renderButton()}</td>
         <td>{this._renderMove()}</td>
@@ -264,6 +276,7 @@ export default class QueueRow extends Component {
             <p> {this.props.user.interest}</p>
           </div>
         </td>
+        {this._renderCheckboxes()}
         <td>
           <p>FILES: {numberFiles}</p>
           <div className="moreInfo">
