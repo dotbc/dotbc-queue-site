@@ -14,6 +14,7 @@ export default class SelectedPartners extends Component {
             <img src="images/Songtrust.png" />
             <img src="images/DowntownMP.png" />
             <img src="images/CDBaby.png" />
+            <img src="images/Avid.png" />
           </div>
         </div>
       </div>

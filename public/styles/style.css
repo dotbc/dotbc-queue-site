@@ -174,9 +174,9 @@ header {
     text-align: center; }
   #selectedPartners img {
     text-align: center;
-    margin: 1em .25em 1em 0em;
+    margin: 1em -1em 0em 5em;
     width: 100%;
-    max-width: 18%;
+    max-width: 25%;
     vertical-align: middle; }
   @media (max-width: 800px) {
     #selectedPartners img {

@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "3df2de3a33148ef7d76d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ce4d5d80898c27d9a7ea"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -87284,7 +87284,8 @@
 	            _react2.default.createElement("img", { src: "images/MediaNet.png" }),
 	            _react2.default.createElement("img", { src: "images/Songtrust.png" }),
 	            _react2.default.createElement("img", { src: "images/DowntownMP.png" }),
-	            _react2.default.createElement("img", { src: "images/CDBaby.png" })
+	            _react2.default.createElement("img", { src: "images/CDBaby.png" }),
+	            _react2.default.createElement("img", { src: "images/Avid.png" })
 	          )
 	        )
 	      );
