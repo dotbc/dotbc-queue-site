@@ -367,7 +367,11 @@ label {
 }
 footer .container {
   font-size: .75em;
-  max-width: 28em; }
+  max-width: 65em; }
+footer .container .title {
+  margin-left: 30%; }
+footer .container .conditions {
+  margin-left: 29%; }
 footer svg {
   width: 1.5em;
   display: inline-block;
