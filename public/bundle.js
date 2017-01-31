@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "568af97404d64386deeb"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3df2de3a33148ef7d76d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -49043,7 +49043,7 @@
 	          { htmlFor: "interestedInSponsoredDevelopment" },
 	          "Interested in Sponsored Development"
 	        ),
-	        _react2.default.createElement("input", { name: "interestedInSponsoredDevelopment", required: true, type: "checkbox", value: this.state.interestedInSponsoredDevelopment, onChange: this.handleChange.bind(this, "interestedInSponsoredDevelopment") })
+	        _react2.default.createElement("input", { name: "interestedInSponsoredDevelopment", type: "checkbox", value: this.state.interestedInSponsoredDevelopment, onChange: this.handleChange.bind(this, "interestedInSponsoredDevelopment") })
 	      ),
 	      _react2.default.createElement("input", { type: "submit", className: "button", disabled: this.state.submitDisabled, value: "Agree and Continue" })
 	    );

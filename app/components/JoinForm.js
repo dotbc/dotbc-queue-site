@@ -71,7 +71,7 @@ export default React.createClass({
         </div>
         <div className="input-field">
           <label htmlFor="interestedInSponsoredDevelopment">Interested in Sponsored Development</label>
-          <input name="interestedInSponsoredDevelopment" required type="checkbox" value={this.state.interestedInSponsoredDevelopment} onChange={this.handleChange.bind(this, "interestedInSponsoredDevelopment")} />
+          <input name="interestedInSponsoredDevelopment" type="checkbox" value={this.state.interestedInSponsoredDevelopment} onChange={this.handleChange.bind(this, "interestedInSponsoredDevelopment")} />
         </div>
 
         <input type="submit" className="button" disabled={this.state.submitDisabled} value="Agree and Continue" />
