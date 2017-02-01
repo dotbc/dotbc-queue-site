@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ce4d5d80898c27d9a7ea"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "16e022d58bbefeebbc9d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -87280,12 +87280,10 @@
 	          _react2.default.createElement(
 	            "div",
 	            { className: "logos" },
-	            _react2.default.createElement("img", { src: "images/SOCAN@2x.png" }),
-	            _react2.default.createElement("img", { src: "images/MediaNet.png" }),
-	            _react2.default.createElement("img", { src: "images/Songtrust.png" }),
-	            _react2.default.createElement("img", { src: "images/DowntownMP.png" }),
 	            _react2.default.createElement("img", { src: "images/CDBaby.png" }),
-	            _react2.default.createElement("img", { src: "images/Avid.png" })
+	            _react2.default.createElement("img", { src: "images/MediaNet.png" }),
+	            _react2.default.createElement("img", { src: "images/SOCAN@2x.png" }),
+	            _react2.default.createElement("img", { src: "images/Songtrust.png" })
 	          )
 	        )
 	      );

@@ -174,7 +174,7 @@ header {
     text-align: center; }
   #selectedPartners img {
     text-align: center;
-    margin: 1em -1em 0em 5em;
+    margin: 1em 0em 0em 0em;
     width: 100%;
     max-width: 25%;
     vertical-align: middle; }
