@@ -1,4 +1,5 @@
 import bodyParser from 'body-parser';
+import enforce from 'express-sslify';
 import express from 'express';
 import flash from 'express-flash';
 import mongodbSession from 'connect-mongodb-session';
@@ -42,6 +43,10 @@ module.exports.start = (cb) => {
     return cb(error);
   });
 
+  if (config.NODE_ENV === "production") {
+    app.use(enforce.HTTPS({ trustProtoHeader: true }));
+  } 
+  
   app.use(session({ 
     name: 'dotbc-queue',
     secret: 'da blockchain', 
