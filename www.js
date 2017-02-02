@@ -1,5 +1,5 @@
 import bodyParser from 'body-parser';
-import enforce from 'express-sslify';
+import enforceSSL from './lib/enforceSSL';
 import express from 'express';
 import flash from 'express-flash';
 import mongodbSession from 'connect-mongodb-session';
@@ -44,7 +44,7 @@ module.exports.start = (cb) => {
   });
 
   if (config.NODE_ENV === "production") {
-    app.use(enforce.HTTPS({ trustProtoHeader: true }));
+    app.use(enforceSSL());
   } 
   
   app.use(session({ 

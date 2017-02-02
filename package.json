@@ -40,7 +40,6 @@
     "express": "^4.14.0",
     "express-flash": "0.0.2",
     "express-session": "^1.14.2",
-    "express-sslify": "^1.2.0",
     "http-proxy": "^1.15.1",
     "humps": "^1.1.0",
     "is-email": "^1.0.0",
