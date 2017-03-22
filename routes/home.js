@@ -54,7 +54,7 @@ export default function (app) {
 
   app.get('/api/index',
     (req, res) => {
-      Queue.get((err, queue) => {
+      Queue.getPublic((err, queue) => {
         if (err) return res.send({ error: err });
         res.send({
           user: req.user,
