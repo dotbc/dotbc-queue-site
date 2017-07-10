@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "666b187000d887795548"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "01e96e6f3a683792eb5f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -24472,9 +24472,13 @@
 	        _react2.default.createElement(
 	          "p",
 	          { className: "intro1 intro" },
-	          "We're building the world's first open framework for decentralized interoperability in the music industry, based on open source software and the biggest thing to ever come along in distributed computing: the Blockchain."
+	          "We are building the only cross vertical solutions for modern rights and data management for the global music industry, leveraging the power of the blockchain, distributed cloud technology, and 21st century machine based data management tools.  To make dotBC work, we want your involvement and insight.  We are looking for rights data and audio track data owners, and users who are looking for a modern rights management data solution to partner with us as we develop dotBC."
 	        )
 	      );
+
+	      var tableStyle = {
+	        border: '1px solid'
+	      };
 
 	      return _react2.default.createElement(
 	        "div",
@@ -24482,26 +24486,135 @@
 	        _react2.default.createElement(
 	          "p",
 	          { className: "intro1 intro" },
-	          "We're building the world's first open framework for decentralized interoperability in the music industry, based on open source software and the biggest thing to ever come along in distributed computing: the Blockchain."
+	          "We are building the only cross vertical solutions for modern rights and data management for the global music industry, leveraging the power of the blockchain, distributed cloud technology, and 21st century machine based data management tools.  To make dotBC work, we want your involvement and insight.  We are looking for rights data and audio track data owners, and users who are looking for a modern rights management data solution to partner with us as we develop dotBC."
 	        ),
 	        _react2.default.createElement(
 	          "p",
 	          { className: "intro" },
-	          "To make a platform that works for the needs of the whole industry, we want you involved."
+	          "To assist our development effort, we are encouraging all participants to upload their current audio tracks and meta data.  All uploads are kept strictly private and confidential, and the data will only be used for our research purposes."
 	        ),
 	        _react2.default.createElement(
 	          "p",
 	          { className: "intro" },
-	          "We're onboarding partners and accepting sample data uploads to help guide development, and to make sure the types and formats of media files that run your business get the support they deserve. All uploads are kept strictly private and confidential."
+	          "We have tiered membership levels that suit every individual and company in the recorded music industry.  From artist, songwriter, producer and manager to labels, distributors, publishers, performing rights organizations, streaming services, digital service providers, licensing companies and more, we are developing tools to allow you to focus on making and monetizing music assets."
 	        ),
 	        _react2.default.createElement(
 	          "p",
-	          { className: "sponsoredDevelopment" },
-	          "Join us today! On-boarding is first-come, first serve. If would would like to pursue sponsored development for a plug-in for automated ingestion and processing, please let us know at ",
+	          { className: "intro" },
+	          "Tiers:"
+	        ),
+	        _react2.default.createElement(
+	          "table",
+	          { className: "intro", style: tableStyle },
+	          _react2.default.createElement(
+	            "tbody",
+	            null,
+	            _react2.default.createElement(
+	              "tr",
+	              { className: "row" },
+	              _react2.default.createElement(
+	                "td",
+	                null,
+	                "Free:"
+	              ),
+	              _react2.default.createElement(
+	                "td",
+	                null,
+	                "$0"
+	              ),
+	              _react2.default.createElement(
+	                "td",
+	                { colSpan: 4 },
+	                "Expected Release at end of 2017.  Free tools for single song dotBC creation"
+	              )
+	            ),
+	            _react2.default.createElement(
+	              "tr",
+	              { className: "row" },
+	              _react2.default.createElement(
+	                "td",
+	                null,
+	                "Bronze:"
+	              ),
+	              _react2.default.createElement(
+	                "td",
+	                null,
+	                "$5,000:"
+	              ),
+	              _react2.default.createElement(
+	                "td",
+	                { colSpan: 4 },
+	                " Free+: Limited data ingestion assistance from dotBC"
+	              )
+	            ),
+	            _react2.default.createElement(
+	              "tr",
+	              { className: "row" },
+	              _react2.default.createElement(
+	                "td",
+	                null,
+	                "Silver:"
+	              ),
+	              _react2.default.createElement(
+	                "td",
+	                null,
+	                "$25,000:"
+	              ),
+	              _react2.default.createElement(
+	                "td",
+	                { colSpan: 4 },
+	                " Bronze+: Blockchain and cloud gateway set up.  Data ingestion."
+	              )
+	            ),
+	            _react2.default.createElement(
+	              "tr",
+	              { className: "row" },
+	              _react2.default.createElement(
+	                "td",
+	                null,
+	                "Gold:"
+	              ),
+	              _react2.default.createElement(
+	                "td",
+	                null,
+	                "$100,000:"
+	              ),
+	              _react2.default.createElement(
+	                "td",
+	                { colSpan: 4 },
+	                " Sliver+: Workflow connections to internal systems for dotBC ingestion."
+	              )
+	            ),
+	            _react2.default.createElement(
+	              "tr",
+	              { className: "row" },
+	              _react2.default.createElement(
+	                "td",
+	                null,
+	                "Enterprise:"
+	              ),
+	              _react2.default.createElement(
+	                "td",
+	                null,
+	                "Contact Us"
+	              ),
+	              _react2.default.createElement(
+	                "td",
+	                { colSpan: 4 },
+	                "Custom development work"
+	              )
+	            )
+	          )
+	        ),
+	        _react2.default.createElement("br", null),
+	        _react2.default.createElement(
+	          "p",
+	          { className: "intro" },
+	          "For more details please review our membership tiers ",
 	          _react2.default.createElement(
 	            "a",
-	            { href: "/join" },
-	            "signup"
+	            { href: "https://view.attach.io/rkV8QNaXW" },
+	            "here"
 	          ),
 	          "."
 	        )
@@ -24530,7 +24643,7 @@
 	              _react2.default.createElement(
 	                "span",
 	                { className: "name" },
-	                "The dotBlockchain Music Project"
+	                "Dot Blockchain Media Partner Queue"
 	              )
 	            )
 	          ),

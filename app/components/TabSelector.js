@@ -32,9 +32,9 @@ export default class TabSelector extends Component {
   }
 
   _renderTab() {
-    return <QueueTabs activeTab={this.state.activeTab} 
-                      accepted={this.state.accepted} 
-                      inQueue={this.state.inQueue} 
+    return <QueueTabs activeTab={this.state.activeTab}
+                      accepted={this.state.accepted}
+                      inQueue={this.state.inQueue}
                       rowsUpdated={this._updateRows.bind(this)} />
   }
 

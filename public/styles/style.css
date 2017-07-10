@@ -102,7 +102,6 @@ ul.unstyled {
     overflow: scroll;
     border: 1px solid #bfbfbf;
     border-radius: 4px;
-    background-color: #fff;
     padding: 0 1em;
     margin-top: .5em; }
     #legalInfo #legalBlock p {
@@ -117,7 +116,7 @@ header {
   header a {
     color: #fff; }
   header #logo .name {
-    font-size: 32px;
+    font-size: 30px;
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
     text-decoration: none;
@@ -156,7 +155,7 @@ header {
     header {
       padding: 2rem 1rem; }
       header #logo .name {
-        font-size: 18px;
+        font-size: 17px;
         top: -8px; }
       header #logo img {
         width: 30px; }
@@ -566,4 +565,73 @@ ul.unstyled {
   list-style: none; }
 div, span, input, textarea, tr, td {
     box-sizing: border-box;
+}
+
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+table tr {
+  border: 1px solid #ddd;
+  padding: .15em;
+}
+table th,
+table td {
+  padding: .525em;
+  text-align: left;
+}
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+  table caption {
+    font-size: 1.3em;
+  }
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  table tr {
+    border-bottom: 2px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: left;
+  }
+  table td:before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  table td:last-child {
+    border-bottom: 0;
+  }
 }
