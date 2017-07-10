@@ -1,5 +1,6 @@
 import QueueTabs from './QueueTabs';
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import { CSVLink } from 'react-csv';
 import { Field, reduxForm } from 'redux-form';
 import $ from 'jquery';
 
@@ -54,6 +55,37 @@ export default class TabSelector extends Component {
         </div>
 
         { this._renderTab() } 
+
+        <div className="container" style={{'text-align': 'center'}}>
+          <p>
+            <CSVLink data={this.state.accepted.map((item) => {
+              return {
+                placeInQueue: item.placeInQueue,
+                email: item.email,
+                fullName: item.fullName,
+                accepted: item.accepted,
+                title: item.title,
+                interest: item.interest,
+                hideMeFromPublic: item.hideMeFromPublic,
+              };  
+            })}>
+              Download accepted csv
+            </CSVLink>
+            |
+            <CSVLink data={this.state.inQueue.map((item) => {
+              return {
+                placeInQueue: item.placeInQueue,
+                email: item.email,
+                fullName: item.fullName,
+                title: item.title,
+                interest: item.interest,
+                hideMeFromPublic: item.hideMeFromPublic,
+              };  
+            })}>
+              Download in-queue csv
+            </CSVLink>
+          </p>
+        </div>
 
       </div>
     );
