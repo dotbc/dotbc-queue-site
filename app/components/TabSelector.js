@@ -48,7 +48,7 @@ export default class TabSelector extends Component {
     function escape(cell)
     {
       return ['\n', '"', ','].some((item) => { return cell.indexOf(item) > -1; }) 
-        ? '\"' + cell.replace(/,/g, ' ').replace(/\"/g, '\"\"') + '\"'
+        ? '\"' + cell.replace(/,/g, ' ').replace(/\"/g, '\"\"').replace(/\n/g, ' ') + '\"'
         : cell;
     }
 
