@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "53c3dae926713a615009"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "695ade11044b58eee0c2"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -88259,7 +88259,6 @@
 	      var acceptedTabClass = activeTab === 'left' ? '' : 'active';
 
 	      function escape(cell) {
-	        // cell = cell.replace(/"/g, "\"");
 	        return ['\n', '"', ','].some(function (item) {
 	          return cell.indexOf(item) > -1;
 	        }) ? '\"' + cell.replace(/,/g, ' ').replace(/\"/g, '\"\"') + '\"' : cell;
