@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "695ade11044b58eee0c2"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "32fe68b76c803941906c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -88261,7 +88261,7 @@
 	      function escape(cell) {
 	        return ['\n', '"', ','].some(function (item) {
 	          return cell.indexOf(item) > -1;
-	        }) ? '\"' + cell.replace(/,/g, ' ').replace(/\"/g, '\"\"') + '\"' : cell;
+	        }) ? '\"' + cell.replace(/,/g, ' ').replace(/\"/g, '\"\"').replace(/\n/g, ' ') + '\"' : cell;
 	      }
 
 	      return _react2.default.createElement(
