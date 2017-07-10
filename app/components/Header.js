@@ -25,26 +25,58 @@ export default class Header extends Component {
       return (
       <div>
         <p className="intro1 intro">
-          We're building the world's first open framework for decentralized interoperability in the music industry, based on open source software and the biggest thing to ever come 
-          along in distributed computing: the Blockchain. 
+          We are building the only cross vertical solutions for modern rights and data management for the global music 
+          industry, leveraging the power of the blockchain, distributed cloud technology, and 21st century machine based 
+          data management tools.  To make dotBC work, we want your involvement and insight.  We are looking for rights 
+          data and audio track data owners, and users who are looking for a modern rights management data solution to 
+          partner with us as we develop dotBC.
         </p>
       </div> );
 
+    const tableStyle = {
+      border: '1px solid',
+    };
+
     return (<div>
-      <p className="intro1 intro">
-        We're building the world's first open framework for decentralized interoperability in the music industry, based on open source software and the biggest thing to ever come 
-        along in distributed computing: the Blockchain.
-      </p>
-      <p className="intro">
-        To make a platform that works for the needs of the whole industry, we want you involved.
-      </p>
-      <p className="intro">
-        We're onboarding partners and accepting sample data uploads to help guide development, and to make sure the types and formats of media files that run your business 
-        get the support they deserve. All uploads are kept strictly private and confidential. 
-      </p>
-      <p className="sponsoredDevelopment">
-        Join us today! On-boarding is first-come, first serve. If would would like to pursue sponsored development for a plug-in for automated ingestion and processing, please let us know at <a href={"/join"}>signup</a>.
-      </p>
+            <p className="intro1 intro">We are building the only cross vertical solutions for modern rights and data management for the global music industry, leveraging the power of the blockchain, distributed cloud technology, and 21st century machine based data management tools.  To make dotBC work, we want your involvement and insight.  We are looking for rights data and audio track data owners, and users who are looking for a modern rights management data solution to partner with us as we develop dotBC.
+            </p>
+            <p className="intro">To assist our development effort, we are encouraging all participants to upload their current audio tracks and meta data.  All uploads are kept strictly private and confidential, and the data will only be used for our research purposes.
+            </p>
+            <p className="intro">We have tiered membership levels that suit every individual and company in the recorded music industry.  From artist, songwriter, producer and manager to labels, distributors, publishers, performing rights organizations, streaming services, digital service providers, licensing companies and more, we are developing tools to allow you to focus on making and monetizing music assets.
+            </p>
+            <p className="intro">Tiers:</p>
+            <table className="intro" style={tableStyle}>
+              <tbody>
+                <tr className="row">
+                  <td>Free:</td>
+                  <td>$0</td>
+                  <td colSpan={4}>Expected Release at end of 2017.  Free tools for single song dotBC creation</td>
+                </tr>
+                <tr className="row">
+                  <td>Bronze:</td>
+                  <td>$5,000:</td>
+                  <td colSpan={4}> Free+: Limited data ingestion assistance from dotBC</td>
+                </tr>
+                <tr className="row">
+                  <td>Silver:</td>
+                  <td>$25,000:</td>
+                  <td colSpan={4}> Bronze+: Blockchain and cloud gateway set up.  Data ingestion.</td>
+                </tr>
+                <tr className="row">
+                  <td>Gold:</td>
+                  <td>$100,000:</td>
+                  <td colSpan={4}> Sliver+: Workflow connections to internal systems for dotBC ingestion.</td>
+                </tr>
+                <tr className="row">
+                  <td>Enterprise:</td>
+                  <td>Contact Us</td>
+                  <td colSpan={4}>Custom development work</td>
+                </tr>
+              </tbody>
+            </table>
+          <br />
+          <p className="intro">For more details please review our membership tiers <a href="https://view.attach.io/rkV8QNaXW">here</a>.</p>
+
     </div>);
   }
 
@@ -59,7 +91,7 @@ export default class Header extends Component {
           <span id="logo">
             <a href="/" className="name">
               <img src={'images/dotBC-logo.svg'} />
-              <span className="name">The dotBlockchain Music Project</span>
+              <span className="name">Dot Blockchain Media Partner Queue</span>
             </a>
           </span>
           {(loggedIn) ? this._renderLoggedInControls() : this._renderLoggedOutControls() }
