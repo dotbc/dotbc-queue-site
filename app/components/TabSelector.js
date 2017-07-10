@@ -45,6 +45,14 @@ export default class TabSelector extends Component {
     const inQueueTabClass = (activeTab === 'left') ? 'active' : '';
     const acceptedTabClass = (activeTab === 'left') ? '' : 'active';
 
+    function escape(cell)
+    {
+      // cell = cell.replace(/"/g, "\"");
+      return ['\n', '"', ','].some((item) => { return cell.indexOf(item) > -1; }) 
+        ? '\"' + cell.replace(/,/g, ' ').replace(/\"/g, '\"\"') + '\"'
+        : cell;
+    }
+
     return (
       <div> 
         <div className="container">
@@ -62,10 +70,10 @@ export default class TabSelector extends Component {
               return {
                 placeInQueue: item.placeInQueue,
                 email: item.email,
-                fullName: item.fullName,
+                fullName: escape(item.fullName),
                 accepted: item.accepted,
-                title: item.title,
-                interest: item.interest,
+                title: escape(item.title),
+                interest: escape(item.interest),
                 hideMeFromPublic: item.hideMeFromPublic,
               };  
             })}>
@@ -76,9 +84,9 @@ export default class TabSelector extends Component {
               return {
                 placeInQueue: item.placeInQueue,
                 email: item.email,
-                fullName: item.fullName,
-                title: item.title,
-                interest: item.interest,
+                fullName: escape(item.fullName),
+                title: escape(item.title),
+                interest: escape(item.interest),
                 hideMeFromPublic: item.hideMeFromPublic,
               };  
             })}>
