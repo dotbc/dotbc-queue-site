@@ -95,6 +95,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "main": "index.js",
+  "engines": {
+    "node": ">=8.1.4"
+  },
   "repository": "git@github.com:dotbc/dotbc-queue-site.git",
   "author": "Matt Walters <mattwalters5@gmail.com>",
   "license": "MIT"
